@@ -15,7 +15,10 @@ const LoginPage = () => {
 
 	return (
 		<>
-			<button type='button' onClick={() => signIn("kakao", { callbackUrl: "/" })} className='text-black flex gap-4 bg-[#fef01b] hover:bg-[#fef01b]/90 font-medium rounded-lg w-full px-5 py-4 text-center items-center justify-center'>>
+			<button
+				type='button'
+				onClick={() => signIn("kakao", { callbackUrl: "/" })}
+				className='text-black flex gap-4 bg-[#fef01b] hover:bg-[#fef01b]/90 font-medium rounded-lg w-full px-5 py-4 text-center items-center justify-center'>
 				<RiKakaoTalkFill className='w-6 h-6' />
 				Sign in With Kakao
 			</button>
