@@ -14,7 +14,7 @@ export default function Home() {
 
 	return (
 		<div>
-			<div className='foolish'>은지 바보</div>
+			<div className='foolish'>남규 바보</div>
 
 			{status === "authenticated" ? (
 				<button type='button' onClick={() => signOut()}>
