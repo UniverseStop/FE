@@ -2,8 +2,14 @@
 	@apply h-screen bg-cover bg-[url("https://github.com/UniverseStop/FE/assets/134919218/89890b25-14b1-47b9-9565-38468650a9b7")];
 }
 
+@layer {
+	.text-white {
+		color: white;
+	}
+}
+
 .title_section {
-    @apply flex flex-col p-[30px] font-bold text-white text-5xl;
+    @apply flex flex-col p-[30px] font-bold text-5xl text-white;
 }
 
 .title_span {
@@ -14,8 +20,8 @@
 	@apply relative top-[60%];
 } 
 
-.section_div_button {
-	@apply flex justify-around items-center font-bold text-white text-3xl;
+.button_div {
+	@apply flex justify-around items-center font-bold text-3xl text-white;
 }
 
 .button {
