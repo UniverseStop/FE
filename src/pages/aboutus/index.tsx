@@ -16,9 +16,9 @@ export default function aboutUs() {
                 </ul>
             </section>
             <section className={styles.button_section}>
-                <div className={styles.section_div_button}>
+                <div className={styles.button_div}>
                     <button className={styles.button}>로그인</button>
-                    <button>둘러보기</button>
+                    <button className={styles.button}>둘러보기</button>
                 </div>
             </section>
         </div>
