@@ -5,7 +5,53 @@ const chatList = () => {
     return (
         <div>
             <ChatNav />
-            chatList
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
+            <p>chatList</p>
         </div>
     );
 };
