@@ -10,3 +10,8 @@ body {
 .foolish {
     @apply px-[20px];
 }
+
+.layout {
+	@apply max-w-[600px] min-w-[375px] mx-auto border h-full;
+	padding: 1 rem;
+}
