@@ -6,21 +6,20 @@ import { authOptions } from "./api/auth/[...nextauth]";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-	const { data, status } = useSession();
+    const { data, status } = useSession();
 
-	console.log(data);
-	console.log(status);
-	console.log(authOptions.session);
+    console.log(data);
+    console.log(status);
 
-	return (
-		<div>
-			<div className='foolish'>남규 바보</div>
+    return (
+        <div>
+            <div className='foolish'>남규 바보</div>
 
-			{status === "authenticated" ? (
-				<button type='button' onClick={() => signOut()}>
-					로그아웃
-				</button>
-			) : null}
-		</div>
-	);
+            {status === "authenticated" ? (
+                <button type='button' onClick={() => signOut()}>
+                    로그아웃
+                </button>
+            ) : null}
+        </div>
+    );
 }
