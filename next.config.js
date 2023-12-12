@@ -6,4 +6,7 @@ const nextConfig = {
 module.exports = {
     nextConfig,
     //   output:'export'3
+    images: {
+        domains: ['github.com'],
+    },
 };
