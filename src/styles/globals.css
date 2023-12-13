@@ -3,12 +3,17 @@
 @tailwind utilities;
 
 body {
-    color: rgb(var(--foreground-rgb));
-    background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
 }
 
 .foolish {
-    @apply px-[20px];
+  @apply text-blue-800 px-[20px];
 }
 
 .layout {
