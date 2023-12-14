@@ -4,14 +4,16 @@
 
 body {
     color: rgb(var(--foreground-rgb));
-    background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
-}
-
-.foolish {
-    @apply px-[20px];
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgb(var(--background-end-rgb))
+        )
+        rgb(var(--background-start-rgb));
 }
 
 .layout {
-	@apply max-w-[600px] min-w-[375px] mx-auto border h-full;
-	padding: 1 rem;
-}
+	@apply max-w-[600px] min-w-[375px] mx-auto border h-screen;
+	background: linear-gradient(170deg, rgba(30,24,32,1) 0%, rgba(98,96,147,1) 100%);
+	}
+
