@@ -12,6 +12,8 @@ body {
         rgb(var(--background-start-rgb));
 }
 
-.foolish {
-    @apply px-[20px];
-}
+.layout {
+	@apply max-w-[600px] min-w-[375px] mx-auto border h-screen;
+	background: linear-gradient(170deg, rgba(30,24,32,1) 0%, rgba(98,96,147,1) 100%);
+	}
+
