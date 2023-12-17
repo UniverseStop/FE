@@ -17,9 +17,4 @@ const parseJwt = (token: any) => {
     }
 };
 
-// const token = "eyJhbGciOiJIUzI1NiJ9..."; // 여기에 JWT 토큰을 넣습니다.
-// const decoded = parseJwt(token);
-
-// console.log(decoded); // 이 코드는 사용자 정보를 출력합니다.
-
 export default parseJwt;
