@@ -1,25 +1,37 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import { signOut, useSession } from "next-auth/react";
-import { authOptions } from "./api/auth/[...nextauth]";
-
-const inter = Inter({ subsets: ["latin"] });
+import React, { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useAuth } from "./api/KakaoContext";
 
 export default function Home() {
-    const { data, status } = useSession();
+    const router = useRouter();
+    const auth = useAuth();
 
-    console.log(data);
-    console.log(status);
+    if (!auth) {
+        return null;
+    }
+
+    const { userInfo, isLoggedIn, logout } = auth;
+
+    const onLogin = () => {
+        router.replace("/users/login");
+    };
+
+    console.log("userInfo", userInfo);
+    console.log("isLoggedIn", isLoggedIn);
+    console.log("logout", logout);
 
     return (
         <div>
             <div className='foolish'>남규 바보</div>
-
-            {status === "authenticated" ? (
-                <button type='button' onClick={() => signOut()}>
+            {isLoggedIn ? (
+                <button type='button' onClick={logout}>
                     로그아웃
                 </button>
-            ) : null}
+            ) : (
+                <button type='button' onClick={onLogin}>
+                    로그인
+                </button>
+            )}
         </div>
     );
 }

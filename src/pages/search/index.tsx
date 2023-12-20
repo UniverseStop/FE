@@ -2,13 +2,15 @@ import Image from "next/image";
 
 export default function search() {
     return (
-        <div className="flex flex-col text-center pt-28">
-            <button className="absolute top-10 left-7"><Image alt="back_icon" width={20} height={20} src="/images/back.svg"/></button>
+        <div className="flex flex-col text-center pt-28 bg-white h-screen">
+            <section className="relative">
+                <button className="absolute bottom-14 left-10"><Image alt="back_icon" width={20} height={20} src="/images/back.png"/></button>
+            </section>
             <section>
                 <span className="flex pl-16 font-bold text-2xl">무엇을 찾으시나요?</span>
                 <div className="relative right-4">
-                    <input className="border-b-2 w-[475px] pt-9 pl-4" placeholder="검색어를 입력해주세요."/>
-                    <button className="absolute top-2 right-4 px-2 py-1 pr-14"><Image alt="search_icon" width={32} height={32} src="/images/search.svg"/></button>
+                    <input className="focus:outline-none border-b-2 w-[475px] pt-9 pl-4" placeholder="검색어를 입력해주세요."/>
+                    <button className="absolute top-2 right-4 px-2 py-1 pr-14"><Image alt="search_icon" width={32} height={32} src="/images/search.png"/></button>
                 </div>
             </section>
             <section className="pt-28">
