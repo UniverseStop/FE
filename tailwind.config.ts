@@ -18,6 +18,7 @@ const config: Config = {
             sans: ["Graphik", "sans-serif"],
             serif: ["Merriweather", "serif"],
         },
+        backgroundImage: { login: "url('/images/login2.png')", mypage: "url('/images/mypage-background.png')"},
         extend: {
             spacing: {
                 "128": "32rem",
@@ -36,7 +37,9 @@ const config: Config = {
                 "gray-dark": "#273444",
                 gray: "#8492a6",
                 "gray-light": "#d3dce6",
+                mainColor: "#BC8E8E"
             },
+
         },
     },
     plugins: [],
