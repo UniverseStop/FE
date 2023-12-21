@@ -37,7 +37,8 @@ const config: Config = {
                 "gray-dark": "#273444",
                 gray: "#8492a6",
                 "gray-light": "#d3dce6",
-                mainColor: "#BC8E8E"
+                mainColor: "#BC8E8E",
+                postColor: "#F2F3F5",
             },
 
         },

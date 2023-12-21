@@ -1,4 +1,5 @@
 import axios from "axios";
+import exp from "constants";
 
 export const instance = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -11,5 +12,15 @@ export const getPostItems = async () => {
         return res.data.data;
     } catch (error) {
         throw error;      
+    }
+};
+
+// 정류장 상세 정보
+export const getPostDetail = async (postId: number) => {
+    try {
+        const res = await instance.get(`api/post/${postId}`)
+        return res.data.data;
+    } catch (error) {
+        throw error; 
     }
 };

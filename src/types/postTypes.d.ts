@@ -17,3 +17,16 @@ interface PostPreviewType {
     userId: number,
     views: number,
 }
+
+interface PostDetailType extends PostPreviewType {
+    chatParticipants: string[],
+    chatroomId: string,
+    content: string,
+    isComplete: boolean,
+    status: string,
+    endTime: string,
+}
+
+type CategoryType = {
+    [key: string]: string;
+};
