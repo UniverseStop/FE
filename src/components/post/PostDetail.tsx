@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { PreviewType } from "../../types/postTypes";
+import { PostPreviewType } from "../../types/postTypes";
 
-const PostDetail = ({ info }: { info: PreviewType }) => {
+const PostDetail = ({ info }: { info: PostPreviewType }) => {
     return (
         <li className="w-[190px] h-[190px] p-4 text-white rounded-[20px] flex flex-col justify-between relative"
         style={{

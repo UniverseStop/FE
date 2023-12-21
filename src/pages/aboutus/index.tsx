@@ -1,9 +1,22 @@
 import { useQuery } from "react-query";
 import { getPostItems } from "../api/post";
-
+import { PostPreviewType } from "@/types/postTypes";
+import { useKeenSlider } from "keen-slider/react";
+import "keen-slider/keen-slider.min.css";
 
 export default function AboutUs() {
-    const { data: posts, isLoading, isError } = useQuery(["posts"], () => getPostItems());
+    // const { data: posts, isLoading, isError } = useQuery(["posts"], () => getPostItems());
+    // console.log(posts)
+
+    // 슬라이더
+    const [sliderRef] = useKeenSlider({
+        loop: true,
+        mode: "free",
+        slides: {
+          perView: 3,
+          spacing: 10,
+        },
+    })
 
     return (
         <div className="gradation">
@@ -16,10 +29,16 @@ export default function AboutUs() {
                         })}
                     </div>
                 </section>
-                    <ul>
-                    </ul>
-                <section className="h-[35%]">
-                    <ul></ul>
+                <section className="pt-[15%] m-2 h-[35%]">
+                    <div ref={sliderRef} className="keen-slider">
+                        {[1, 2, 3, 4, 5, 6].map((p: number)=>{
+                            return (
+                                <div key={p} className="keen-slider__slide w-[190px] h-[190px]">
+                                    <span>1</span>
+                                </div>
+                            );
+                        })}
+                    </div>
                 </section>
                 <section className="relative overflow-hidden h-[35%]">
                     <img className="absolute w-[70%] right-2/4 top-0" alt="earth" src="/images/earth.png"/>
