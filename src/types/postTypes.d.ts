@@ -2,7 +2,7 @@ export interface LayoutProps {
     children: ReactNode;
 }
 
-interface PreviewType {
+interface PostPreviewType {
     age: string,
     category: string,
     createdAt: string,
