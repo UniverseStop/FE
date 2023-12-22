@@ -27,8 +27,8 @@ export default function ImageSlider() {
         <Slider {...settings} className="z-50">
             {posts && posts.map((p: PostPreviewType)=>{
                 return (
-                    <div className="pl-2 pr-2 pt-8" key={p.id}>
-                        <PostDetail info={p} wSize="15vw" hSize="35vh"/>
+                    <div className="pt-8" key={p.id}>
+                        <PostDetail info={p} wSize="w-[90%]" hSize="h-[33vh]"/>
                     </div>
                 );
             })}

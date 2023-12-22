@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { PostPreviewType } from "../../types/postTypes";
+import { getCategory } from "@/utils/getCategory";
 
 const PostDetail = ({ info, hSize, wSize }: { info: PostPreviewType, hSize: string, wSize: string }) => {
     // 날짜 변경
@@ -8,7 +9,7 @@ const PostDetail = ({ info, hSize, wSize }: { info: PostPreviewType, hSize: stri
     const time = [date.getMonth(), date.getDay(), daysOfWeek[date.getDay()]].join("."); 
     
     return (
-        <li className={`w-[${wSize}] h-[${hSize}] p-4 text-white rounded-[20px] flex flex-col justify-between relative`}
+        <li className={`${wSize} ${hSize} max-w-[600px] p-4 text-white rounded-[20px] flex flex-col justify-between relative`}
         style={{
             position: "relative",
             backgroundImage: `url(${info.imageUrlList[0]})`,
@@ -33,7 +34,7 @@ const PostDetail = ({ info, hSize, wSize }: { info: PostPreviewType, hSize: stri
             <div className="relative z-10">
                 <span className="text-xl font-bold">{info.title.length > 10 ? info.title.substring(0, 9) + '...' : info.title}</span>
                 <ul className="pt-2">
-                    <li className="flex justify-center text-sm w-[80px] h-[24px] border rounded-[20px]">{info.category}</li>
+                    <li className="flex justify-center text-sm w-[80px] h-[24px] border rounded-[20px]">{getCategory(info.category)}</li>
                 </ul>
                 <div className="flex pt-2">
                     <Image width={12} height={20} alt="location" src="/images/location.png"/>
