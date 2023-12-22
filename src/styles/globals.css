@@ -2,11 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    color: rgb(var(--foreground-rgb));
-    background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+.gradation {
+	background: linear-gradient(170deg, rgba(30, 24, 32, 1) 0%, rgba(98, 96, 147, 1) 100%);
 }
 
-.gradation {
-    background: linear-gradient(170deg, rgba(30, 24, 32, 1) 0%, rgba(98, 96, 147, 1) 100%);
+[class^="number-slide"],
+[class*=" number-slide"] {
+  background: grey;
+  height: 150px;
+  padding-left: 20px;
+
 }
+
