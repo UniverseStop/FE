@@ -1,9 +1,12 @@
+import { useRouter } from "next/router";
 import ImageSlider from "./imageSlider";
 
 export default function AboutUs() {
+    const router = useRouter();
+
     return (
         <div className="gradation h-screen relative">
-            <div className="bg-cover bg-[url('/images/aboutUs.png')] absolute top-0 left-0 w-full h-full z-0" />
+            <div className="bg-cover bg-[url('/images/aboutUs.png')] absolute top-0 left-0 w-full h-full" />
             <div className="relative">
                 <section className="relative overflow-hidden">
                     <img className="absolute w-[55%] left-2/4 top-5" alt="planet" src="/images/planet.png"/>
@@ -21,8 +24,8 @@ export default function AboutUs() {
                         <img className="absolute top-0 left-[-145px]" alt="earth" src="/images/earth.png"/>
                     </div>
                     <div className="flex justify-around items-center font-bold text-3xl text-white space-x-[-10%]">
-                        <button className="z-40">로그인</button>
-                        <button className="z-40">둘러보기</button>
+                        <button className="z-40" onClick={()=>router.push("/users/login")}>로그인</button>
+                        <button className="z-40" onClick={()=>router.push("/main")}>둘러보기</button>
                     </div>
                 </section>
             </div>
