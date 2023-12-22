@@ -18,7 +18,7 @@ const config: Config = {
             sans: ["Graphik", "sans-serif"],
             serif: ["Merriweather", "serif"],
         },
-        backgroundImage: { login: "url('/login2.png')" },
+        backgroundImage: { login: "url('/images/login2.png')" },
         extend: {
             spacing: {
                 "128": "32rem",
