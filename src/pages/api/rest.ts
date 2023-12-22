@@ -15,7 +15,7 @@ export const getKakaoLogin = async (KAKAO_CODE: string) => {
         const refreshToken = response.headers.refreshtoken;
         Cookies.set("access_Token", accessToken, { path: "/" });
         Cookies.set("refresh_Token", refreshToken, { path: "/" });
-        document.dispatchEvent(new CustomEvent("loginSuccess"));
+        // document.dispatchEvent(new CustomEvent("loginSuccess"));
         console.log("카카오 로그인 성공", response);
         return response.data;
     } catch (error) {

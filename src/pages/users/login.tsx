@@ -1,3 +1,4 @@
+import Nav from "@/components/nav/Nav";
 import React from "react";
 import { RiKakaoTalkFill } from "react-icons/ri";
 
@@ -9,7 +10,7 @@ const LoginPage = () => {
     };
 
     return (
-        <div className='layout'>
+        <div className='gradation'>
             <div className='bg-login h-screen center center bg-no-repeat relative'>
                 <button
                     type='button'

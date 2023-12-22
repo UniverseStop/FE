@@ -1,4 +1,4 @@
-const parseJwt = (token: any) => {
+const useParseJwt = (token: any) => {
     try {
         const base64Url = token.split(".")[1];
         const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
@@ -17,4 +17,4 @@ const parseJwt = (token: any) => {
     }
 };
 
-export default parseJwt;
+export default useParseJwt;

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import { useAuth } from "./api/KakaoContext";
+import { useAuth } from "../context/KakaoContext";
 
 export default function Home() {
     const router = useRouter();
