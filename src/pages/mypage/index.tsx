@@ -1,13 +1,12 @@
 import Introduce from "@/components/mypage/Introduce";
 import MyPost from "@/components/mypage/MyPost";
 import Profile from "@/components/mypage/Profile";
-import Image from "next/image";
 import React from "react";
 
-const index = () => {
+const mypage = () => {
 	return (
 		<div className="gradation">
-			<div className="bg-mypage bg-cover flex flex-col h-screen">
+			<div className="bg-mypage bg-cover bg-no-repeat flex flex-col h-full">
 				<Introduce />
 				<Profile />
 				<MyPost />
@@ -16,4 +15,4 @@ const index = () => {
 	);
 };
 
-export default index;
+export default mypage;
