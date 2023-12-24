@@ -12,7 +12,7 @@ function MyPost() {
 
 	return (
 		<div>
-			<p className="text-white font-bold text-3xl pt-[50px]">내가 쓴 글</p>
+			<p className="text-white font-bold text-3xl pt-[50px] pl-6">내가 쓴 글</p>
 			<div ref={ref} className="keen-slider p-5">
 				<div className="keen-slider__slide number-slide1">1</div>
 				<div className="keen-slider__slide number-slide2">2</div>
