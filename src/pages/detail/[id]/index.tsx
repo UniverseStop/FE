@@ -1,12 +1,15 @@
+import { useState } from "react";
 import { useQuery } from "react-query";
 import { getPostDetail } from "../../api/post";
 import { PostDetailType } from "@/types/postTypes";
 import { getCategory } from "@/utils/getCategory";
-import { useKeenSlider } from "keen-slider/react"
-import "keen-slider/keen-slider.min.css"
 
+import { useKeenSlider } from "keen-slider/react";
+import "keen-slider/keen-slider.min.css"
+import DeleteModal from "@/components/detail/DeleteModal";
+import KakaoMap from "@/components/detail/KakaoMap";
 export default function Detail() {
-    const { data: post, isLoading, isError } = useQuery<PostDetailType>(["posts"], () => getPostDetail(21));
+    const { data: post, isLoading, isError } = useQuery<PostDetailType>(["posts"], () => getPostDetail(2));
 
     // 시간 변경
     const date = post?.endDate.replace("-", "년 ").replace("-", "월 ") + "일";
@@ -17,15 +20,22 @@ export default function Detail() {
         loop: true,
     });
 
+    // 삭제 (본인 작성글만 삭제 가능)
+    const [isDeleteModal, setIsDeleteModal] = useState<boolean>(false); // 삭제 모달
+
     return (
         <div>
             {post && <div className="bg-postColor h-svh">
+                {isDeleteModal ? <DeleteModal postId={post.id} isDeleteModal={isDeleteModal} setIsDeleteModal={setIsDeleteModal}/> : <></>}
                 <section className="flex justify-between p-6">
                     <div className="flex">
                         <img className="w-[80px] h-[80px] rounded-full" alt="profile" src={post.profileImageUrl}/>
                         <div className="flex flex-col pl-5 pt-2">
                             <span className="text-2xl font-bold">{post.nickname}</span>
-                            <span className="text-sm">만{post.age}세 • {post.gender === "female" ? "여" : "남"}</span>
+                            <div className="flex">
+                                <span className="text-sm">만{post.age}세 • {post.gender === "female" ? "여" : "남"} </span>
+                                <button className="ml-1 w-4 h-4" onClick={()=>setIsDeleteModal(!isDeleteModal)}><img alt="postTrash" src="/images/postTrash.png"/></button>
+                            </div>
                         </div>
                     </div>
                     <span className="text-sm pt-2 pr-4">{post.createdAt.split("T")[0].replaceAll("-", ".")}</span>
@@ -55,6 +65,7 @@ export default function Detail() {
                 </section>
                 <section className="pl-2">
                     <span className="text-2xl font-bold">📍장소</span>
+                    <KakaoMap latitude={37.498004414546934} longitude={127.02770621963765}/>
                 </section>
             </div>}
         </div>
