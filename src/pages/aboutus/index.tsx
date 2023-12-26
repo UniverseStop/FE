@@ -19,13 +19,17 @@ export default function AboutUs() {
                 <section className="max-w-[600px] min-w-[375px]">
                     <ImageSlider />
                 </section>
-                <section className="fixed w-screen bottom-10 left-0 right-0">
-                    <div className="relative overflow-hidden right-0 top-[330px] w-screen h-[500px] max-w-[600px] mx-auto">
-                        <img className="absolute top-0 left-[-145px]" alt="earth" src="/images/earth.png"/>
+                <section>
+                    <div className="fixed w-screen bottom-10 right-0">
+                        <div className="relative overflow-hidden right-0 top-[330px] w-screen h-[500px] max-w-[600px] mx-auto">
+                            <img className="absolute top-0 left-[-145px]" alt="earth" src="/images/earth.png"/>
+                        </div>
                     </div>
-                    <div className="flex justify-around items-center font-bold text-3xl text-white space-x-[-10%]">
-                        <button className="z-40" onClick={()=>router.push("/users/login")}>로그인</button>
-                        <button className="z-40" onClick={()=>router.push("/main")}>둘러보기</button>
+                    <div className="w-[70%] mx-auto">
+                        <div className="fixed bottom-10 w-[70%] max-w-[410px] flex justify-between items-center font-bold text-3xl text-white"> 
+                            <button className="z-50" onClick={() => router.push("/users/login")}>로그인</button>
+                            <button className="z-50" onClick={() => router.push("/main")}>둘러보기</button>
+                        </div>
                     </div>
                 </section>
             </div>

@@ -18,9 +18,19 @@ export const getPostItems = async () => {
 // 정류장 상세 정보
 export const getPostDetail = async (postId: number) => {
     try {
-        const res = await instance.get(`api/post/${postId}`)
+        const res = await instance.get(`/api/post/${postId}`)
         return res.data.data;
     } catch (error) {
         throw error; 
+    }
+};
+
+// 게시물 삭제
+export const deletePost = async (postId: number) => {
+    try {
+        const res = await instance.delete(`/api/post/${postId}`)
+        return res;
+    } catch (error) {
+        throw error;
     }
 };
