@@ -1,27 +1,40 @@
-import Script from "next/script";
-import { Map, MapMarker } from "react-kakao-maps-sdk";
+import "react-kakao-maps-sdk";
 
-interface Position {
-    latitude: number;
-    longitude: number;
-}
+const KakaoMap = ({ location }: { location: string }) => {
+    kakao.maps.load(() => {
+        const container = document.getElementById("map");
+        const options = {
+            center: new kakao.maps.LatLng(33.450701, 126.570667),
+            level: 3,
+        };
+        const map = new kakao.maps.Map(container as HTMLElement, options); // 지도 생성
 
-const KakaoMap = ({ latitude, longitude }: Position) => {
-    const KAKAO_SDK_URL = `//dapi.kakao.com/v2/maps/sdk.js?appkey=4e5cdccf07ff90b1aaea272d387eb18b&autoload=false`;
+        let geocoder = new kakao.maps.services.Geocoder(); // 주소-좌표 변환 객체 생성
 
-    let location = { lat: latitude, lng: longitude };
+        geocoder.addressSearch(location, function(result, status) {
+            if (status === kakao.maps.services.Status.OK) {
+                // result[0].y와 result[0].x를 'number'로 변환
+                const latitude: number = Number(result[0].y);
+                const longitude: number = Number(result[0].x);
+            
+                let coords = new kakao.maps.LatLng(latitude, longitude);
+            
+                // 결과값으로 받은 위치를 마커로 표시
+                let marker = new kakao.maps.Marker({
+                    map: map,
+                    position: coords
+                });
+            
+                // 지도의 중심을 결과값으로 받은 위치로 이동
+                map.setCenter(coords);
+            }
+        });
+
+    });
 
     return (
-        <div>
-            <Script src={KAKAO_SDK_URL} strategy="beforeInteractive" />
-            <Map
-                center={location}
-                level={3}
-                style={{ width: "560px", height: "280px" }}
-                zoomable={false}
-            >
-                <MapMarker position={location}></MapMarker>
-            </Map>
+        <div className="flex items-center justify-center">
+            <div id="map" className="w-[95%] h-72" />
         </div>
     )
 }

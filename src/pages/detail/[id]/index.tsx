@@ -1,15 +1,14 @@
 import { useState } from "react";
-import { useQuery } from "react-query";
-import { getPostDetail } from "../../api/post";
+import { useMutation, useQuery } from "react-query";
+import { getBusStopDetail, postChatApproval } from "../../api/post";
 import { PostDetailType } from "@/types/postTypes";
 import { getCategory } from "@/utils/getCategory";
-
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css"
 import DeleteModal from "@/components/detail/DeleteModal";
 import KakaoMap from "@/components/detail/KakaoMap";
 export default function Detail() {
-    const { data: post, isLoading, isError } = useQuery<PostDetailType>(["posts"], () => getPostDetail(2));
+    const { data: post, isLoading, isError } = useQuery<PostDetailType>(["posts"], () => getBusStopDetail(1));
 
     // 시간 변경
     const date = post?.endDate.replace("-", "년 ").replace("-", "월 ") + "일";
@@ -22,6 +21,12 @@ export default function Detail() {
 
     // 삭제 (본인 작성글만 삭제 가능)
     const [isDeleteModal, setIsDeleteModal] = useState<boolean>(false); // 삭제 모달
+
+    // 참여 승인 (본인 작성글만 삭제 가능)
+    const commentAddMutation = useMutation(postChatApproval, {});
+    const handleClickApproval = () => {
+        if (post) commentAddMutation.mutate({postId: post.id, userId: post.userId});
+    };
 
     return (
         <div>
@@ -45,7 +50,7 @@ export default function Detail() {
                         <span><span className="text-mainColor font-bold">#{post.location}</span>에서</span>
                         <span>{post.title}</span>
                     </div>
-                    <div className="flex flex-col text-mainColor font-bold pt-7">
+                    <div className="flex flex-col text-≈ font-bold pt-7">
                         <span>#{date} {time}</span>
                         <span>#{getCategory(post.category)}</span>
                     </div>
@@ -63,10 +68,25 @@ export default function Detail() {
                         </div>
                     </div>
                 </section>
-                <section className="pl-2">
-                    <span className="text-2xl font-bold">📍장소</span>
-                    <KakaoMap latitude={37.498004414546934} longitude={127.02770621963765}/>
+                <section>
+                    <span className="pl-2 text-2xl font-bold">📍장소</span>
+                    <KakaoMap location={post.location}/>
                 </section>
+                <section className="p-2 pt-7">
+                    <span className="pl-1 pb-2 text-2xl font-bold">👩🏻‍🚀 신청자 정보</span>
+                    <div className="flex justify-between items-center">
+                        <div className="flex">
+                            <img className="w-[70px] h-[70px] rounded-full" alt="profile" src="/images/ghost.png"/>
+                            <div className="flex flex-col pl-3 pt-2">
+                                <span className="text-2xl font-bold">최은지</span>
+                                <div className="flex">
+                                    <span className="text-sm">만64세 • 남 </span>
+                                </div>
+                            </div>
+                        </div>
+                        <button onClick={()=>handleClickApproval()} className="mr-7 w-16 h-9 text-sm font-bold text-white bg-mainColor rounded-2xl">참가 수락</button>
+                    </div>
+            </section>
             </div>}
         </div>
     )
