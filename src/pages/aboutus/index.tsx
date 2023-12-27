@@ -1,5 +1,5 @@
+import ImageSlider from "@/components/aboutus/ImageSlider";
 import { useRouter } from "next/router";
-import ImageSlider from "./imageSlider";
 
 export default function AboutUs() {
     const router = useRouter();

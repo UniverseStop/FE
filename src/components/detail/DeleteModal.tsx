@@ -1,9 +1,9 @@
 import { useMutation } from "react-query";
-import { deletePost } from "@/pages/api/post";
+import { deleteBusStop } from "@/pages/api/post";
 
 const DeleteModal = ({postId, isDeleteModal, setIsDeleteModal}: {postId: number, isDeleteModal: boolean, setIsDeleteModal: (isDeleteModal: boolean) => void}) => {
     // 게시물 삭제
-    const deletePostMutation = useMutation(deletePost, {});
+    const deletePostMutation = useMutation(deleteBusStop, {});
 
     const deletePostHandler = () => {
         deletePostMutation.mutate(postId);

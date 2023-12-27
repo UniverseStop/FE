@@ -1,13 +1,13 @@
 import { useQuery } from "react-query";
-import { getPostItems } from "../../api/post";
+import { getBusStopItems } from "@/pages/api/post";
 import { PostPreviewType } from "@/types/postTypes";
 import PostDetail from "@/components/post/PostDetail";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-export default function ImageSlider() {
-    const { data: posts, isLoading, isError } = useQuery(["posts"], () => getPostItems());
+const ImageSlider = () => {
+    const { data: posts, isLoading, isError } = useQuery(["posts"], () => getBusStopItems());
 
     // 슬라이더 설정
     const settings = {
@@ -34,4 +34,6 @@ export default function ImageSlider() {
             })}
         </Slider>
     );
-};
+}
+
+export default ImageSlider;
