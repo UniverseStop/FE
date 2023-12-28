@@ -4,8 +4,7 @@ import { deleteBusStop } from "@/pages/api/post";
 const DeleteModal = ({postId, isDeleteModal, setIsDeleteModal}: {postId: number, isDeleteModal: boolean, setIsDeleteModal: (isDeleteModal: boolean) => void}) => {
     // 게시물 삭제
     const deletePostMutation = useMutation(deleteBusStop, {});
-
-    const deletePostHandler = () => {
+    const handleClickDelete = () => {
         deletePostMutation.mutate(postId);
     };
 
@@ -22,7 +21,7 @@ const DeleteModal = ({postId, isDeleteModal, setIsDeleteModal}: {postId: number,
                     </section>
                     <section className="pt-7 flex justify-between font-bold text-xl w-[85%] space-x-2">
                         <button onClick={()=>setIsDeleteModal(!isDeleteModal)} className="w-3/5 h-12 text-mainColor border border-mainColor rounded-3xl">취소하기</button>
-                        <button className="w-3/5 h-12 text-white bg-mainColor rounded-3xl ">삭제하기</button>
+                        <button onClick={()=>handleClickDelete()} className="w-3/5 h-12 text-white bg-mainColor rounded-3xl">삭제하기</button>
                     </section>
                 </div>
             </article>

@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { useMutation, useQuery } from "react-query";
-import { getBusStopDetail, postChatApproval } from "../../api/post";
-import { PostDetailType } from "@/types/postTypes";
-import { getCategory } from "@/utils/getCategory";
+import { getBusStopDetail, postChatApplication } from "../../api/post";
+import { ChatApprovalType, PostDetailType } from "@/types/postTypes";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css"
+import { getCategory } from "@/utils/getCategory";
 import DeleteModal from "@/components/detail/DeleteModal";
 import KakaoMap from "@/components/detail/KakaoMap";
+import UserInfo from "@/components/detail/UserInfo";
+import ChatParticipate from "@/components/detail/ChatParticipate";
+
 export default function Detail() {
     const { data: post, isLoading, isError } = useQuery<PostDetailType>(["posts"], () => getBusStopDetail(1));
 
@@ -22,10 +25,10 @@ export default function Detail() {
     // 삭제 (본인 작성글만 삭제 가능)
     const [isDeleteModal, setIsDeleteModal] = useState<boolean>(false); // 삭제 모달
 
-    // 참여 승인 (본인 작성글만 삭제 가능)
-    const commentAddMutation = useMutation(postChatApproval, {});
-    const handleClickApproval = () => {
-        if (post) commentAddMutation.mutate({postId: post.id, userId: post.userId});
+    // 참가 신청 (다른 사용자 글에만 가능)
+    const applicationMutation = useMutation(postChatApplication, {});
+    const handleClickApplication = () => {
+        if (post) applicationMutation.mutate(post.id);
     };
 
     return (
@@ -33,16 +36,7 @@ export default function Detail() {
             {post && <div className="bg-postColor h-svh">
                 {isDeleteModal ? <DeleteModal postId={post.id} isDeleteModal={isDeleteModal} setIsDeleteModal={setIsDeleteModal}/> : <></>}
                 <section className="flex justify-between p-6">
-                    <div className="flex">
-                        <img className="w-[80px] h-[80px] rounded-full" alt="profile" src={post.profileImageUrl}/>
-                        <div className="flex flex-col pl-5 pt-2">
-                            <span className="text-2xl font-bold">{post.nickname}</span>
-                            <div className="flex">
-                                <span className="text-sm">만{post.age}세 • {post.gender === "female" ? "여" : "남"} </span>
-                                <button className="ml-1 w-4 h-4" onClick={()=>setIsDeleteModal(!isDeleteModal)}><img alt="postTrash" src="/images/postTrash.png"/></button>
-                            </div>
-                        </div>
-                    </div>
+                    <UserInfo nickname={post.nickname} age={Number(post.age)} gender={post.gender} imageUrl={post.profileImageUrl} isDeleteModal={isDeleteModal} setIsDeleteModal={setIsDeleteModal}/>
                     <span className="text-sm pt-2 pr-4">{post.createdAt.split("T")[0].replaceAll("-", ".")}</span>
                 </section>
                 <section className="flex flex-col text-2xl pt-5 pl-8 pb-5">
@@ -50,7 +44,7 @@ export default function Detail() {
                         <span><span className="text-mainColor font-bold">#{post.location}</span>에서</span>
                         <span>{post.title}</span>
                     </div>
-                    <div className="flex flex-col text-≈ font-bold pt-7">
+                    <div className="flex flex-col text-mainColor font-bold pt-7">
                         <span>#{date} {time}</span>
                         <span>#{getCategory(post.category)}</span>
                     </div>
@@ -73,20 +67,17 @@ export default function Detail() {
                     <KakaoMap location={post.location}/>
                 </section>
                 <section className="p-2 pt-7">
-                    <span className="pl-1 pb-2 text-2xl font-bold">👩🏻‍🚀 신청자 정보</span>
-                    <div className="flex justify-between items-center">
-                        <div className="flex">
-                            <img className="w-[70px] h-[70px] rounded-full" alt="profile" src="/images/ghost.png"/>
-                            <div className="flex flex-col pl-3 pt-2">
-                                <span className="text-2xl font-bold">최은지</span>
-                                <div className="flex">
-                                    <span className="text-sm">만64세 • 남 </span>
-                                </div>
-                            </div>
-                        </div>
-                        <button onClick={()=>handleClickApproval()} className="mr-7 w-16 h-9 text-sm font-bold text-white bg-mainColor rounded-2xl">참가 수락</button>
-                    </div>
-            </section>
+                    <span className="pl-1 pb-4 text-2xl font-bold">👩🏻‍🚀 신청자 정보</span>
+                    {post.applicants.map((p: ChatApprovalType) => {
+                        return <ChatParticipate key={p.userId} info={p} postId={post.id} userId={post.userId}/>
+                    })}
+                </section>
+                <section className="relative">
+                    <button onClick={()=>handleClickApplication()} className="z-50 absolute bottom-5 right-5 w-[100px] h-[100px] flex flex-col justify-center items-center rounded-full bg-white">
+                        <img className="w-[70px] h-[70px]" alt="application" src="/images/application.png"/>
+                        <span className="font-bold text-xs">참가신청</span>
+                    </button>
+                </section>
             </div>}
         </div>
     )
