@@ -32,9 +32,7 @@ const mainPage = () => {
             </div>
             <div className="flex flex-wrap">
                 {a.map((i) => (
-                    <div key={i} className={styles.post_box}>
-                        {i}
-                    </div>
+                    <div key={i} className={styles.post_box}>{i}</div>
                 ))}
             </div>
         </>

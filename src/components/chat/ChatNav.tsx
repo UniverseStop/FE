@@ -1,12 +1,17 @@
+import { useRouter } from "next/router";
 import React from "react";
 import { IoMdArrowBack } from "react-icons/io";
 
 const ChatNav = () => {
+    const router = useRouter();
+
+    const onBackButtonHandler = () => {
+        router.back();
+    };
+
     return (
         <div>
-            <div>
-                <IoMdArrowBack className='w-6 h-6' />
-            </div>
+            <IoMdArrowBack size={50} className='p-3' onClick={onBackButtonHandler} />
         </div>
     );
 };
