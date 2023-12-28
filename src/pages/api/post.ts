@@ -1,5 +1,4 @@
 import axios from "axios";
-import exp from "constants";
 
 export const instance = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -35,10 +34,30 @@ export const deleteBusStop = async (postId: number) => {
     }
 };
 
+// 참가 신청
+export const postChatApplication = async (postId: number) => {
+    try {
+        const res = await instance.post(`/api/post/${postId}/applicants`);
+        return res;
+    } catch (error) {
+        throw error;
+    }
+};
+
 // 참여자 승인
 export const postChatApproval = async ({postId, userId}: {postId: number, userId: number}) => {
     try {
         const res = await instance.post(`/api/post/${postId}/applicants/${userId}`);
+        return res;
+    } catch (error) {
+        throw error;
+    }
+};
+
+// 참여자 거절
+export const postChatRefuse = async ({postId, userId}: {postId: number, userId: number}) => {
+    try {
+        const res = await instance.delete(`/api/post/${postId}/applicants/${userId}`);
         return res;
     } catch (error) {
         throw error;
