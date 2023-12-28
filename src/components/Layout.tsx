@@ -5,7 +5,7 @@ import style from "./layout.module.css";
 
 const Layout = ({ children }: LayoutProps) => {
     return (
-        <div className={style.layout}>
+        <div className="max-w-[600px] min-w-[375px] mx-auto border h-screen">
             <Nav />
             <div>{children}</div>
         </div>
