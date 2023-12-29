@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Error() {
     return (
         <div className="gradation">
-            <div className="gradationh-screen bg-cover bg-[url('/images/loading-error-background.png')]">
+            <div className="gradationh-screen bg-cover bg-[url('/images/error.png')]">
                 <div className="lg:w-full w-full h-full">
                     <div className="xxx_imgWrap flex flex-col my-auto items-center mx-3">
                         <div className="flex h-screen">

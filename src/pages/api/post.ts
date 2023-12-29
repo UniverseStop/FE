@@ -1,8 +1,4 @@
-import axios from "axios";
-
-export const instance = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL,
-});
+import { instance } from "./instance";
 
 // 소게 페이지 랜덤 정류장 (10개)
 export const getBusStopItems = async () => {
