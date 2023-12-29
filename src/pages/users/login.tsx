@@ -1,15 +1,26 @@
-import Nav from "@/components/nav/Nav";
-import React from "react";
-import { RiKakaoTalkFill } from "react-icons/ri";
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useAuth } from '@/context/KakaoContext';
+import { RiKakaoTalkFill } from 'react-icons/ri';
 
 const LoginPage = () => {
+    const auth = useAuth();
+    const router = useRouter();
+
     const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}&prompt=login`;
+
+    useEffect(() => {
+        if (auth.isLoggedIn) {
+            router.back();
+        }
+    }, [auth, router]);
 
     const onKakaoLogin = () => {
         window.location.href = KAKAO_AUTH_URL;
     };
 
-    return (
+    // Render the login page only if not authenticated
+    return !auth.isLoggedIn ? (
         <div className='gradation'>
             <div className='bg-login h-screen center center bg-no-repeat relative'>
                 <button
@@ -21,7 +32,7 @@ const LoginPage = () => {
                 </button>
             </div>
         </div>
-    );
+    ) : null;
 };
 
 export default LoginPage;

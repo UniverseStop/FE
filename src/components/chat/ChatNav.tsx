@@ -10,7 +10,7 @@ const ChatNav = () => {
     };
 
     return (
-        <div>
+        <div className="flex flex-row">
             <IoMdArrowBack size={50} className='p-3' onClick={onBackButtonHandler} />
         </div>
     );

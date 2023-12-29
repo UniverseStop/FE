@@ -15,16 +15,14 @@ const ChatList = () => {
         return null;
     }
 
-    const { userInfo, isLoggedIn, logout } = auth;
-
     // const rooms = await getRooms();
 
     return (
-        <div>
+        <>
             <ChatNav />
             <Chat />
             <Nav />
-        </div>
+        </>
     );
 };
 

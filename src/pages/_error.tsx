@@ -17,7 +17,7 @@ export default function Error() {
                                 </section>
                                 <section>
                                     <button className="flex justify-around items-center h-[60px] w-[270px] text-2xl px-4 py-2 rounded-3xl bg-white ">
-                                        <Image alt="reset" width={27} height={27} src="/images/reset.svg"/>
+                                        {/*<Image alt="reset" width={27} height={27} src="/images/reset.svg"/>*/}
                                         <span>한번 다시 해볼까요?</span>    
                                     </button>
                                 </section>

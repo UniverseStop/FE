@@ -19,13 +19,13 @@ export interface ChatListType {
 
 // Chat
 export interface ChatType {
-    roomId: string;
-    name: string;
-    userCount: number;
-    titleImageUrl: string;
-    participants: string[];
-    lastMessage?: string | null;
-    lastMessageSender?: string | null;
-    lastMessageSenderProfileImageUrl?: string | null;
-    lastMessageTime?: string | null;
+    "roomId": string,
+    "name": string,
+    "userCount": number,
+    "titleImageUrl": string,
+    "participants": string[],
+    "lastMessage": string | null,
+    "lastMessageSender": string | null,
+    "lastMessageSenderProfileImageUrl": string | null,
+    "lastMessageTime": string | null
 }
