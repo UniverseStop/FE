@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "../context/KakaoContext";
+import Nav from "@/components/nav/Nav";
+import {credentialLogin} from "@/pages/api/user";
 
 export default function Home() {
     const router = useRouter();
@@ -11,6 +13,7 @@ export default function Home() {
     }
 
     const { userInfo, isLoggedIn, logout } = auth;
+    console.log(userInfo)
 
     const onLogin = () => {
         router.replace("/users/login");
@@ -23,6 +26,7 @@ export default function Home() {
     return (
         <div>
             <div className='foolish'>남규 바보</div>
+            <button onClick={credentialLogin}>로그인</button>
             {isLoggedIn ? (
                 <button type='button' onClick={logout}>
                     로그아웃
@@ -32,6 +36,7 @@ export default function Home() {
                     로그인
                 </button>
             )}
+            <Nav/>
         </div>
     );
 }
