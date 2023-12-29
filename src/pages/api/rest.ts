@@ -1,5 +1,4 @@
 import axios from "axios";
-// import { instance } from "./instance";
 import Cookies from "js-cookie";
 
 export const instance = axios.create({
@@ -16,9 +15,7 @@ export const getKakaoLogin = async (KAKAO_CODE: string) => {
         Cookies.set("refresh_Token", refreshToken, { path: "/" });
         console.log("카카오 로그인 성공", response);
         return response.data;
-    } catch (error) {
-        // 로그인 에러 처리
-        console.error("카카오 로그인 실패", error);
+    } catch (error) { // 로그인 에러 처리
         throw error;
     }
 };

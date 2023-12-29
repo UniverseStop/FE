@@ -29,3 +29,4 @@ export interface ChatType {
     "lastMessageSenderProfileImageUrl": string | null,
     "lastMessageTime": string | null
 }
+

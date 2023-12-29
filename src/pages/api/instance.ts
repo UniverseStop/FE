@@ -5,6 +5,7 @@ export const instance = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
+
 // 요청 인터셉터 설정
 instance.interceptors.request.use(config => {
     const accessToken = Cookies.get('access_Token');

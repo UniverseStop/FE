@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 .gradation {
 	background: linear-gradient(170deg, rgba(30, 24, 32, 1) 0%, rgba(98, 96, 147, 1) 100%);
 }
@@ -14,3 +15,52 @@
 
 }
 
+/* 날짜선택 css */
+.react-datepicker__month-container {
+    width: 370px !important;
+    border-radius: 20px;
+}
+.react-datepicker__triangle {
+    display: none;
+}
+.react-datepicker__navigation-icon {
+    font-size: 5px !important;
+}
+.react-datepicker__header {
+    background-color: #bc8e8e !important;
+}
+.react-datepicker__current-month {
+    color: white !important;
+    font-size: 25px !important;
+}
+.react-datepicker__day--outside-month {
+    cursor: default;
+    visibility: hidden;
+}
+.react-datepicker__day-name {
+    color: white !important;
+    font-size: 20px !important;
+    width: 45px !important;
+    height: 36px;
+}
+
+/* 위치선택 css */
+
+.rs-picker-cascader-menu-items {
+    width: 365px !important;
+}
+.rs-picker-cascader-menu-items > div {
+    width: 365px !important;
+}
+
+.rs-picker-cascader-menu-column {
+    width: 180px !important;
+    height: 450px !important;
+}
+
+.rs-picker-cascader-menu-has-children
+    rs-picker-cascader-menu-item
+    rs-picker-cascader-menu-item-focus {
+    background-color: #bc8e8e !important;
+    color: #bc8e8e !important;
+}
