@@ -12,12 +12,14 @@ instance.interceptors.request.use(
                 .split(";")
                 .filter((cookies) => cookies.includes("access_Token"))[0]
                 ?.split("=")[1];
+
         const refreshToken =
             document.cookie &&
             document.cookie
                 .split(";")
                 .filter((cookies) => cookies.includes("refresh_Token"))[0]
                 ?.split("=")[1];
+
         if (accessToken) config.headers.authorization = accessToken;
         if (!accessToken && refreshToken) config.headers.refresh = refreshToken;
         return config;
@@ -37,6 +39,7 @@ instance.interceptors.response.use(
                 response.headers.authorization
             }; expires=${expiresTime.toUTCString()}; path=/;`;
         }
+
         if (response.headers.refreshtoken) {
             const expiresTime = new Date();
             expiresTime.setDate(expiresTime.getDate() + 14);
@@ -44,6 +47,7 @@ instance.interceptors.response.use(
                 response.headers.refreshtoken
             }; expires=${expiresTime.toUTCString()}; path=/;`;
         }
+        
         return response;
     },
     (error) => {
