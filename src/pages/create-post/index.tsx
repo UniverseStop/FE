@@ -1,18 +1,28 @@
-import Category from "@/components/category/Category"
-import React from 'react'
+import Category from "@/components/category/Category";
+import AddContent from "@/components/create-post/AddContent";
+import AddDateTime from "@/components/create-post/AddDateTime";
+import AddImage from "@/components/create-post/AddImage";
+import AddPlace from "@/components/create-post/AddPlace";
+import AddTitle from "@/components/create-post/AddTitle";
+import React from "react";
 
 function createPost() {
-    //카테고리(공통))
-    //날짜 및 시간(남규님) 2023.11.28 화 로 백엔드한테 넘겨줘야함. (공통-남규님이 만들어주심)
-    //표지에 쓰일 이미지는 여기에 바로 생성. (공통 컴포넌트가 아니라서)
-    //제목 내용도 여기에 바로 생성 (공통 컴포넌트가 아니지만 )
-    // 취소, 등록하기 버튼
-
-  return (
-    <div className="">
-        <Category title="🗂️ 카테고리" />
-    </div>
-  )
+	return (
+		<div>
+			<section>
+				<Category title="🗂️ 카테고리" />
+				<AddImage />
+				<AddTitle />
+				<AddContent />
+				<AddDateTime />
+				<AddPlace />
+			</section>
+			<section className="flex justify-center mb-10 mt-[100px] gap-10">
+				<button className="border text-mainColor border-mainColor h-14 rounded-2xl w-1/4">취소</button>
+				<button className="bg-mainColor text-white h-14 rounded-2xl w-1/4">등록하기</button>
+			</section>
+		</div>
+	);
 }
 
-export default createPost
+export default createPost;
