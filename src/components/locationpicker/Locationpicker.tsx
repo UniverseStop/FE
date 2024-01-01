@@ -8,7 +8,7 @@ interface Node {
     children?: Node[];
 }
 
-const Locationpicker: React.FC = () => {
+const Locationpicker = ({ showInline }: { showInline: boolean }) => {
     const customData: Node[] = [
         {
             label: "서울",
@@ -366,7 +366,7 @@ const Locationpicker: React.FC = () => {
     return (
         <div>
             <Cascader
-                inline
+                inline={showInline}
                 data={customData}
                 size="lg"
                 style={styles}
