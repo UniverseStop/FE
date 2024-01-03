@@ -1,6 +1,7 @@
+import dayjs, { Dayjs } from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import 'dayjs/locale/ko';
-import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import "dayjs/locale/ko";
 import {useInfiniteQuery} from "react-query";
 import {getMessageList} from "@/pages/api/chat";
 import {useInView} from "react-intersection-observer";
@@ -9,11 +10,9 @@ import {useChat} from "@/hooks/useChat";
 import {useAuth} from "@/context/KakaoContext";
 import {MessageType, ResponseData} from "@/types/chatTypes";
 
-dayjs.locale('ko');
-dayjs.extend(relativeTime)
-
-
-
+dayjs.locale("ko");
+dayjs.extend(relativeTime);
+dayjs.extend(utc);
 
 export default function Message({ roomId }: { roomId: string }) {
     const { messages, isConnected } = useChat();
@@ -31,6 +30,14 @@ export default function Message({ roomId }: { roomId: string }) {
             return undefined;
         },
     });
+
+    const formatSunset = (time: Dayjs) => {
+        return time.hour() >= 12 ? "PM" : "AM";
+    };
+    const currentDate = dayjs();
+    const date = currentDate.format("M월 D일");
+    const sunset = formatSunset(currentDate);
+    const time = currentDate.format("h:m");
 
     useEffect(() => {
         const newMessages = [...(messagesList?.pages.flatMap(page => page.content).reverse() || []), ...messages];
@@ -67,10 +74,10 @@ export default function Message({ roomId }: { roomId: string }) {
             <div ref={ref} style={{height: 50,}}/>
             {combMessages.map((message, index) => {
                 const isMyMessage = message.senderId == userInfo.userId;
-                const messageKey = message.messageId || `${message.createdAt}-${message.senderId}-${index}`;
+
                 return (
                     <>
-                        <div key={messageKey} className={`flex flex-col items-${isMyMessage ? 'end' : 'start'} mb-6`}>
+                        <div key={index} className={`flex flex-col items-${isMyMessage ? 'end' : 'start'} mb-6`}>
                             <div className="flex flex-row gap-3">
                                 {isMyMessage ? (
                                     <>
