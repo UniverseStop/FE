@@ -14,12 +14,13 @@ dayjs.locale("ko");
 dayjs.extend(relativeTime);
 dayjs.extend(utc);
 
-export default function Message({ roomId }: { roomId: string }) {
-    const { messages, isConnected } = useChat();
+export default function Message() {
+    const { messages, roomIdQuery, isConnected } = useChat();
+    const roomId = Array.isArray(roomIdQuery) ? roomIdQuery[0] : roomIdQuery || '';
     const [combMessages, setCombMessages] = useState<MessageType[]>([])
     const auth = useAuth();
     const {userInfo} = auth;
-    const scrollRef = useRef<HTMLDivElement>();
+    const scrollRef = useRef<HTMLDivElement>(null);
     const { data: messagesList, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery<ResponseData, Error, ResponseData>({
         queryKey: ['chat', 'messages', roomId],
         queryFn: ({ pageParam = 0 }) => getMessageList({ roomId, pageNum: pageParam }),
