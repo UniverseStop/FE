@@ -6,10 +6,13 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import Layout from "@/components/Layout";
 import { AuthProvider } from "@/context/KakaoContext";
+import { useLoading } from "@/hooks/useLoading";
+import Spinner from "@/components/spinner/Spinner";
 
 export default function App({ Component, pageProps }: AppProps) {
     const queryClient = new QueryClient();
     // const { session } = pageProps;
+    const isLoading = useLoading();
 
     return (
         <RecoilRoot>
@@ -18,6 +21,7 @@ export default function App({ Component, pageProps }: AppProps) {
                     {/* <SessionProvider session={session}> */}
                     <ReactQueryDevtools initialIsOpen={false} />
                     <Layout>
+                        {isLoading ? <Spinner /> : null}
                         <Component {...pageProps} />
                     </Layout>
                     {/* </SessionProvider> */}
