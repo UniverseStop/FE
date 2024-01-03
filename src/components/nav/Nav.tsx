@@ -15,8 +15,8 @@ const Nav = () => {
                 <Link href='/search'>
                     <Image src="/images/nav-search.svg" alt="search" width={35} height={35}/>
                 </Link>
-                <Link href='/post'>
-                    <Image src="/images/nav-post.svg" alt="post" width={34} height={34}/>
+                <Link href='/create-post'>
+                    <Image src="/images/nav-post.svg" alt="create-post" width={34} height={34}/>
                 </Link>
                 <Link href='/chat'>
                     <Image src="/images/nav-chat.svg" alt="chat" width={32} height={32}/>

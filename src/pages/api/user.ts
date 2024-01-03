@@ -1,5 +1,6 @@
 import Cookies from "js-cookie";
 import axios from "axios";
+import { instance } from "./instance";
 
 
 export const credentialLogin = async () => {
@@ -18,3 +19,9 @@ export const credentialLogin = async () => {
         throw error;
     }
 }
+
+//마이페이지
+export const getMyPage = async (userId: Number) => {
+	const response = await instance.get(`/api/mypage/${userId}`);
+	return response.data;
+};
