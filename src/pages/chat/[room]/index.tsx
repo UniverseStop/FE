@@ -5,15 +5,10 @@ import {useEffect} from "react";
 import {useChat} from "@/hooks/useChat";
 
 const ChatRoom = () => {
-    const { roomIdQuery } = useChat();
-
-
-
-
     return (
         <div className="h-screen flex flex-col items-stretch">
             <ChatNav />
-            <Message roomId={roomIdQuery} />
+            <Message  />
             <ChatForm />
         </div>
 

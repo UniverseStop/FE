@@ -1,18 +1,11 @@
-import axios from "axios";
-// import {instance} from "@/pages/api/instance";
-import Cookies from "js-cookie";
-import {Dispatcher} from "undici-types";
 import {instance} from "@/pages/api/instance";
 
-// export const instance = axios.create({
-//     baseURL: process.env.NEXT_PUBLIC_API_URL,
-// });
-
 // 채팅 룸 리스트
-export const getRooms = async ()  => {
-    const res: Response = await instance.get(`${process.env.NEXT_PUBLIC_API_URL}/chat/rooms`)
-    return res.data;
+export const getRooms = async () => {
+    const roomsResponse = await instance.get(`${process.env.NEXT_PUBLIC_API_URL}/chat/rooms`);
+    return roomsResponse.data;
 }
+
 
 // 전체 체팅방 가져오기
 // export const postTestRoom = async () => {
@@ -25,10 +18,10 @@ export const getRooms = async ()  => {
 // }
 
 // 이전 메세지
-export const getMessageList = async ({roomId, pageNum}: {roomId: string, pageNum: number}): Promise<ResponseData> => {
+export const getMessageList = async ({roomId, pageNum}: {roomId: string, pageNum: number}) => {
     try {
-        const res = await instance.get(`${process.env.NEXT_PUBLIC_API_URL}/chat/${roomId}?page=${pageNum}`)
-        return res.data;
+        const messageListResponse = await instance.get(`${process.env.NEXT_PUBLIC_API_URL}/chat/${roomId}?page=${pageNum}`)
+        return messageListResponse.data;
     } catch (error) {
         console.error('Error fetching message list:', error);
         throw error;
