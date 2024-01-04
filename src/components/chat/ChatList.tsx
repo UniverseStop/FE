@@ -1,4 +1,3 @@
-import { ChatType } from "@/types/propsTypes";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -6,58 +5,36 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import 'dayjs/locale/ko';
 import {useAuth} from "@/context/KakaoContext";
+import {getRooms} from "@/pages/api/chat";
+
+import {useQuery} from "react-query";
+
+dayjs.locale('ko');
+dayjs.extend(relativeTime)
 
 const Chat = () => {
     const router = useRouter();
     const auth = useAuth();
-    console.log(auth)
-    const chat = [
 
-        {
-            roomId: "dc8963ff-75d4-4df9-9b8b-3332054a25da",
-            name: "바보",
-            userCount: 0,
-            titleImageUrl: "/images/littleduck-logo.png",
-            participants: ["user"],
-            lastMessage: "나는 땅콩이다",
-            lastMessageSender: null,
-            lastMessageSenderProfileImageUrl: null,
-            lastMessageTime: null,
-        },
-        {
-            roomId: "dc8963ff-75d4-4df9-9b8b-3332054a25db",
-            name: "이응",
-            userCount: 0,
-            titleImageUrl: "/images/littleduck-logo.png",
-            participants: ["user"],
-            lastMessage: "나는 땅콩이다",
-            lastMessageSender: null,
-            lastMessageSenderProfileImageUrl: null,
-            lastMessageTime: null,
-        },
-        {
-            roomId: "dc8963ff-75d4-4df9-9b8b-3332054a25dc",
-            name: "남궁민수",
-            userCount: 0,
-            titleImageUrl: "/images/littleduck-logo.png",
-            participants: ["user"],
-            lastMessage: "나는 땅콩이다",
-            lastMessageSender: null,
-            lastMessageSenderProfileImageUrl: null,
-            lastMessageTime: null,
-        },
-    ];
+    const { data } = useQuery({
+        queryKey: "chat",
+        queryFn: getRooms,
+        staleTime: 60 * 1000,
+        enabled: !!auth.isLoggedIn,
+    });
 
     return (
         <main className='border-t border-[#EEE]'>
-            {chat.map((item) => (
+            {data && data.map((item:any) => (
                 <Link
                     href={`/chat/${item.roomId}`}
                     key={item.roomId}
                     className='flex flex-row items-center justify-between py-5 px-10 border-b border-[#EEE]'>
                     <div className='flex flex-row'>
                         <div className='flex items-center justify-center bg-[#F1F1F1] rounded-[50%] w-14 h-14'>
-                            <Image width={50} height={50} src={item.titleImageUrl} alt='' />
+                            {item.titleImageUrl && (
+                                <Image width={50} height={50} src={item.titleImageUrl} alt='' />
+                            )}
                         </div>
                         <div className='flex flex-col justify-center px-5'>
                      .       <div className='flex flex-row items-center'>

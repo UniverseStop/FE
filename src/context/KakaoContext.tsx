@@ -10,7 +10,6 @@ export const AuthProvider = ({ children }: any) => {
     const [token, setToken] = useState<any>(null);
     const [userInfo, setUserInfo] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-
     const tokenUser = useParseJwt(tokenFromCookie);
 
     useEffect(() => {

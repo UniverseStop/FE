@@ -7,24 +7,30 @@ const KakaoRedirect = () => {
     const router = useRouter();
     const { code }: any = router.query;
     const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
+    const [isLoginFailed, setIsLoginFailed] = useState(false);
     const [isLoginAttempted, setIsLoginAttempted] = useState(false);
 
     const loginMutation = useMutation(getKakaoLogin, {
         onSuccess: () => {
             setIsLoginSuccessful(true);
         },
+        onError: () => {
+
+            router.push('/');
+            setIsLoginFailed(true);
+        },
     });
 
     useEffect(() => {
         if (code && !isLoginAttempted) {
             loginMutation.mutate(code);
-            setIsLoginAttempted(true); // 로그인 시도 상태 업데이트
+            setIsLoginAttempted(true);
         }
     }, [code, loginMutation]);
 
     useEffect(() => {
         if (isLoginSuccessful) {
-            router.push("/"); // 로그인 성공 시 메인 페이지로 이동
+            router.push("/");
         }
     }, [isLoginSuccessful, router]);
 

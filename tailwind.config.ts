@@ -18,7 +18,10 @@ const config: Config = {
             sans: ["Graphik", "sans-serif"],
             serif: ["Merriweather", "serif"],
         },
-        backgroundImage: { login: "url('/images/login2.png')", mypage: "url('/images/mypage-background.png')"},
+        backgroundImage: {
+            login: "url('/images/login2.png')",
+            mypage: "url('/images/mypage-background.png')",
+        },
         extend: {
             spacing: {
                 "128": "32rem",
@@ -39,8 +42,17 @@ const config: Config = {
                 "gray-light": "#d3dce6",
                 mainColor: "#BC8E8E",
                 postColor: "#F2F3F5",
+                mainDivisionLine: "#191818",
             },
-
+            keyframes: {
+                rotate: {
+                    "0%": { transform: "rotate(0deg)" },
+                    "100%": { transform: "rotate(-360deg)" },
+                },
+            },
+            animation: {
+                "spin-slow": "rotate 3s linear infinite",
+            },
         },
     },
     plugins: [],
