@@ -17,8 +17,6 @@ export default function Detail() {
     const param = useParams();
     const postId: number = param && Number(param.id);
     const { data: post } = useQuery<PostDetailType>({ queryKey: ["bus", postId], queryFn: () => getBusStopDetail(postId)});
-    // const { data: post } = useQuery<PostDetailType>(["bus", postId], () => getBusStopDetail(postId));
-    console.log(postId, post)
 
     // 현재 로그인된 사용자 정보
     const { userInfo } = useAuth();

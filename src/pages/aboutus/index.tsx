@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 
 export default function AboutUs() {
     const { userInfo, logout } = useAuth();
+    const router = useRouter();
 
     let buttonName = "로그인";
     let handleClickButto = () => {
@@ -15,8 +16,6 @@ export default function AboutUs() {
             logout();
         };
     }
-
-    const router = useRouter();
 
     return (
         <div className="gradation h-screen relative">
