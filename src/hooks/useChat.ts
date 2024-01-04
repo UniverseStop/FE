@@ -1,19 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
-import Cookies from 'js-cookie';
 import {CompatClient, Stomp, StompSubscription} from '@stomp/stompjs';
 import * as StompJs from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import { useAuth } from '@/context/KakaoContext';
 import {Simulate} from "react-dom/test-utils";
 import {MessageType} from "@/types/chatTypes";
+import { getSession } from "@/utils/getSession";
 
 export const useChat = () => {
     const auth = useAuth()
     const {userInfo} = auth;
     const router = useRouter();
     const roomIdQuery = router.query.room
-    const token = Cookies.get('access_Token');
+    const token = getSession("access_Token");
     const clientRef = useRef<any>({});
     const [stompClient, setStompClient] = useState<CompatClient | null>();
     const [isConnected, setIsConnected] = useState(false);

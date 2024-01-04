@@ -1,5 +1,7 @@
+import { getSession } from "@/utils/getSession";
+import { removeSession } from "@/utils/removeSession";
+import { saveSession } from "@/utils/saveSession";
 import axios from 'axios';
-import Cookies from 'js-cookie';
 
 export const instance = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -7,15 +9,12 @@ export const instance = axios.create({
 
 instance.interceptors.request.use(
     function (config) {
-        const accessToken = Cookies.get("access_Token");
-        const refreshToken = Cookies.get("refresh_Token");
+        const accessToken = getSession("access_Token");
+		if (accessToken) config.headers.Authorization = accessToken;
 
-        if (accessToken) {
-            config.headers.accessToken = `${accessToken}`;
+        const refreshToken = getSession("refresh_Token");
+		if (refreshToken) config.headers.RefreshToken = refreshToken;
 
-        } else if (!accessToken && refreshToken) {
-            config.headers.refreshToken = `${refreshToken}`;
-        }
         return config;
     },
     function (error) {
@@ -23,13 +22,35 @@ instance.interceptors.request.use(
     }
 );
 
+// 토큰 갱신
 instance.interceptors.response.use(
-    function (response) {
-        return response;
-    },
-    function (error) {
-        return Promise.reject(error);
-    }
+	(response) => {
+		return response;
+	},
+	async (error) => {
+		const { response } = error; // 디스트럭처링을 통해 response를 가져옵니다.
+
+		if (!response) { // response가 없을 경우에 대한 예외 처리
+			return Promise.reject(error);
+		}
+
+		const { status, headers } = response;
+		if (status === 401) {
+			const config = { ...error.config };
+			const newToken = headers.authorization;
+			if (newToken) {
+				// 기존 토큰 제거 및 새로운 토큰 추가
+				removeSession("access_Token");
+				saveSession("access_Token", newToken);
+
+                config.headers.Authorization = newToken;
+                
+				// 실패했던 기존 request 재시도
+				return instance(config);
+			}
+		}
+		return Promise.reject(error);
+	}
 );
 
 export default instance;
