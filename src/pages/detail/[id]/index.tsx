@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
+import { useParams } from "next/navigation";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css"
-import { getBusStopDetail } from "../../api/post";
-import { ChatApprovalType, PostDetailType } from "@/types/postTypes";
+import { getBusStopDetail, postChatApplication } from "../../api/post";
+import { PostDetailType } from "@/types/postTypes";
 import { getCategory } from "@/utils/getCategory";
 import DeleteModal from "@/components/detail/DeleteModal";
 import KakaoMap from "@/components/detail/KakaoMap";
@@ -13,7 +14,11 @@ import { useAuth } from "@/context/KakaoContext";
 import ChatApplication from "@/components/detail/ChatApplication";
 
 export default function Detail() {
-    const { data: post } = useQuery<PostDetailType>(["post"], () => getBusStopDetail(1));
+    const param = useParams();
+    const postId: number = param && Number(param.id);
+    const { data: post } = useQuery<PostDetailType>({ queryKey: ["bus", postId], queryFn: () => getBusStopDetail(postId)});
+    // const { data: post } = useQuery<PostDetailType>(["bus", postId], () => getBusStopDetail(postId));
+    console.log(postId, post)
 
     // 현재 로그인된 사용자 정보
     const { userInfo } = useAuth();
@@ -41,7 +46,7 @@ export default function Detail() {
                 </section>
                 <section className="flex flex-col text-2xl pt-5 pl-8 pb-5">
                     <div className="flex flex-col">
-                        <span><span className="text-mainColor font-bold">#{post.location}</span>에서</span>
+                        <span><span className="text-mainColor font-bold">#{post.locationDetail}</span>에서</span>
                         <span>{post.title}</span>
                     </div>
                     <div className="flex flex-col text-mainColor font-bold pt-7">
@@ -64,15 +69,12 @@ export default function Detail() {
                 </section>
                 <section>
                     <span className="pl-2 text-2xl font-bold">📍장소</span>
-                    <KakaoMap location={post.location}/>
+                    <KakaoMap location={post.locationDetail}/>
                 </section>
-               {isWriter && <section className="p-2 pt-7">
-                    <span className="pl-1 pb-4 text-2xl font-bold">👩🏻‍🚀 신청자 정보</span>
-                    {post.applicants.map((p: ChatApprovalType, index) => {
-                        return <ChatParticipate key={index} info={p} postId={post.id} userId={post.userId}/>
-                    })}
-                </section>}
-                { !isWriter && !post.isAlreadyApplicant && <ChatApplication postId={post.id}/>}
+                {/* 신청자 정보 */}
+                {isWriter ? <ChatParticipate applicants={post.applicants} postId={post.id} userId={post.userId}/> : <></>}
+                {/* 참가 신청 버튼 */}
+                {userInfo && !isWriter && !post.isAlreadyApplicant ? <ChatApplication postId={post.id}/> : <></>}
             </div>}
         </div>
     )

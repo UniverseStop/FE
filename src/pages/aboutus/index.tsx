@@ -1,7 +1,21 @@
 import ImageSlider from "@/components/aboutus/ImageSlider";
+import { useAuth } from "@/context/KakaoContext";
 import { useRouter } from "next/router";
 
 export default function AboutUs() {
+    const { userInfo, logout } = useAuth();
+
+    let buttonName = "로그인";
+    let handleClickButto = () => {
+        router.push("/users/login");
+    };
+    if (userInfo) {
+        buttonName = "로그아웃";
+        handleClickButto = () => {
+            logout();
+        };
+    }
+
     const router = useRouter();
 
     return (
@@ -27,7 +41,7 @@ export default function AboutUs() {
                     </div>
                     <div className="w-[70%] mx-auto">
                         <div className="fixed bottom-10 w-[70%] max-w-[410px] flex justify-between items-center font-bold text-3xl text-white"> 
-                            <button className="z-50" onClick={() => router.push("/users/login")}>로그인</button>
+                            <button className="z-50" onClick={() => handleClickButto()}>{buttonName}</button>
                             <button className="z-50" onClick={() => router.push("/main")}>둘러보기</button>
                         </div>
                     </div>

@@ -33,8 +33,11 @@ const KakaoMap = ({ location }: { location: string }) => {
     });
 
     return (
-        <div className="flex items-center justify-center">
-            <div id="map" className="w-[95%] h-72" />
+        <div>
+            <span className="pl-5">{location}</span>
+            <div className="flex items-center justify-center">
+                <div id="map" className="w-[95%] h-72" />
+            </div>
         </div>
     )
 }
