@@ -4,29 +4,30 @@ export interface LayoutProps {
 
 // 정류장 미리보기 타입
 interface PostPreviewType {
-    age: string,
-    category: string,
-    createdAt: string,
-    endDate: string,
-    gender: string,
-    id: number,
+    age: string;
+    category: string;
+    createdAt: string;
+    endDate: string;
+    gender: string;
+    id: number;
     imageUrlList: string[],
-    locationDetail: string,
-    nickname: string,
-    profileImageUrl: string,
-    title: string,
-    userId: number,
-    views: number,
-};
+    thumbnailImageUrl: string[];
+    location: string;
+    nickname: string;
+    profileImageUrl: string;
+    title: string;
+    userId: number;
+    views: number;
+}
 
 interface ChatApprovalType {
-    age: number,
-    gender: string,
-    nickname: string,
-    profileImageUrl: string,
-    turn: number,
-    userId: number,
-};
+    age: number;
+    gender: string;
+    nickname: string;
+    profileImageUrl: string;
+    turn: number;
+    userId: number;
+}
 
 // 게시물 상세 타입
 interface PostDetailType extends PostPreviewType {

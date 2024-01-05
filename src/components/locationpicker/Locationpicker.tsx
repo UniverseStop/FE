@@ -8,7 +8,13 @@ interface Node {
     children?: Node[];
 }
 
-const Locationpicker = ({ showInline }: { showInline: boolean }) => {
+const Locationpicker = ({
+    showInline,
+    onLocationChange,
+}: {
+    showInline: boolean;
+    onLocationChange: (location: string | null) => void;
+}) => {
     const customData: Node[] = [
         {
             label: "서울",
@@ -359,7 +365,7 @@ const Locationpicker = ({ showInline }: { showInline: boolean }) => {
     ];
 
     const handleCascaderChange = (value: string | null) => {
-        console.log("Selected Value:", value);
+        onLocationChange(value);
     };
 
     const styles = { width: 370, display: "block", marginBottom: 10 };
