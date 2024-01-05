@@ -12,7 +12,7 @@ interface PostPreviewType {
     id: number;
     imageUrlList: string[],
     thumbnailImageUrl: string[];
-    location: string;
+    locationDetail: string;
     nickname: string;
     profileImageUrl: string;
     title: string;
@@ -40,6 +40,7 @@ interface PostDetailType extends PostPreviewType {
     applicants: ChatApprovalType[], // 참여 신청한 유저들 정보
     isAlreadyApplicant: boolean, // 참여 신청한 게시물인지 여부
     isParticipants: boolean, // 이미 참여한 게시물인지 여부
+    status: string, // 게시물 종류
 };
 
 // 게시물 카테고리 타입

@@ -4,7 +4,6 @@ import { getGender } from "@/utils/getGender";
 const UserInfo = ({ userId, nickname, age, gender, imageUrl, isDeleteModal, setIsDeleteModal}: { userId: number, nickname: string, age: number, gender: string, imageUrl: string, isDeleteModal?: boolean, setIsDeleteModal?: (isDeleteModal: boolean) => void}) => {
     const { userInfo } = useAuth(); // 현재 로그인된 사용자 정보
 
-
     return (
         <div className="flex">
             <img className="w-[60px] h-[60px] rounded-full" alt="profile" src={imageUrl}/>
