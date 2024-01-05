@@ -6,17 +6,27 @@ export const getBusStopItems = async () => {
         const res = await instance.get("/api/post/random?size=10");
         return res.data.data;
     } catch (error) {
-        throw error;      
+        throw error;
+    }
+};
+
+// 메인페이지 정류장 작성글(무한스크롤)
+export const getBusStopMainItems = async (page: number) => {
+    try {
+        const res = await instance.get(`/api/post?page=${page}`);
+        return res.data.data.content;
+    } catch (error) {
+        throw error;
     }
 };
 
 // 정류장 상세 정보
 export const getBusStopDetail = async (postId: number) => {
     try {
-        const res = await instance.get(`/api/post/${postId}`)
+        const res = await instance.get(`/api/post/${postId}`);
         return res.data.data;
     } catch (error) {
-        throw error; 
+        throw error;
     }
 };
 
@@ -41,7 +51,7 @@ export const postChatApplication = async (postId: number) => {
 };
 
 // 참여자 승인
-export const postChatApproval = async ({postId, userId}: {postId: number, userId: number}) => {
+export const postChatApproval = async ({ postId, userId }: { postId: number; userId: number }) => {
     try {
         const res = await instance.post(`/api/post/${postId}/applicants/${userId}`);
         return res;
@@ -51,7 +61,7 @@ export const postChatApproval = async ({postId, userId}: {postId: number, userId
 };
 
 // 참여자 거절
-export const postChatRefuse = async ({postId, userId}: {postId: number, userId: number}) => {
+export const postChatRefuse = async ({ postId, userId }: { postId: number; userId: number }) => {
     try {
         const res = await instance.delete(`/api/post/${postId}/applicants/${userId}`);
         return res;
