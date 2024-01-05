@@ -1,12 +1,14 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import Cookies from "js-cookie";
 import useParseJwt from "../hooks/useParseJwt";
 import { AuthContextType } from "@/types/propsTypes";
+import { saveSession } from "@/utils/saveSession";
+import { removeSession } from "@/utils/removeSession";
+import { getSession } from "@/utils/getSession";
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider = ({ children }: any) => {
-    const tokenFromCookie = Cookies.get("access_Token");
+    const tokenFromCookie = getSession("access_Token");
     const [token, setToken] = useState<any>(null);
     const [userInfo, setUserInfo] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -23,14 +25,17 @@ export const AuthProvider = ({ children }: any) => {
         }
     }, [tokenFromCookie]);
 
-    const updateToken = (newToken: any) => {
-        Cookies.set("access_Token", newToken);
+    const updateToken = (newToken: string) => {
+        saveSession("access_Token", newToken);
         setToken(newToken);
     };
 
     const logout = () => {
-        Cookies.remove("access_Token");
-        Cookies.remove("refresh_Token");
+        // 애플리케이션 토큰 삭제
+        removeSession("access_Token");
+        removeSession("refresh_Token");
+
+        //
         setToken(null);
         setUserInfo(null);
         setIsLoggedIn(false);
