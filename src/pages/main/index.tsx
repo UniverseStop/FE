@@ -4,11 +4,35 @@ import { useQuery } from "react-query";
 import { getBusStopMainItems } from "../api/post";
 import { PostPreviewType } from "@/types/postTypes";
 import PostDetail from "@/components/post/PostDetail";
-import { useParams, usePathname, useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
+import DateFilter from "./_datefilter";
+import LocationFilter from "./_locationfilter";
+import { getDateFormat } from "@/utils/getDate";
+import InterestButton from "./_interestbutton";
 
 const mainPage = () => {
     const router = useRouter();
-    const { search, interest, date, location } = router.query;
+    const params = useParams();
+
+    const [dateFilterToggle, setDateFilterToggle] = useState<boolean>(false);
+    const [locationFilterToggle, setLocationFilterToggle] = useState<boolean>(false);
+    const [date, setDate] = useState<string>("");
+    const [location, setLocation] = useState<string>("");
+    const [interest, setInterest] = useState<string>("");
+
+    const handleLocationChange = (location: string) => {
+        setLocation(location);
+        setLocationFilterToggle(false);
+    };
+    const handleDateChange = (date: Date) => {
+        setDate(getDateFormat(date));
+    };
+    const handleDateToggle = () => {
+        setDateFilterToggle(false);
+    };
+    const handleInterestChange = (interest: string) => {
+        setInterest(interest);
+    };
 
     const [page, setPage] = useState<number>(0);
     const [postData, setPostData] = useState<PostPreviewType[]>([]);
@@ -26,7 +50,7 @@ const mainPage = () => {
 
     const observer = useRef<IntersectionObserver | null>(null);
     const lastPostRef = useCallback(
-        (node: HTMLDivElement | null) => {
+        (node: HTMLButtonElement | null) => {
             if (!infiniteToggle || isLoading || !node) return;
 
             if (observer.current) {
@@ -45,6 +69,12 @@ const mainPage = () => {
         },
         [isLoading]
     );
+    if (dateFilterToggle) {
+        return <DateFilter onDateToggle={handleDateToggle} onDateChange={handleDateChange} />;
+    }
+    if (locationFilterToggle) {
+        return <LocationFilter onLocationChange={handleLocationChange} />;
+    }
 
     return (
         <>
@@ -53,6 +83,7 @@ const mainPage = () => {
                     className="mr-auto mt-[30px] ml-[30px]"
                     src="https://i.ibb.co/LY7XF2w/Group-172.png"
                     alt="로고"
+                    onClick={() => router.push("/")}
                 ></img>
                 <img
                     className="h-[47px] mt-[33px] mr-[30px]"
@@ -63,51 +94,43 @@ const mainPage = () => {
             </div>
             <div className="border border-t border-mainDivisionLine my-[20px] "></div>
             <div className="w-full">
-                <button className="border border-mainColor mb-[20px] mr-[5px] ml-[15px] w-[155px] h-[35px] rounded-[20px]">
+                <button
+                    className="border border-mainColor mb-[20px] mr-[5px] ml-[15px] w-[155px] h-[35px] rounded-[20px]"
+                    onClick={() => setDateFilterToggle(true)}
+                >
                     {date ? date : "날짜"}
                 </button>
-                <button className="border border-mainColor mb-[20px] mr-[5px] ml-[15px] w-[155px] h-[35px] rounded-[20px]">
-                    지역
+                <button
+                    className="border border-mainColor mb-[20px] mr-[5px] ml-[15px] w-[155px] h-[35px] rounded-[20px]"
+                    onClick={() => setLocationFilterToggle(true)}
+                >
+                    {location ? location : "지역"}
                 </button>
             </div>
-            <div className="w-full">
-                <button className="border border-mainColor mb-[20px] mr-[5px] ml-[15px] w-[95px] h-[35px] rounded-[20px]">
-                    🍰 맛집
-                </button>
-                <button className="border border-mainColor mb-[20px] mr-[5px] ml-[15px] w-[95px] h-[35px] rounded-[20px]">
-                    🎬 문화
-                </button>
-                <button className="border border-mainColor mb-[20px] mr-[5px] ml-[15px] w-[95px] h-[35px] rounded-[20px]">
-                    🏀 운동
-                </button>
-                <button className="border border-mainColor mb-[20px] mr-[5px] ml-[15px] w-[95px] h-[35px] rounded-[20px]">
-                    📖 스터디
-                </button>
-                <button className="border border-mainColor mb-[20px] mr-[5px] ml-[15px] w-[95px] h-[35px] rounded-[20px]">
-                    🎸 기타
-                </button>
-            </div>
+            <InterestButton onInterestChange={handleInterestChange} />
             <div className="flex flex-wrap">
                 {postData &&
                     postData.map((p: PostPreviewType, index: number) => {
                         if (index === postData.length - 1) {
                             return (
-                                <div
+                                <button
                                     className="w-[46%] sm:w-[30%] min-w-[145px] aspect-square box-border m-[1.66%]"
                                     key={p.id}
-                                    ref={lastPostRef} // 마지막 아이템에 ref 추가
+                                    ref={lastPostRef}
+                                    onClick={() => router.push(`/detail/${p.id}`)}
                                 >
                                     <PostDetail info={p} wSize="w-[100%]" hSize="h-[100%]" />
-                                </div>
+                                </button>
                             );
                         } else {
                             return (
-                                <div
+                                <button
                                     className="w-[46%] sm:w-[30%] min-w-[145px] aspect-square box-border m-[1.66%]"
                                     key={p.id}
+                                    onClick={() => router.push(`/detail/${p.id}`)}
                                 >
                                     <PostDetail info={p} wSize="w-[100%]" hSize="h-[100%]" />
-                                </div>
+                                </button>
                             );
                         }
                     })}

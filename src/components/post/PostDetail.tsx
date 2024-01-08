@@ -13,7 +13,7 @@ const PostDetail = ({ info, hSize, wSize }: { info: PostPreviewType; hSize: stri
             className={`${wSize} ${hSize} max-w-[600px] p-4 text-white rounded-[20px] flex flex-col justify-between relative`}
             style={{
                 position: "relative",
-                backgroundImage: `url(${info.thumbnailImageUrl[0]})`,
+                backgroundImage: `url()`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
