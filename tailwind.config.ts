@@ -31,7 +31,7 @@ const config: Config = {
                 "4xl": "2rem",
             },
             colors: {
-                blue: "#1fb6ff",
+                blue: "#0000FF",
                 purple: "#7e5bef",
                 pink: "#ff49db",
                 orange: "#ff7849",

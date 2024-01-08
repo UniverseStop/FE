@@ -1,4 +1,6 @@
+import { postConfirmNickname } from "@/pages/api/user";
 import React, { useState } from "react";
+import { useMutation } from "react-query";
 
 function UserInput({
 	title,
@@ -10,6 +12,9 @@ function UserInput({
 	setAge,
 	gender,
 	setGender,
+	isValidatedNickname,
+	setIsValidatedNickname,
+	setIsConfirmNicknameSuccess,
 }: {
 	title: string;
 	placeholder: string;
@@ -17,9 +22,12 @@ function UserInput({
 	nickname?: string;
 	setNickname?: (nickname: string) => void;
 	age?: string;
-	setAge?: (nickname: string) => void;
+	setAge?: (age: string) => void;
 	gender?: string;
-	setGender?: (nickname: string) => void;
+	setGender?: (gender: string) => void;
+	isValidatedNickname?: boolean;
+	setIsValidatedNickname?: (isValidatedNickname: boolean) => void;
+	setIsConfirmNicknameSuccess?: (isConfirmNicknameSuccess: boolean) => void;
 }) {
 	/** title '나이'일 경우 : 10부터 99까지의 2자릿수 */
 	const validateAge = (inputValue: string) => {
@@ -38,14 +46,17 @@ function UserInput({
 			setErrorMsg("");
 		} else if (inputValue.length < 2 || inputValue.length > 10) {
 			setErrorMsg("2자 이상 10자 이하로 입력해주세요.");
+			if (setIsValidatedNickname) setIsValidatedNickname(false);
 		} else {
 			const nicknameRegex = /^[a-zA-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ]*$/;
 			const hasOnlyConsonantsOrVowels = /^[ㄱ-ㅎㅏ-ㅣ]+$/;
 
 			if (title === "닉네임" && (!nicknameRegex.test(inputValue) || hasOnlyConsonantsOrVowels.test(inputValue))) {
 				setErrorMsg("영어 대소문자, 한글, 숫자만 사용가능합니다.");
+				if (setIsValidatedNickname) setIsValidatedNickname(false);
 			} else {
 				setErrorMsg("");
+				if (setIsValidatedNickname) setIsValidatedNickname(true);
 			}
 		}
 		if (setNickname) {
@@ -53,11 +64,36 @@ function UserInput({
 		}
 	};
 
+	/** title '닉네임'일 경우 : 중복체크 버튼눌렀을때 */
+	const [textBlue, setTextBlue] = useState(false);
+	const postConfirmNicknameMutation = useMutation(postConfirmNickname, {
+		onSuccess: (data) => {
+			if (!data.data.success) {
+				setErrorMsg("중복된 닉네임입니다.");
+				setTextBlue(false);
+				if (setIsConfirmNicknameSuccess) setIsConfirmNicknameSuccess(false);
+			} else {
+				setTextBlue(true);
+				setErrorMsg("사용가능한 닉네임입니다.");
+				if (setIsConfirmNicknameSuccess) setIsConfirmNicknameSuccess(true);
+			}
+		},
+		onError: (error) => {
+			console.error("중복 확인 에러:", error);
+			setTextBlue(false);
+			setErrorMsg("중복 확인 중 오류가 발생했습니다.");
+			if (setIsConfirmNicknameSuccess) setIsConfirmNicknameSuccess(false);
+		},
+	});
+
+	const handleDuplicateCheck = () => {
+		if (nickname) postConfirmNicknameMutation.mutate(nickname);
+	};
+
 	/** title '성별'일 경우 : setGender이 있을 경우 진행 (타입에러방지)*/
-	const validateGender = (inputValue : string) => {
-		if(setGender)
-		setGender(inputValue)
-	}
+	const validateGender = (inputValue: string) => {
+		if (setGender) setGender(inputValue);
+	};
 
 	return (
 		<div>
@@ -73,7 +109,7 @@ function UserInput({
 							placeholder={placeholder}
 							className="focus:outline-none pl-4 border border-mainColor rounded-2xl w-full h-14"
 						/>
-						<p className="pt-2 pl-1 text-sm text-red">{errorMsg}</p>
+						<p className={`pt-2 pl-1 text-sm text-red ${textBlue ? 'text-blue' : ''}`}>{errorMsg}</p>
 					</div>
 				) : title === "나이" ? (
 					/* 나이일 경우 */
@@ -99,7 +135,10 @@ function UserInput({
 
 				{isShowDuplicateCheckBtn ? (
 					/** 조건부렌더링 : 닉네임의 경우 - 중복확인버튼있음 */
-					<button type="button" className="cursor w-1/5 h-14 rounded-2xl bg-mainColor text-white">
+					<button
+						onClick={handleDuplicateCheck}
+						type="button"
+						className="cursor w-1/5 h-14 rounded-2xl bg-mainColor text-white">
 						중복 확인
 					</button>
 				) : (

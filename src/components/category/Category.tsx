@@ -6,13 +6,13 @@ function Category({
 	handleCategoryChange,
 }: {
 	title: string;
-	handleCategoryChange: (categoryTag: string) => void;
+	handleCategoryChange: (categoryTagKey: string) => void;
 }) {
 	const [activeCategory, setActiveCategory] = useState("");
 
-	const handleCategoryBtnClick = (categoryTag: string) => {
-		handleCategoryChange(categoryTag);
-		setActiveCategory(categoryTag);
+	const handleCategoryBtnClick = (categoryTagKey: string) => {
+		handleCategoryChange(categoryTagKey);
+		setActiveCategory(categoryTagKey);
 	};
 
 	return (
@@ -21,33 +21,38 @@ function Category({
 			<div className="flex justify-around">
 				<CategoryBtn
 					emoticon="🍰"
-					categoryTag="맛집"
+					categoryTag="음식"
 					handleCategoryChange={handleCategoryBtnClick}
-					isClicked={activeCategory === "맛집"}
+					isClicked={activeCategory === "음식"}
+					categoryTagKey="Eats"
 				/>
 				<CategoryBtn
 					emoticon="🎬"
 					categoryTag="문화"
 					handleCategoryChange={handleCategoryBtnClick}
 					isClicked={activeCategory === "문화"}
+					categoryTagKey="Culture"
 				/>
 				<CategoryBtn
 					emoticon="🏀"
 					categoryTag="운동"
 					handleCategoryChange={handleCategoryBtnClick}
 					isClicked={activeCategory === "운동"}
+					categoryTagKey="Exercise"
 				/>
 				<CategoryBtn
 					emoticon="📖"
 					categoryTag="스터디"
 					handleCategoryChange={handleCategoryBtnClick}
 					isClicked={activeCategory === "스터디"}
+					categoryTagKey="Study"
 				/>
 				<CategoryBtn
 					emoticon="🎸"
 					categoryTag="기타"
 					handleCategoryChange={handleCategoryBtnClick}
 					isClicked={activeCategory === "기타"}
+					categoryTagKey="Etc"
 				/>
 			</div>
 		</div>

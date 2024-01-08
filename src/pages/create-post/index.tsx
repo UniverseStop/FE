@@ -9,7 +9,7 @@ import React from "react";
 function createPost() {
 
 	const handleCategoryChange = (category: string) => {
-		console.log("과연", category)
+
 	}
 3
 
