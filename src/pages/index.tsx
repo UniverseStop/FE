@@ -13,15 +13,15 @@ export default function Home() {
     }
 
     const { userInfo, isLoggedIn, logout } = auth;
-    console.log(userInfo)
+    // console.log(userInfo)
 
     const onLogin = () => {
         router.replace("/users/login");
     };
 
-    console.log("userInfo", userInfo);
-    console.log("isLoggedIn", isLoggedIn);
-    console.log("logout", logout);
+    // console.log("userInfo", userInfo);
+    // console.log("isLoggedIn", isLoggedIn);
+    // console.log("logout", logout);
 
     return (
         <div>

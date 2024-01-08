@@ -3,10 +3,15 @@ import UserInput from "@/components/user-input/UserInput";
 import React from "react";
 
 function MypageEdit() {
+
+	const handleCategoryChange = (category: string) => {
+		console.log("과연", category)
+	}
+
 	return (
 		<div className="flex flex-col justify-between h-screen ">
 			<section>
-				<Category title="나의 관심사를 선택해주세요" />
+				<Category title="나의 관심사를 선택해주세요" handleCategoryChange={handleCategoryChange}/>
 				<UserInput title="닉네임" placeholder="닉네임을 입력해주세요" isShowDuplicateCheckBtn={true} />
 			</section>
 			<section className="flex justify-center mb-10 gap-5">
