@@ -26,10 +26,11 @@
     "react-dom": "^18",
     "react-icon": "^1.0.0",
     "react-icons": "^4.12.0",
-
+    "react-intersection-observer": "^9.5.3",
     "react-kakao-maps-sdk": "^1.1.24",
     "react-query": "^3.39.3",
     "react-slick": "^0.29.0",
+    "react-textarea-autosize": "^8.5.3",
     "recoil": "^0.7.7",
     "rsuite": "^5.48.1",
     "slick-carousel": "^1.8.1",

@@ -1,8 +1,0 @@
-.post_box {
-    @apply border w-[30%];
-    /* width: 30%; */
-    min-width: 145px;
-    aspect-ratio: 1/1;
-    box-sizing: border-box;
-    margin: 0 1.66%;
-}
