@@ -5,3 +5,8 @@ export interface FirstSetUserInfoType {
     age : string;
     gender : string;
 }
+
+export interface NewDataType {
+    userId : string;
+    userSettings : FirstSetUserInfoType;
+}

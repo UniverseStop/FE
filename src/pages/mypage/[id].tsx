@@ -19,7 +19,7 @@ const Mypage = () => {
 	const NumUrlId = Number(urlId)
 	// console.log("router", urlId)
 
-	const { data: mypage, isLoading, isError } = useQuery(["mypage"], () => getMyPage(NumUrlId));
+	const { data: mypage, isLoading, isError } = useQuery(["mypage", NumUrlId], () => getMyPage(NumUrlId));
 
 	// console.log("data 호", mypage)
 

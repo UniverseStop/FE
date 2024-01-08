@@ -10,3 +10,4 @@ export function getCategory(key: string): string {
     };
     return categoryDict[key];
 }
+

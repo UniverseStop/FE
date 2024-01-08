@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import axios from "axios";
 import { instance } from "./instance";
-import { FirstSetUserInfoType } from "@/types/myPageTypes";
+import { FirstSetUserInfoType, NewDataType } from "@/types/myPageTypes";
 
 export const credentialLogin = async () => {
 	try {
@@ -23,12 +23,35 @@ export const credentialLogin = async () => {
 
 //마이페이지
 export const getMyPage = async (userId: Number) => {
-	const response = await instance.get(`/api/mypage/${userId}`);
-	return response.data;
+	try {
+		const response = await instance.get(`/api/mypage/${userId}`);
+		return response.data;
+	} catch (error) {
+		console.error("getMyPage error:", error);
+		throw error;
+	}
 };
 
 //내 정보 설정(최초 로그인시)
-export const putUserInfoSet = async (userInfo: FirstSetUserInfoType) => {
-	const response = await instance.put(`api/mypage/detail`, userInfo);
-    return response;
+export const putUserInfoSet = async (data: NewDataType) => {
+	try {
+		const response = await instance.put(`/api/mypage/${data.userId}/detail`, data.userSettings);
+		return response;
+	} catch (error) {
+		console.error("putUserInfoSet error:", error);
+		throw error;
+	}
+};
+
+//닉네임 중복확인
+export const postConfirmNickname = async (userNickname: string) => {
+	try {
+		const response = await instance.post(`/api/mypage/nickname/check`, JSON.stringify({ nickname: userNickname }), {
+			headers: { "Content-Type": "application/json" },
+		});
+		return response;
+	} catch (error) {
+		console.error("postConfirmNickname error:", error);
+		throw error;
+	}
 };

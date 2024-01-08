@@ -5,7 +5,7 @@ import React from "react";
 function MypageEdit() {
 
 	const handleCategoryChange = (category: string) => {
-		console.log("과연", category)
+
 	}
 
 	return (

@@ -4,24 +4,26 @@ function CategoryBtn({
 	emoticon,
 	categoryTag,
 	handleCategoryChange,
-  isClicked
+	isClicked,
+	categoryTagKey
 }: {
 	emoticon: string;
 	categoryTag: string;
-	handleCategoryChange: (categoryTag: string) => void;
-  isClicked: boolean;
+	handleCategoryChange: (categoryTagKey: string) => void;
+	isClicked: boolean;
+	categoryTagKey: string;
 }) {
-
-
-const categoryBtnClick = () => {
-  handleCategoryChange(categoryTag)
-}
-
+	const categoryBtnClick = () => {
+		handleCategoryChange(categoryTagKey);
+	};
 
 	return (
 		<div className="flex flex-col items-center">
-			<button type="button" className="hover" onClick={categoryBtnClick}>
-				<div className={`w-20 h-20 rounded-full border border-mainColor border-2 flex items-center justify-center ${isClicked ? 'bg-mainColor' : ''}`}>
+			<button type="button" className="hover" onClick={categoryBtnClick} id={categoryTagKey}>
+				<div
+					className={`w-20 h-20 rounded-full border border-mainColor border-2 flex items-center justify-center ${
+						isClicked ? "bg-mainColor" : ""
+					}`}>
 					<p className="text-5xl">{emoticon}</p>
 				</div>
 			</button>
