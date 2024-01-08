@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useMutation } from "react-query";
 import { getKakaoLogin } from "@/pages/api/rest";
+import { useAuth } from "@/context/KakaoContext";
 
 const KakaoRedirect = () => {
     const router = useRouter();
@@ -9,14 +10,17 @@ const KakaoRedirect = () => {
     const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
     const [isLoginFailed, setIsLoginFailed] = useState(false);
     const [isLoginAttempted, setIsLoginAttempted] = useState(false);
+    const auth = useAuth();
+    const {userInfo} = auth;
+
+    console.log("랄랄", userInfo.userId)
 
     const loginMutation = useMutation(getKakaoLogin, {
         onSuccess: () => {
             setIsLoginSuccessful(true);
         },
         onError: () => {
-
-            router.push('/');
+            router.push('/');3
             setIsLoginFailed(true);
         },
     });
@@ -30,8 +34,9 @@ const KakaoRedirect = () => {
 
     useEffect(() => {
         if (isLoginSuccessful) {
-            router.push("/");
-        }
+            router.push("/userinfo-setting");
+         }
+        // if (isLoginSuccessful)
     }, [isLoginSuccessful, router]);
 
     if (!code) {

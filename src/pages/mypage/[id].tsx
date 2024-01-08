@@ -8,20 +8,23 @@ import { useQuery } from "react-query";
 import { getMyPage } from "../api/user";
 
 const Mypage = () => {
-	//로그인한 정보 context api 에서 받아오는 id값
+	//로그인한 정보 context api 에서 받아오는 id값 (1번 id / 사용자)
 	const auth = useAuth();
 	const {userInfo} = auth;
-	console.log("userInfo", userInfo)
+	// console.log("userInfo", userInfo)
 
-	//url 에서 가져온 id값 : string type
+	//url 에서 가져온 id값 : string type -> num으로 변환해줘야함 (2번 id / 페이지주인)
 	const router = useRouter();
 	const urlId = router.query.id
-	console.log("router", urlId)
+	const NumUrlId = Number(urlId)
+	// console.log("router", urlId)
 
-	const { data: mypage, isLoading, isError } = useQuery(["mypage"], () => getMyPage(Number(urlId)));
+	const { data: mypage, isLoading, isError } = useQuery(["mypage"], () => getMyPage(NumUrlId));
 
-	console.log("data 호", mypage)
+	// console.log("data 호", mypage)
 
+
+	//1번과 2번이 같으면 수정표시 있게, 다르다면 신고표시뜨게
 
 	return (
 		<div className="gradation">

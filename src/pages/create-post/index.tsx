@@ -7,10 +7,16 @@ import AddTitle from "@/components/create-post/AddTitle";
 import React from "react";
 
 function createPost() {
+
+	const handleCategoryChange = (category: string) => {
+		console.log("과연", category)
+	}
+3
+
 	return (
 		<div>
 			<section>
-				<Category title="🗂️ 카테고리" />
+				<Category title="🗂️ 카테고리" handleCategoryChange={handleCategoryChange} />
 				<AddImage />
 				<AddTitle />
 				<AddContent />
