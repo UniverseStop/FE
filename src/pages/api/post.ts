@@ -11,9 +11,11 @@ export const getBusStopItems = async () => {
 };
 
 // 메인페이지 정류장 작성글(무한스크롤)
-export const getBusStopMainItems = async (page: number) => {
+export const getBusStopMainItems = async (page: number, queryString: string) => {
+    console.log(`/api/post?page=${page}${queryString}`);
     try {
-        const res = await instance.get(`/api/post?page=${page}`);
+        const res = await instance.get(`/api/post?page=${page}${queryString}`);
+        console.log("res", res);
         return res.data.data.content;
     } catch (error) {
         throw error;
