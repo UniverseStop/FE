@@ -1,15 +1,10 @@
-import { getUserList } from "@/pages/api/admin";
+import { getUserList } from "@/pages/api/manager";
 import { useQuery } from "react-query";
 
 const Management = () => {
-    const { data: users, error } = useQuery("users", getUserList, {
-        // 다양한 옵션 설정 가능
-      });
-      
-      if (error) {
-        console.error('Error fetching users:', error);
-        // 에러 처리 로직 추가
-      }
+    const { data: users } = useQuery("users", getUserList);
+    console.log("users", users)
+     
 
     return (
         <div className="flex items-center justify-center pt-10">

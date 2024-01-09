@@ -4,7 +4,7 @@ import { instance } from "./instance";
 export const getUserList = async () => {
     try {
         const res = await instance.get("/user/userList");
-        return res;
+        return res.data.data;
     } catch (error) {
         throw error;
     }
