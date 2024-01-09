@@ -8,7 +8,7 @@ module.exports = {
     nextConfig,
     //   output:'export'3
     images: {
-        domains: ['github.com'],
+        domains: ['github.com', 'k.kakaocdn.net']
     },
 };
 
