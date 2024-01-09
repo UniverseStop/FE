@@ -10,28 +10,61 @@ import { getMyPage } from "../api/user";
 const Mypage = () => {
 	//로그인한 정보 context api 에서 받아오는 id값 (1번 id / 사용자)
 	const auth = useAuth();
-	const {userInfo} = auth;
-	// console.log("userInfo", userInfo)
+	const { userInfo } = auth;
+	const loggedInUserId = userInfo ? userInfo.userId : null;
 
 	//url 에서 가져온 id값 : string type -> num으로 변환해줘야함 (2번 id / 페이지주인)
 	const router = useRouter();
-	const urlId = router.query.id
-	const NumUrlId = Number(urlId)
-	// console.log("router", urlId)
+	const urlId = router.query.id;
+	const myPageUserId = Number(urlId);
 
-	const { data: mypage, isLoading, isError } = useQuery(["mypage", NumUrlId], () => getMyPage(NumUrlId));
+	/** 서버에서 받아오는 2번 id 주인의 데이터 */
+	const { data: mypage, isLoading, isError } = useQuery(["mypage", myPageUserId], () => getMyPage(myPageUserId));
 
-	// console.log("data 호", mypage)
+	const { age, gender, mannerTemplate, nickname, profileImageUrl, userId, interest } = mypage
+		? mypage.data
+		: {
+				age: null,
+				gender: null,
+				mannerTemplate: null,
+				nickname: null,
+				profileImageUrl: null,
+				userId: null,
+				interest: null,
+		  };
 
-
-	//1번과 2번이 같으면 수정표시 있게, 다르다면 신고표시뜨게
+	const UserPosts = mypage
+		? mypage.data.userPosts
+		: {
+				age: null,
+				category: null,
+				createdAt: null,
+				endDate: null,
+				gender: null,
+				id: null,
+				imageUrlList: null,
+				thumbnailImageUrl: null,
+				location: null,
+				nickname: null,
+				profileImageUrl: null,
+				title: null,
+				userId: null,
+				views: null,
+		  };
 
 	return (
 		<div className="gradation">
 			<div className="bg-mypage bg-cover bg-no-repeat flex flex-col h-full">
-				<Introduce />
-				<Profile />
-				<MyPost />
+				<Introduce
+					age={age}
+					gender={gender}
+					nickname={nickname}
+					interest={interest}
+					loggedInUserId={loggedInUserId}
+					myPageUserId={myPageUserId}
+				/>
+				<Profile profileImageUrl={profileImageUrl} />
+				<MyPost userPosts={UserPosts} />
 			</div>
 		</div>
 	);

@@ -12,7 +12,7 @@ interface PostPreviewType {
     id: number;
     imageUrlList: string[],
     thumbnailImageUrl: string[];
-    locationDetail: string;
+    location: string;
     nickname: string;
     profileImageUrl: string;
     title: string;
