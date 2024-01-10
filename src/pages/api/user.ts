@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import axios from "axios";
 import { instance } from "./instance";
-import { FirstSetUserInfoType, NewDataType } from "@/types/myPageTypes";
+import { NewEditDataType, NewSetDataType } from "@/types/myPageTypes";
 
 export const credentialLogin = async () => {
 	try {
@@ -32,8 +32,19 @@ export const getMyPage = async (userId: Number) => {
 	}
 };
 
+//마이페이지 수정
+export const putUserInfoEdit = async (data : NewEditDataType) => {
+	try {
+		const response = await instance.put(`/api/mypage/${data.userId}/nickname`, data.userEditSettings);
+		return response;
+	} catch (error) {
+		console.error("putUserInfoEdit error", error);
+		throw error;
+	}
+}
+
 //내 정보 설정(최초 로그인시)
-export const putUserInfoSet = async (data: NewDataType) => {
+export const putUserInfoSet = async (data: NewSetDataType) => {
 	try {
 		const response = await instance.put(`/api/mypage/${data.userId}/detail`, data.userSettings);
 		return response;

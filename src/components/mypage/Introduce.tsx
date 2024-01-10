@@ -22,6 +22,7 @@ function Introduce({
 	//영어 -> 한국어
 	const userInterest = getCategory(interest);
 
+
 	return (
 		<div>
 			<div className="grid justify-items-center">
