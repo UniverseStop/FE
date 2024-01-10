@@ -5,7 +5,7 @@ import { useState } from "react";
 
 export default function Admin() {
     const [select, setSelect] = useState<number>();
-    
+
     return (
         <div style={{ width: "100vw", marginLeft: "calc(-50vw + 50%"}}>
             <section className="h-[70px] p-4 flex items-center justify-between">
@@ -25,7 +25,7 @@ export default function Admin() {
             </section>
             <section>
                 {/* Statistics: 통계,  Management: 관리, Authority: 권한 */}
-                {select === 1 ? <Statistics /> : select === 2 ? <Management /> : <Authority />}
+                {select === 0 ? <Statistics /> : select === 1 ? <Management /> : <Authority />}
             </section>
         </div>
     )

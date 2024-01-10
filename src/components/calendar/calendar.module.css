@@ -1,4 +1,4 @@
-.datePicker {
+.datePickerFliter {
     display: flex;
     align-items: center;
     border: 1px solid hsl(0, 7%, 62%);
@@ -13,9 +13,24 @@
     font-size: 25px;
 }
 
+.datePickerPost {
+    display: flex;
+    border: 1px solid #bc8e8e;;
+    border-radius: 15px;
+    box-sizing: border-box;
+    height: 55px;
+    width: 580px;
+    color:  #8492a6;
+    /* text-align: center; */
+    font-size: 17px;
+    margin-left: 20px;
+    align-items: center;
+    padding-right: 14px;
+    padding-left: 19px;
+}
+
 .calenderWrapper {
     background-color: white;
-    /* color: black; */
 }
 
 .selectedDay {

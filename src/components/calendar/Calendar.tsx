@@ -3,6 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "./calendar.module.css";
 import { ko } from "date-fns/locale";
+import styled from "styled-components";
 
 const Calendar = ({ showTime, onDateChange }: { showTime: boolean; onDateChange: (date: Date) => void }) => {
     const [startDate, setStartDate] = useState<Date | null>(new Date());
@@ -18,10 +19,10 @@ const Calendar = ({ showTime, onDateChange }: { showTime: boolean; onDateChange:
         <div>
             <DatePicker
                 locale={ko}
-                className={styles.datePicker}
+                className={showTime? styles.datePickerPost : styles.datePickerFliter}
                 calendarClassName={styles.calenderWrapper}
                 dayClassName={(d) => (d.getDate() === startDate!.getDate() ? styles.selectedDay : styles.unselectedDay)}
-                shouldCloseOnSelect={false} // 날짜를 선택하면 datepicker가 자동으로 닫힘
+                shouldCloseOnSelect={true} // 날짜를 선택하면 datepicker가 자동으로 닫힘
                 dateFormat={showTime ? "yyyy.MM.dd eee hh:mm" : "yyyy.MM.dd eee"} // 날짜 형태
                 minDate={new Date()} // minDate 이전 날짜 선택 불가
                 selected={startDate}
