@@ -45,6 +45,7 @@ const config: Config = {
                 postColor: "#F2F3F5",
                 mainDivisionLine: "#191818",
                 fontColor: "#858585",
+                adminColor: "#FBF9F9",
             },
             keyframes: {
                 rotate: {

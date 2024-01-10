@@ -1,9 +1,9 @@
-import Authority from "@/components/admin/Authority";
-import Management from "@/components/admin/Management";
-import Statistics from "@/components/admin/Statistics";
+import Authority from "@/components/manager/Authority";
+import Management from "@/components/manager/Management";
+import Statistics from "@/components/manager/Statistics";
 import { useState } from "react";
 
-export default function Admin() {
+export default function Manager() {
     const [select, setSelect] = useState<number>();
 
     return (
@@ -23,7 +23,7 @@ export default function Admin() {
                     })}
                 </ul>
             </section>
-            <section>
+            <section className="bg-adminColor h-[90vh]">
                 {/* Statistics: 통계,  Management: 관리, Authority: 권한 */}
                 {select === 0 ? <Statistics /> : select === 1 ? <Management /> : <Authority />}
             </section>
