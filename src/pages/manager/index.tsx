@@ -4,10 +4,10 @@ import Statistics from "@/components/manager/Statistics";
 import { useState } from "react";
 
 export default function Manager() {
-    const [select, setSelect] = useState<number>();
+    const [select, setSelect] = useState<number>(0);
 
     return (
-        <div style={{ width: "100vw", marginLeft: "calc(-50vw + 50%"}}>
+        <div style={{ width: "100vw", marginLeft: "calc(-50vw + 50%" }}>
             <section className="h-[70px] p-4 flex items-center justify-between">
                 <button className="absolute">
                     <img className="w-[120px] h-[40px]" alt="logo" src="/images/logo.png"/>
@@ -28,5 +28,5 @@ export default function Manager() {
                 {select === 0 ? <Statistics /> : select === 1 ? <Management /> : <Authority />}
             </section>
         </div>
-    )
+    );
 }

@@ -27,10 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
                 <QueryClientProvider client={queryClient}>
                     {/* <SessionProvider session={session}> */}
                     <ReactQueryDevtools />
-                    <Layout>
-                        {isLoading ? <Spinner /> : null}
-                        <Component {...pageProps} />
-                    </Layout>
+                    <Layout>{isLoading ? <Spinner /> : <Component {...pageProps} />}</Layout>
                     {/* </SessionProvider> */}
                 </QueryClientProvider>
             </AuthProvider>

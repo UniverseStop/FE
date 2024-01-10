@@ -3,11 +3,9 @@ import React from "react";
 
 const Spinner = () => {
     return (
-        // <div className="gradation w-full">
-        // <div className="gradationh-screen bg-cover bg-[url('/images/loading-error-background.png')]">
-        <div className="flex h-screen">
+        <div className="flex h-screen bg-white">
             <section className="m-auto flex flex-col items-center">
-                <div className="relative top-[30px] z-9999">
+                <div className="relative top-[30px]">
                     <Image
                         alt="earth"
                         width={285}
@@ -24,9 +22,7 @@ const Spinner = () => {
                     />
                 </div>
             </section>
-            {/* </div> */}
         </div>
-        // </div>
     );
 };
 
