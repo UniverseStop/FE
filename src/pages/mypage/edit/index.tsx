@@ -43,6 +43,8 @@ function MypageEdit() {
 			//토큰 삭제 후 토큰 갱신
 			const { headers } = data;
 			const newToken = headers.authorization;
+			console.log("data", data)
+			console.log("헤더", headers)
 			removeSession("access_Token");
 			saveSession("access_Token", newToken);
 		},
