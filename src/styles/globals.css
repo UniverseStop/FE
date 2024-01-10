@@ -2,16 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-
 .gradation {
-	background: linear-gradient(170deg, rgba(30, 24, 32, 1) 0%, rgba(98, 96, 147, 1) 100%);
+    background: linear-gradient(170deg, rgba(30, 24, 32, 1) 0%, rgba(98, 96, 147, 1) 100%);
 }
 
 [class^="number-slide"],
 [class*=" number-slide"] {
-  height: 150px;
-  padding-left: 20px;
-
+    height: 150px;
+    padding-left: 20px;
 }
 
 /* 날짜선택 css */
@@ -46,20 +44,18 @@
 /* 위치선택 css */
 
 .rs-picker-cascader-menu-items {
-    width: 365px !important;
+    width: 420px !important;
 }
 .rs-picker-cascader-menu-items > div {
-    width: 365px !important;
+    width: 420px !important;
 }
 
 .rs-picker-cascader-menu-column {
-    width: 180px !important;
-    height: 450px !important;
+    width: 140px !important;
+    height: 500px !important;
 }
 
-.rs-picker-cascader-menu-has-children
-    rs-picker-cascader-menu-item
-    rs-picker-cascader-menu-item-focus {
+.rs-picker-cascader-menu-has-children rs-picker-cascader-menu-item rs-picker-cascader-menu-item-focus {
     background-color: #bc8e8e !important;
     color: #bc8e8e !important;
 }

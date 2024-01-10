@@ -4,19 +4,24 @@ import Statistics from "@/components/manager/Statistics";
 import { useState } from "react";
 
 export default function Manager() {
-    const [select, setSelect] = useState<number>();
-    
+    const [select, setSelect] = useState<number>(0);
+
     return (
-        <div style={{ width: "100vw", marginLeft: "calc(-50vw + 50%"}}>
+        <div style={{ width: "100vw", marginLeft: "calc(-50vw + 50%" }}>
             <section className="h-[70px] p-4 flex items-center justify-between">
                 <button>
-                    <img className="w-[120px] h-[40px]" alt="logo" src="/images/logo.png"/>
+                    <img className="w-[120px] h-[40px]" alt="logo" src="/images/logo.png" />
                 </button>
                 <ul className="flex items-center w-[100%] justify-center space-x-[60px]">
                     {["사용자 통계", "사용자 관리", "관리자 권한"].map((name, index) => {
                         return (
                             <li key={index} className="flex flex-col">
-                                <button onClick={()=>setSelect(index)} className={`text-[20px] ${index===select ? "text-mainColor" : "text-fontColor"}`}>{name}</button>
+                                <button
+                                    onClick={() => setSelect(index)}
+                                    className={`text-[20px] ${index === select ? "text-mainColor" : "text-fontColor"}`}
+                                >
+                                    {name}
+                                </button>
                                 {select === index ? <div className="h-[5px] w-[110px] bg-mainColor"></div> : <></>}
                             </li>
                         );
@@ -28,5 +33,5 @@ export default function Manager() {
                 {select === 0 ? <Statistics /> : select === 1 ? <Management /> : <Authority />}
             </section>
         </div>
-    )
+    );
 }

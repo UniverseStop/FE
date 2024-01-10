@@ -4,12 +4,13 @@ import { useQuery } from "react-query";
 import { getBusStopMainItems } from "../api/post";
 import { PostPreviewType } from "@/types/postTypes";
 import PostDetail from "@/components/post/PostDetail";
-import DateFilter from "./_datefilter";
-import LocationFilter from "./_locationfilter";
 import { getDateFormat } from "@/utils/getDate";
-import InterestButton from "./_interestbutton";
-import Search from "./_search";
 import Image from "next/image";
+import Search from "@/components/main/Search";
+import DateFilter from "@/components/main/DateFilter";
+import LocationFilter from "@/components/main/LocationFilter";
+import InterestButton from "@/components/main/InterestButton";
+import Nav from "@/components/nav/Nav";
 
 const mainPage = () => {
     const router = useRouter();
@@ -109,8 +110,8 @@ const mainPage = () => {
     }
 
     return (
-        <>
-            <div className="flex flex-row">
+        <div className="h-screen border">
+            <div className="flex flex-row border">
                 {search ? (
                     <div className="flex items-center mr-auto mt-[30px]">
                         <span className="mr-[10px] text-4xl text-black">{search}</span>
@@ -181,7 +182,8 @@ const mainPage = () => {
                         }
                     })}
             </div>
-        </>
+            <Nav />
+        </div>
     );
 };
 
