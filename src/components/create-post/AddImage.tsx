@@ -1,30 +1,44 @@
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 
-function AddImage() {
-	const [images, setImages] = useState<string[]>([]);
+function AddImage({ postImage, setpostImage }: { postImage: File[]; setpostImage: (postImage: File[]) => void }) {
+	const [imagePreview, setImagePreview] = useState<File[]>([]);
+	const [isButtonDisabled, setIsButtonDisabled] = useState<Boolean>(true);
 
-	const handleChange = (e: React.ChangeEvent) => {
-		const targetFiles = (e.target as HTMLInputElement).files as FileList;
-		const selectedFiles: string[] = Array.from(targetFiles).map((file) => {
-			return URL.createObjectURL(file);
-		});
-		setImages((prev) => prev.concat(selectedFiles));
+	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+		if (imagePreview.length >= 2) {
+			setIsButtonDisabled(false);
+		}
+		const targetFiles = e.target.files as FileList;
+		const selectedFiles: File[] = Array.from(targetFiles);
+		console.log(targetFiles);
+		console.log(selectedFiles);
+		setImagePreview((prev) => [...prev, ...selectedFiles]);
+
+		return;
 	};
+
+	setpostImage(imagePreview);
 
 	return (
 		<div>
 			<p className="text-2xl font-bold m-6 0 6 6">☝🏻표지에 쓰일 이미지를 골라주세요!</p>
-			<div className="flex ml-6">
-				{images &&
-					images.map((url, i) => (
-						<div key={url}>
-							<img className="rounded-2xl object-cover h-36 w-36" src={url} alt={`image${i}`} />
+			<div className="flex gap-3 ml-6">
+				{imagePreview &&
+					imagePreview.map((file, i) => (
+						<div key={i}>
+							<img
+								className="rounded-2xl object-cover h-36 w-36"
+								src={URL.createObjectURL(file)}
+								alt={`image${i}`}
+							/>
 						</div>
 					))}
 				<label
 					htmlFor="file"
-					className="flex justify-center items-center border border-mainColor rounded-2xl w-36 h-36">
+					className={`flex justify-center items-center border border-mainColor rounded-2xl w-36 h-36 cursor-pointer ${
+						!isButtonDisabled ? "pointer-events-none opacity-50" : ""
+					}`}>
 					<Image alt="사진업로드아이콘" width={45} height={45} src="/images/AddImageIcon.png" />
 				</label>
 				<input

@@ -5,7 +5,7 @@ import { useState } from "react";
 
 export default function Manager() {
     const [select, setSelect] = useState<number>();
-    
+
     return (
         <div style={{ width: "100vw", marginLeft: "calc(-50vw + 50%"}}>
             <section className="h-[70px] p-4 flex items-center justify-between">

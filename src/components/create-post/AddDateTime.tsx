@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Calendar from "../calendar/Calendar";
 
-function AddDateTime() {
+function AddDateTime({
+	postDateTime,
+	setPostDateTime,
+}: {
+	postDateTime: Date;
+	setPostDateTime: (postDateTime: Date) => void;
+}) {
 	return (
-		<div>
-			<p className="text-2xl font-bold m-6 0 6 6">🗓️날짜 및 시간</p>
-			<div className="flex ml-6">
-				<button className="flex justify-start border border-mainColor rounded-2xl w-full h-14">
-					<p className="text-gray p-4 0 0 6">만남 날짜와 시간을 정해주세요.</p>
-				</button>
+		<section className="flex flex-col justify-center">
+			<div className=" w-[580px]">
+				<p className="text-2xl font-bold m-6 0 6 6">🗓️ 날짜 및 시간</p>
+				<section className="place-items-center">
+					<Calendar showTime={true} onDateChange={setPostDateTime} />
+				</section>
 			</div>
-		</div>
+		</section>
 	);
 }
 
