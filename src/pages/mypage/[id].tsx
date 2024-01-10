@@ -23,34 +23,12 @@ const Mypage = () => {
 
 	const { age, gender, mannerTemplate, nickname, profileImageUrl, userId, interest } = mypage
 		? mypage.data
-		: {
-				age: null,
-				gender: null,
-				mannerTemplate: null,
-				nickname: null,
-				profileImageUrl: null,
-				userId: null,
-				interest: null,
-		  };
+		: { age : null, gender : null, mannerTemplate : null, nickname : null, profileImageUrl : null, userId : null, interest : null, };
 
 	const UserPosts = mypage
 		? mypage.data.userPosts
-		: {
-				age: null,
-				category: null,
-				createdAt: null,
-				endDate: null,
-				gender: null,
-				id: null,
-				imageUrlList: null,
-				thumbnailImageUrl: null,
-				location: null,
-				nickname: null,
-				profileImageUrl: null,
-				title: null,
-				userId: null,
-				views: null,
-		  };
+		: { age : null, category : null, createdAt: null, endDate: null, gender: null, id: null, imageUrlList: null, thumbnailImageUrl: null,
+			location: null, nickname: null, profileImageUrl: null, title: null, userId: null, views: null };
 
 	return (
 		<div className="gradation">

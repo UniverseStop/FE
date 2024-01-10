@@ -8,7 +8,7 @@ import AddTitle from "@/components/create-post/AddTitle";
 import { getDateTimeFormat } from "@/utils/getDate";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation} from "react-query";
 import { postBusStop } from "../api/post";
 
 function CreatePost() {
@@ -18,7 +18,7 @@ function CreatePost() {
 	const [postContent, setPostContent] = useState<string>("");
 	const [postLoaction, setPostLoaction] = useState<string>("");
 	const [postDateTime, setPostDateTime] = useState<Date>(new Date());
-	const [postSubLimit, setpostSubLimit] = useState<number>(0);
+	const [postSubLimit, setpostSubLimit] = useState<number>(1);
 
 	const router = useRouter();
 
@@ -35,6 +35,7 @@ function CreatePost() {
 		subLimit: postSubLimit,
 	};
 
+	/** 통신로직 */
 	const postAddMutation = useMutation(postBusStop, {
 		onSuccess: (response) => {
 			alert("게시글이 등록되었습니다.");
@@ -45,23 +46,16 @@ function CreatePost() {
 		},
 	});
 
+	// 등록하기 버튼 눌렀을때 함수
 	const handleAddPost = () => {
-		if (
-			!postCategory ||
-			!postTitle ||
-			!postContent ||
-			!postLoaction ||
-			!postDateTime ||
-			!postSubLimit ||
-			postImage.length === 0
-		) {
+		if (!postCategory || !postTitle || !postContent || !postLoaction || !postDateTime || !postSubLimit || postImage.length === 0) {
 			alert("모든 필수 항목을 입력해주세요.");
 			return;
 		}
 
 		const formdata = new FormData();
 
-		// 1. 이미지를 FormData로 형변환, 자바가 인식할수 있도록
+		// 1. 이미지를 FormData로 형변환, 자바가 인식할수 있도록 요건 type을 지정할 필요가 없는 이윤 자바에서 다 하나하나 뭐시기하기떄문?
 		postImage.map((img) => {
 			formdata.append("file", img);
 		});
