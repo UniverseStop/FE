@@ -3,14 +3,22 @@ import MyPost from "@/components/mypage/MyPost";
 import Profile from "@/components/mypage/Profile";
 import { useAuth } from "@/context/KakaoContext";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "react-query";
 import { getMyPage } from "../api/user";
 
 const Mypage = () => {
+	/** 로그인 후 이용가능한 페이지 */
+	const { userInfo, isLoggedIn} = useAuth();
+ 	useEffect(()=>{
+		if(!isLoggedIn) {
+			alert("로그인이 필요한 페이지입니다.")
+			router.push("/users/login");
+			return;
+		}
+	},[isLoggedIn])
+
 	//로그인한 정보 context api 에서 받아오는 id값 (1번 id / 사용자)
-	const auth = useAuth();
-	const { userInfo } = auth;
 	const loggedInUserId = userInfo ? userInfo.userId : null;
 
 	//url 에서 가져온 id값 : string type -> num으로 변환해줘야함 (2번 id / 페이지주인)

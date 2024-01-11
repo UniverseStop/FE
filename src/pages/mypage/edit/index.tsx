@@ -5,7 +5,7 @@ import { putUserInfoEdit } from "@/pages/api/user";
 import { removeSession } from "@/utils/removeSession";
 import { saveSession } from "@/utils/saveSession";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 
 function MypageEdit() {
@@ -13,9 +13,19 @@ function MypageEdit() {
 	const [changedNickname, setChangedNickname] = useState<string>("")
 	const [isValidatedNickname, setIsValidatedNickname] = useState<boolean>(false); //닉네임 형식에 맞는지 체크
 	const [isConfirmNicknameSuccess, setIsConfirmNicknameSuccess] = useState<boolean>(false); //닉네임 중복확인 체크
-	const { userInfo } = useAuth();
 	const queryClient = useQueryClient();
 	const router = useRouter();
+
+	/** 로그인 후 이용가능한 페이지 */
+	const { userInfo, isLoggedIn} = useAuth();
+	useEffect(()=>{
+		if(!isLoggedIn) {
+			alert("로그인이 필요한 페이지입니다.")
+			router.push("/users/login");
+			return;
+		}
+	},[isLoggedIn])
+
 
 	const handleCategoryChange = (category: string) => {
 		setChangedCategory(category)
