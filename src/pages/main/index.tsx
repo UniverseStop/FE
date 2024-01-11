@@ -6,112 +6,97 @@ import { PostPreviewType } from "@/types/postTypes";
 import PostDetail from "@/components/post/PostDetail";
 import { getDateFormat } from "@/utils/getDate";
 import Image from "next/image";
-import Search from "@/components/main/Search";
 import DateFilter from "@/components/main/DateFilter";
 import LocationFilter from "@/components/main/LocationFilter";
 import InterestButton from "@/components/main/InterestButton";
 import Nav from "@/components/nav/Nav";
 
 const MainPage = () => {
-	const router = useRouter();
+    const router = useRouter();
+    const { search } = router.query
+    const [componentToggle, setComponentToggle] = useState<string>("");
+    const [page, setPage] = useState<number>(0);
+    const [date, setDate] = useState<string>("");
+    const [location, setLocation] = useState<string>("");
+    const [interest, setInterest] = useState<string>("");
+    const [queryString, setQueryString] = useState("");
+    const [postData, setPostData] = useState<PostPreviewType[]>([]);
+    const [infiniteToggle, setInfiniteToggle] = useState<boolean>(true);
 
-	const [componentToggle, setComponentToggle] = useState<string>("");
-	const [page, setPage] = useState<number>(0);
-	const [search, setSearch] = useState<string>("");
-	const [date, setDate] = useState<string>("");
-	const [location, setLocation] = useState<string>("");
-	const [interest, setInterest] = useState<string>("");
-	const [queryString, setQueryString] = useState("");
-	const [postData, setPostData] = useState<PostPreviewType[]>([]);
-	const [infiniteToggle, setInfiniteToggle] = useState<boolean>(true);
+    useEffect(() => {
+        const queryParams = [];
+        if (search) queryParams.push(`titleOrContent=${search}`);
+        if (date) queryParams.push(`endDate=${date}`);
+        if (location) queryParams.push(`location=${location}`);
+        if (interest) queryParams.push(`interest=${interest}`);
 
-	useEffect(() => {
-		const queryParams = [];
-		if (search) queryParams.push(`titleOrContent=${search}`);
-		if (date) queryParams.push(`endDate=${date}`);
-		if (location) queryParams.push(`location=${location}`);
-		if (interest) queryParams.push(`interest=${interest}`);
+        const newQueryString = queryParams.length > 0 ? "&" + queryParams.join("&") : "";
+        setQueryString(newQueryString);
+        setPostData([]);
+        setPage(0);
+        setInfiniteToggle(true);
+    }, [date, location, interest]);
 
-		const newQueryString = queryParams.length > 0 ? "&" + queryParams.join("&") : "";
-		setQueryString(newQueryString);
-		setPostData([]);
-		setPage(0);
-		setInfiniteToggle(true);
-	}, [search, date, location, interest]);
+    const { isLoading } = useQuery(
+        ["postList", { page, queryString }],
+        () => getBusStopMainItems(page, queryString),
+        {
+            onSuccess: (newData) => {
+                newData.pop();
+                setPostData((data) => (data ? [...data, ...newData] : newData));
+                if (newData.length === 0) {
+                    setInfiniteToggle(false);
+                }
+            },
+        }
+    );
 
-	const { data, isLoading, isError } = useQuery(
-		["postList", { page, queryString }],
-		() => getBusStopMainItems(page, queryString),
-		{
-			onSuccess: (newData) => {
-				newData.pop();
-				setPostData((data) => (data ? [...data, ...newData] : newData));
-				if (newData.length === 0) {
-					setInfiniteToggle(false);
-				}
-			},
-		}
-	);
+    const observer = useRef<IntersectionObserver | null>(null);
+    const lastPostRef = useCallback(
+        (node: HTMLButtonElement | null) => {
+            if (!infiniteToggle || isLoading || !node) return;
 
-	const observer = useRef<IntersectionObserver | null>(null);
-	const lastPostRef = useCallback(
-		(node: HTMLButtonElement | null) => {
-			if (!infiniteToggle || isLoading || !node) return;
+            if (observer.current) {
+                observer.current.disconnect();
+            }
 
-			if (observer.current) {
-				observer.current.disconnect();
-			}
+            observer.current = new IntersectionObserver(
+                (entries) => {
+                    if (entries[0].isIntersecting) {
+                        setPage((prevPage) => prevPage + 1);
+                    }
+                },
+                { threshold: 0.8 }
+            );
+            observer.current.observe(node);
+        },
+        [isLoading]
+    );
 
-			observer.current = new IntersectionObserver(
-				(entries) => {
-					if (entries[0].isIntersecting) {
-						setPage((prevPage) => prevPage + 1);
-					}
-				},
-				{ threshold: 0.8 }
-			);
-			observer.current.observe(node);
-		},
-		[isLoading]
-	);
+    const handleComponentToggle = () => {
+        setComponentToggle("");
+    };
+    const handleDateChange = (date: Date) => {
+        setDate(getDateFormat(date));
+    };
+    const handleLocationChange = (location: string) => {
+        setLocation(location);
+        setComponentToggle("");
+    };
+    const handleInterestChange = (interest: string) => {
+        setInterest(interest);
+    };
 
-	const handleComponentToggle = () => {
-		setComponentToggle("");
-	};
-	const handleSearchChange = (search: string) => {
-		setSearch(search);
-		setComponentToggle("");
-	};
-	const handleDateChange = (date: Date) => {
-		setDate(getDateFormat(date));
-	};
-	const handleLocationChange = (location: string) => {
-		setLocation(location);
-		setComponentToggle("");
-	};
-	const handleInterestChange = (interest: string) => {
-		setInterest(interest);
-	};
-	const handleSearchCancel = () => {
-		setSearch("");
-		setDate("");
-		setLocation("");
-		setInterest("");
-	};
-
-	if (componentToggle == "search") {
-		return <Search onSearchChange={handleSearchChange} />;
-	}
-	if (componentToggle == "date") {
-		return <DateFilter onDateToggle={handleComponentToggle} onDateChange={handleDateChange} />;
-	}
-	if (componentToggle == "location") {
-		return <LocationFilter onLocationChange={handleLocationChange} />;
-	}
+    if (componentToggle == "date") {
+        return <DateFilter onDateToggle={handleComponentToggle} onDateChange={handleDateChange} />;
+    }
+    if (componentToggle == "location") {
+        return <LocationFilter onLocationChange={handleLocationChange} />;
+    }
 
     return (
-        <div className="h-screen border">
-            <div className="flex flex-row border">
+        <div>
+            <div className="flex flex-row">
                 {search ? (
                     <div className="flex items-center mr-auto mt-[30px]">
                         <span className="mr-[10px] text-4xl text-black">{search}</span>
@@ -121,7 +106,7 @@ const MainPage = () => {
                             height={20}
                             className="cursor-pointer"
                             src="/images/cancel.png"
-                            onClick={handleSearchCancel}
+                            onClick={() => router.push("/main")}
                         />
                     </div>
                 ) : (
@@ -136,7 +121,7 @@ const MainPage = () => {
                     className="h-[47px] mt-[33px] mr-[30px] cursor-pointer"
                     src="https://github.com/tph7897/tph7897/assets/132332533/7a3eed66-2a45-40c4-ad0c-ee1c671601fc"
                     alt="검색버튼"
-                    onClick={() => setComponentToggle("search")}
+                    onClick={() => router.push(`/search`)}
                 ></img>
             </div>
             <div className="border border-t border-mainDivisionLine my-[20px] "></div>

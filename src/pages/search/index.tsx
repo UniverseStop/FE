@@ -1,15 +1,11 @@
 import useInput from "@/hooks/useInput";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React from "react";
 
-const Search = ({ onSearchChange }: { onSearchChange: (search: string) => void }) => {
+const Search = () => {
     const [searchValue, handleSearchChange, resetSearchValue] = useInput("");
-
-    const handleSearch = () => {
-        onSearchChange(searchValue);
-        resetSearchValue;
-    };
-
+    const router = useRouter();
     return (
         <div className="flex flex-col text-center pt-28 bg-white h-screen">
             <section className="relative">
@@ -26,7 +22,7 @@ const Search = ({ onSearchChange }: { onSearchChange: (search: string) => void }
                         value={searchValue}
                         onChange={handleSearchChange}
                     />
-                    <button className="absolute top-2 right-4 px-2 py-1 pr-14" onClick={handleSearch}>
+                    <button className="absolute top-2 right-4 px-2 py-1 pr-14" onClick={() => router.push(`/main?search=${searchValue}`)}>
                         <Image alt="search_icon" width={32} height={32} src="/images/search.png" />
                     </button>
                 </div>
