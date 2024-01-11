@@ -34,11 +34,6 @@ const Post = ({postId}: {postId: number}) => {
             </div> 
         );
     }
-
-    // 날짜 및 시간 정보
-    const date = post?.endDate.replace("-", "년 ").replace("-", "월 ") + "일"; // 날짜
-    const time = post?.endTime; // 시간: 형식 변경 필요
-    
     return (
         <div className="bg-postColor">
             {post &&
@@ -48,38 +43,41 @@ const Post = ({postId}: {postId: number}) => {
                     <UserInfo userId={post.userId} nickname={post.nickname} age={Number(post.age)} gender={post.gender} imageUrl={post.profileImageUrl} isDeleteModal={isDeleteModal} setIsDeleteModal={setIsDeleteModal}/>
                     <span className="text-sm pt-2 pr-4">{post.createdAt.split("T")[0].replaceAll("-", ".")}</span>
                 </section>
-                <section className="flex flex-col text-2xl pt-5 pl-8 pb-5">
+                <section className="flex flex-col text-2xl pt-5 pl-5 pb-5">
                     <div className="flex flex-col">
-                        <span><span className="text-mainColor font-bold">#{post.locationDetail}</span>에서</span>
+                        <span><span className="text-mainColor font-bold"># {post.location.split(" ").slice(0, 2).join(" ")}</span>에서</span>
                         <span>{post.title}</span>
                     </div>
                     <div className="flex flex-col text-mainColor font-bold pt-7">
-                        <span>#{date} {time}</span>
-                        <span>#{getCategory(post.category)}</span>
+                        <span># {post.endDate}</span>
+                        <span># {getCategory(post.category)}</span>
                     </div>
                 </section>
-                <section className="relative pb-[180px]">
+                <section>
                     <div ref={sliderRef} className="keen-slider">
                         {post.imageUrlList.map((url: string, index: number)=>{
-                            return <img className="keen-slider__slide w-full h-[350px]" key={index} alt="image" src={url} />
+                            return <img className="keen-slider__slide w-full h-[400px]" key={index} alt="image" src={url} />
                         })}
                     </div>
-                    <div className="absolute w-[95%] h-[40%] mt-10 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-2xl bg-white shadow offset-x-2 offset-y-2 blur-4bg-gray-800">
-                        <div className="flex flex-col p-6">
+                </section>
+                <section className="transform -translate-y-5 flex items-center justify-center">
+                    <div className="whitespace-normal w-[95%] h-[auto] items-center justify-center bg-white rounded-2xl shadow offset-x-2 offset-y-2 blur-4bg-gray-800">
+                        <div className="flex flex-col p-6 whitespace-normal">
                             <span className="text-xl">{post.title}</span>
-                            <span className="text-sm pt-3">{post.content}</span>
+                            <span className="text-sm pt-3 break-all">{post.content}</span>
                         </div>
                     </div>
                 </section>
                 <section>
                     <span className="pl-2 text-2xl font-bold">📍장소</span>
-                    <KakaoMap location={post.locationDetail}/>
+                    <KakaoMap location={post.location}/>
                 </section>
                 {/* 신청자 정보 */}
                 {isWriter ? <ChatParticipate applicants={post.applicants} postId={post.id} userId={post.userId}/> : <></>}
                 {/* 참가 신청 버튼 */}
                 {userInfo && !isWriter && !post.isAlreadyApplicant ? <ChatApplication postId={post.id}/> : <></>}
             </div>}
+            <div className="h-[80px]" />
         </div>
     )
 }
