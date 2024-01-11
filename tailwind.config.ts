@@ -39,7 +39,7 @@ const config: Config = {
                 yellow: "#ffc82c",
                 red: "#EB0000",
                 "gray-dark": "#273444",
-                gray: "#8492a6",
+                gray: "#939393",
                 "gray-light": "#d3dce6",
                 mainColor: "#BC8E8E",
                 postColor: "#F2F3F5",
@@ -47,7 +47,7 @@ const config: Config = {
                 managerFontColor: "#858585",
                 managerGrayColor: "#F5F5FA",
                 managerColor: "#FBF9F9",
-                managerPointColor: "#D4D4D4",            
+                managerPointColor: "#D4D4D4",
             },
             keyframes: {
                 rotate: {

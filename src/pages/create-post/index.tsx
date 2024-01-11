@@ -21,6 +21,9 @@ function CreatePost() {
 	const [postSubLimit, setpostSubLimit] = useState<number>(1);
 
 	const router = useRouter();
+	const handleCancel = () => {
+		router.back();
+	}
 
 	const handleCategoryChange = (category: string) => {
 		setPostCategory(category);
@@ -78,7 +81,7 @@ function CreatePost() {
 				<AddPlace postLoaction={postLoaction} setPostLoaction={setPostLoaction} />
 			</section>
 			<section className="flex justify-center mb-10 mt-[100px] gap-10">
-				<button className="border text-mainColor border-mainColor h-14 rounded-2xl w-1/4">취소</button>
+				<button onClick={handleCancel}className="border text-mainColor border-mainColor h-14 rounded-2xl w-1/4">취소</button>
 				<button onClick={handleAddPost} className="bg-mainColor text-white h-14 rounded-2xl w-1/4">
 					등록하기
 				</button>
