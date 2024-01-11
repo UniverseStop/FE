@@ -13,6 +13,7 @@ const useInput = (initialValue?: string) => {
         setValue("");
     };
 
+    // 값, 값 업데이트 함수, 값 초기화 함수
     return [value, handler, resetValue] as const;
 };
 
