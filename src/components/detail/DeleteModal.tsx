@@ -1,9 +1,18 @@
 import { useMutation } from "react-query";
 import { deleteBusStop } from "@/pages/api/post";
+import { useRouter } from "next/router";
 
 const DeleteModal = ({postId, isDeleteModal, setIsDeleteModal}: {postId: number, isDeleteModal: boolean, setIsDeleteModal: (isDeleteModal: boolean) => void}) => {
     // 게시물 삭제
-    const deletePostMutation = useMutation(deleteBusStop, {});
+    const router = useRouter();
+    const deletePostMutation = useMutation(deleteBusStop, {
+        onSuccess: () => {
+            router.push("/main");
+        },
+        onError: (error) => {
+            alert("게시물이 삭제되지 못했습니다.");
+        },
+    });
     const handleClickDelete = () => {
         deletePostMutation.mutate(postId);
     };
