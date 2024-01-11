@@ -20,11 +20,11 @@ const Search = ({ onSearchChange }: { onSearchChange: (search: string) => void }
 
     return (
         <div className="flex flex-col text-center pt-28 h-screen">
-            <section className="relative">
+            {/* <section className="relative">
                 <button className="absolute bottom-14 left-10">
-                    <Image alt="back_icon" width={20} height={20} src="/images/back.png" />
+                    <Image alt="back_icon" width={20} height={20} src="/images/back.svg" />
                 </button>
-            </section>
+            </section> */}
             <section>
                 <span className="flex pl-16 font-bold text-2xl">무엇을 찾으시나요?</span>
                 <div className="relative right-4">
