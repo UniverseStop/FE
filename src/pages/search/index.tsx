@@ -1,22 +1,18 @@
 import useInput from "@/hooks/useInput";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React from "react";
 
-const Search = ({ onSearchChange }: { onSearchChange: (search: string) => void }) => {
-    // 입력된 검색어 (입력한 검색어, 상태 업데이트 함수, 입력된 검색어 초기화 함수)
-    const [searchValue, handleSearchChange, resetSearchValue] = useInput(""); 
 
-    // 검색 기능 (사용자가 내용 입력 후 검색어 버튼 누르면 바로 API 요청)
-    const handleSearch = () => {
-        onSearchChange(searchValue); // 검색어 바로 업데이트
-        resetSearchValue; // 검색어 초기화
-    };
+const Search = () => {
+    const [searchValue, handleSearchChange, resetSearchValue] = useInput("");
+    const router = useRouter();
 
-    // 추천 검색어 (선택된 추천 검색어로만 검색)
-    const handleClickRecommend = (val: string) => {
-        onSearchChange(val); // 선택된 추천 검색어로 업데이트
-        resetSearchValue; // 검색어 초기화
-    };
+    // // 추천 검색어 (선택된 추천 검색어로만 검색)
+    // const handleClickRecommend = (val: string) => {
+    //     onSearchChange(val); // 선택된 추천 검색어로 업데이트
+    //     resetSearchValue; // 검색어 초기화
+    // };
 
     return (
         <div className="flex flex-col text-center pt-28 h-screen">
@@ -34,7 +30,7 @@ const Search = ({ onSearchChange }: { onSearchChange: (search: string) => void }
                         value={searchValue}
                         onChange={handleSearchChange}
                     />
-                    <button className="absolute top-6 right-4 px-2 py-1 pr-14" onClick={handleSearch}>
+                    <button className="absolute top-2 right-4 px-2 py-1 pr-14" onClick={() => router.push(`/main?search=${searchValue}`)}>
                         <Image alt="search_icon" width={32} height={32} src="/images/search.png" />
                     </button>
                 </div>
@@ -49,7 +45,7 @@ const Search = ({ onSearchChange }: { onSearchChange: (search: string) => void }
                                     className="text-mainColor flex items-center justify-center m-2 border rounded-2xl w-[98px] h-[35px] text-xl"
                                     key={index}
                                     value={item}
-                                    onClick={() => handleClickRecommend(item)}
+                                    // onClick={() => handleClickRecommend(item)}
                                 >
                                     #{item}
                                 </button>

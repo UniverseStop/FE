@@ -19,3 +19,13 @@ export const getBlackUserList = async (pageNum: number) => {
         throw error;
     }
 };
+
+// 전체 모임장소 위치 조회
+export const getPostLocationStatic = async () => {
+    try {
+        const res = await instance.get(`/api/static`);
+        return res.data;
+    } catch (error) {
+        throw error;
+    }
+};
