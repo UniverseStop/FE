@@ -1,13 +1,28 @@
-import { useState } from "react";
-import { useQuery } from "react-query";
+import { useEffect, useState } from "react";
+import { RefetchOptions, RefetchQueryFilters, useQuery } from "react-query";
 import { getBlackUserList, getUserList } from "@/pages/api/manager";
-import { UserType } from "@/types/managerTypes";
+import ManagementTable from "./common/ManagementTable";
+
+interface CustomRefetchOptions extends RefetchOptions, RefetchQueryFilters<number> {
+    page?: number;
+}
 
 const Management = () => {
-    const { data: users } = useQuery("users", ()=>getUserList(0)); // 전체 사용자 조회 (차단 사용자 제외)
-    console.log(users)
-    const { data: blackUsers } = useQuery("blackUsers", ()=>getBlackUserList(0)); // 차단된 사용자 조회
+    // 전체 사용자 조회 및 페이지네이션
+    const [selectPage, setSelectPage] = useState(0);
+    const { data: users, refetch: userRefetch } = useQuery("users", () => getUserList(selectPage));
+    useEffect(()=>{
+        userRefetch({ page: selectPage } as CustomRefetchOptions);
+    }, [selectPage]);
  
+    // 차단된 유저 목록 조회 및 페이지네이션
+    const [selectBlackPage, setSelectBlackPage] = useState(0);
+    const { data: blackUsers, refetch: blackRefetch } = useQuery("blackUsers", () => getBlackUserList(0));
+    useEffect(()=>{
+        blackRefetch({ page: selectBlackPage } as CustomRefetchOptions);
+    }, [selectBlackPage]);
+
+    // 사용자 차단
     const [selectBox, setSelectBox] = useState<number[]>([]);
     const handleCheckBox = (userId: number) => {
         setSelectBox(prevSelectBox => {
@@ -18,19 +33,16 @@ const Management = () => {
             }
         });
     };
-
+        
     return (
-        <div className="flex items-center justify-center pt-10">
-            <div className="flex justify-center p-5 space-x-10 bg-white w-[1300px] h-[600px]">
-                <section className="space-y-5 border border-managerPointColor w-1/2 p-5">
-                    <div>
-                        <span>Nickname</span>
-                        
-                    </div>
+        <div className="flex items-center justify-center pt-5">
+            <div className="flex justify-center p-3 space-x-10 bg-white min-w-[1200px] w-11/12 h-[870px] mb-5 pb-8">
+                {users ? <ManagementTable users={users.content} totalPages={users.totalPages} selectPage={selectPage} setSelectPage={setSelectPage}/> : <></>}
+                <section className="flex flex-col items-center justify-center space-y-2">
+                    <button><img className="border rounded-sm" alt="clear" src="/images/move.png"/></button>
+                    <button><img className="border rounded-sm transform scale-x-[-1]" alt="clear" src="/images/move.png"/></button>
                 </section>
-                <section className="border border-managerPointColor w-1/2 p-5">
-                    냐옹
-                </section>
+                {blackUsers ? <ManagementTable users={blackUsers.content} totalPages={blackUsers.totalPages} selectPage={selectBlackPage} setSelectPage={setSelectBlackPage}/> : <></>}
             </div>
         </div>
     )

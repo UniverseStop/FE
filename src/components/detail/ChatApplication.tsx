@@ -15,7 +15,7 @@ const ChatApplication = ({ postId }: { postId: number }) => {
     };
     
     return (
-        <section className="fixed bottom-5 pr-5 w-full max-w-[600px] flex justify-end z-50">
+        <section className="fixed bottom-5 pr-5 pb-[61px] w-full max-w-[600px] flex justify-end z-50">
             <button onClick={() => handleClickApplication()} className="w-[100px] h-[100px] flex flex-col justify-center items-center rounded-full bg-white">
                 <img className="w-[70px] h-[70px]" alt="application" src="/images/application.png"/>
                 <span className="font-bold text-xs">참가신청</span>

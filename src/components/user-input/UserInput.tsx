@@ -64,7 +64,7 @@ function UserInput({
 		}
 	};
 
-	/** title '닉네임'일 경우 : 중복체크 버튼눌렀을때 */
+	/** title '닉네임'일 경우 : 통신로직 */
 	const [textBlue, setTextBlue] = useState(false);
 	const postConfirmNicknameMutation = useMutation(postConfirmNickname, {
 		onSuccess: (data) => {
@@ -86,6 +86,7 @@ function UserInput({
 		},
 	});
 
+	// 중복체크 버튼 눌렀을때 함수
 	const handleDuplicateCheck = () => {
 		if (nickname) postConfirmNicknameMutation.mutate(nickname);
 	};
@@ -100,33 +101,17 @@ function UserInput({
 			<p className="text-2xl font-bold m-6 0 6 6">{title}</p>
 			<div className="flex gap-5 ml-6">
 				{title === "닉네임" ? (
-					/* 닉네임일 경우 */
 					<div className="w-1/2">
-						<input
-							type="text"
-							value={nickname}
-							onChange={(e) => validateNickname(e.target.value)}
-							placeholder={placeholder}
-							className="focus:outline-none pl-4 border border-mainColor rounded-2xl w-full h-14"
-						/>
-						<p className={`pt-2 pl-1 text-sm text-red ${textBlue ? 'text-blue' : ''}`}>{errorMsg}</p>
+						<input type="text" value={nickname} onChange={(e) => validateNickname(e.target.value)} placeholder={placeholder}
+							className="focus:outline-none pl-4 border border-mainColor rounded-2xl w-full h-14" />
+						<p className={`pt-2 pl-1 text-sm ${textBlue ? 'text-blue' : 'text-red'}`}>{errorMsg}</p>
 					</div>
 				) : title === "나이" ? (
-					/* 나이일 경우 */
-					<input
-						type="text"
-						value={age}
-						onChange={(e) => validateAge(e.target.value)}
-						placeholder={placeholder}
-						className="focus:outline-none pl-4 border border-mainColor rounded-2xl w-1/2 h-14"
-					/>
+					<input type="text" value={age} onChange={(e) => validateAge(e.target.value)} placeholder={placeholder}
+						className="focus:outline-none pl-4 border border-mainColor rounded-2xl w-1/2 h-14" />
 				) : title === "성별" ? (
-					/* 성별일 경우 */
 					<div className="p-4 4 4 4 border border-mainColor rounded-2xl w-1/2 h-14">
-						<select
-							className="w-full focus:outline-none"
-							value={gender}
-							onChange={(e) => validateGender(e.target.value)}>
+						<select className="w-full focus:outline-none" value={gender} onChange={(e) => validateGender(e.target.value)}>
 							<option value="남">남</option>
 							<option value="여">여</option>
 						</select>
@@ -135,10 +120,7 @@ function UserInput({
 
 				{isShowDuplicateCheckBtn ? (
 					/** 조건부렌더링 : 닉네임의 경우 - 중복확인버튼있음 */
-					<button
-						onClick={handleDuplicateCheck}
-						type="button"
-						className="cursor w-1/5 h-14 rounded-2xl bg-mainColor text-white">
+					<button onClick={handleDuplicateCheck} type="button" className="cursor w-1/5 h-14 rounded-2xl bg-mainColor text-white">
 						중복 확인
 					</button>
 				) : (

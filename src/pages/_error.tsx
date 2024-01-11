@@ -1,6 +1,13 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 export default function Error() {
+    const router = useRouter();
+    // 이전 페이지로 돌아가기
+    const goBack = () => {
+        router.back();
+    };
+    
     return (
         <div className="gradation">
             <div className="gradationh-screen bg-cover bg-[url('/images/error.png')]">
@@ -16,7 +23,7 @@ export default function Error() {
                                     <Image alt="ghost" width={285} height={300} src="/images/ghost.png"/>
                                 </section>
                                 <section>
-                                    <button className="flex justify-around items-center h-[60px] w-[270px] text-2xl px-4 py-2 rounded-3xl bg-white ">
+                                    <button onClick={goBack} className="flex justify-around items-center h-[60px] w-[270px] text-2xl px-4 py-2 rounded-3xl bg-white ">
                                         {/*<Image alt="reset" width={27} height={27} src="/images/reset.svg"/>*/}
                                         <span>한번 다시 해볼까요?</span>    
                                     </button>

@@ -9,8 +9,6 @@ import Image from "next/image";
 import DateFilter from "@/components/main/DateFilter";
 import LocationFilter from "@/components/main/LocationFilter";
 import InterestButton from "@/components/main/InterestButton";
-import Nav from "@/components/nav/Nav";
-
 const MainPage = () => {
     const router = useRouter();
     const { search } = router.query
@@ -167,7 +165,6 @@ const MainPage = () => {
                         }
                     })}
             </div>
-            <Nav />
         </div>
     );
 };

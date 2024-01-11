@@ -3,21 +3,29 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
 
+
 const Search = () => {
     const [searchValue, handleSearchChange, resetSearchValue] = useInput("");
     const router = useRouter();
+
+    // // 추천 검색어 (선택된 추천 검색어로만 검색)
+    // const handleClickRecommend = (val: string) => {
+    //     onSearchChange(val); // 선택된 추천 검색어로 업데이트
+    //     resetSearchValue; // 검색어 초기화
+    // };
+
     return (
-        <div className="flex flex-col text-center pt-28 bg-white h-screen">
-            <section className="relative">
+        <div className="flex flex-col text-center pt-28 h-screen">
+            {/* <section className="relative">
                 <button className="absolute bottom-14 left-10">
-                    <Image alt="back_icon" width={20} height={20} src="/images/back.png" />
+                    <Image alt="back_icon" width={20} height={20} src="/images/back.svg" />
                 </button>
-            </section>
+            </section> */}
             <section>
                 <span className="flex pl-16 font-bold text-2xl">무엇을 찾으시나요?</span>
                 <div className="relative right-4">
                     <input
-                        className="focus:outline-none border-b-2 w-[475px] pt-9 pl-4"
+                        className="text-xl pb-2 focus:outline-none border-b-2 w-[475px] pt-9 pl-4"
                         placeholder="검색어를 입력해주세요."
                         value={searchValue}
                         onChange={handleSearchChange}
@@ -34,8 +42,10 @@ const Search = () => {
                         {["산책", "맛집", "독서", "공방", "취미", "운동"].map((item, index) => {
                             return (
                                 <button
-                                    className="flex items-center justify-center m-2 border rounded-2xl w-[98px] h-[35px] text-xl"
+                                    className="text-mainColor flex items-center justify-center m-2 border rounded-2xl w-[98px] h-[35px] text-xl"
                                     key={index}
+                                    value={item}
+                                    // onClick={() => handleClickRecommend(item)}
                                 >
                                     #{item}
                                 </button>

@@ -45,9 +45,9 @@ const config: Config = {
                 postColor: "#F2F3F5",
                 mainDivisionLine: "#191818",
                 managerFontColor: "#858585",
+                managerGrayColor: "#F5F5FA",
                 managerColor: "#FBF9F9",
-                managerPointColor: "#D4D4D4",
-                
+                managerPointColor: "#D4D4D4",            
             },
             keyframes: {
                 rotate: {

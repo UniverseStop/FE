@@ -23,7 +23,7 @@ export default function Manager() {
                     })}
                 </ul>
             </section>
-            <section className="bg-managerColor h-[90vh]">
+            <section className="bg-managerColor h-full">
                 {/* Statistics: 통계,  Management: 관리, Authority: 권한 */}
                 {select === 0 ? <Statistics /> : select === 1 ? <Management /> : <Authority />}
             </section>
