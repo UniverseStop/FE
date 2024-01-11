@@ -19,7 +19,7 @@ const Search = ({ onSearchChange }: { onSearchChange: (search: string) => void }
     };
 
     return (
-        <div className="flex flex-col text-center pt-28 bg-white h-screen">
+        <div className="flex flex-col text-center pt-28 h-screen">
             <section className="relative">
                 <button className="absolute bottom-14 left-10">
                     <Image alt="back_icon" width={20} height={20} src="/images/back.png" />

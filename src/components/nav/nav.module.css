@@ -1,4 +1,0 @@
-.nav {
-    @apply fixed bottom-0 flex justify-between items-center border p-[20px] rounded-tl-[15px] rounded-tr-[15px] h-[61px] w-[600px];
-    background-color: white;
-}

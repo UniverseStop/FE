@@ -10,8 +10,6 @@ import Search from "@/components/main/Search";
 import DateFilter from "@/components/main/DateFilter";
 import LocationFilter from "@/components/main/LocationFilter";
 import InterestButton from "@/components/main/InterestButton";
-import Nav from "@/components/nav/Nav";
-
 const MainPage = () => {
 	const router = useRouter();
 
@@ -182,7 +180,6 @@ const MainPage = () => {
                         }
                     })}
             </div>
-            <Nav />
         </div>
     );
 };
