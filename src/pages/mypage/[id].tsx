@@ -3,18 +3,18 @@ import MyPost from "@/components/mypage/MyPost";
 import Profile from "@/components/mypage/Profile";
 import { useAuth } from "@/context/KakaoContext";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "react-query";
 import { getMyPage } from "../api/user";
 
 const Mypage = () => {
+	const { userInfo} = useAuth();
+	const router = useRouter();
+
 	//로그인한 정보 context api 에서 받아오는 id값 (1번 id / 사용자)
-	const auth = useAuth();
-	const { userInfo } = auth;
 	const loggedInUserId = userInfo ? userInfo.userId : null;
 
 	//url 에서 가져온 id값 : string type -> num으로 변환해줘야함 (2번 id / 페이지주인)
-	const router = useRouter();
 	const urlId = router.query.id;
 	const myPageUserId = Number(urlId);
 
@@ -33,14 +33,7 @@ const Mypage = () => {
 	return (
 		<div className="gradation">
 			<div className="bg-mypage bg-cover bg-no-repeat flex flex-col h-full">
-				<Introduce
-					age={age}
-					gender={gender}
-					nickname={nickname}
-					interest={interest}
-					loggedInUserId={loggedInUserId}
-					myPageUserId={myPageUserId}
-				/>
+				<Introduce age={age} gender={gender} nickname={nickname} interest={interest} loggedInUserId={loggedInUserId} myPageUserId={myPageUserId}/>
 				<Profile profileImageUrl={profileImageUrl} />
 				<MyPost userPosts={UserPosts} />
 			</div>
