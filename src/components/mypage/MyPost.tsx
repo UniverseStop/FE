@@ -2,7 +2,7 @@ import React from "react";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import { PostPreviewType } from "@/types/postTypes";
-import PostDetail from "../post/PostDetail";
+import PostPreview from "../common/PostPreview";
 
 function MyPost({ userPosts }: { userPosts: PostPreviewType[] }) {
 	const [ref] = useKeenSlider<HTMLDivElement>({
@@ -21,7 +21,7 @@ function MyPost({ userPosts }: { userPosts: PostPreviewType[] }) {
 				{Array.isArray(userPosts) && userPosts.length > 0 ? (
 					userPosts.slice(0, 6).map((item: PostPreviewType) => (
 						<div key={item.id} className="keen-slider__slide number-slide1">
-							<PostDetail info={item} wSize="w-[full]" hSize="h-[150px]" />
+							<PostPreview info={item} type={""}/>
 						</div>
 					))
 				) : (
