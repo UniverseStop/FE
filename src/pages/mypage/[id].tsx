@@ -8,21 +8,13 @@ import { useQuery } from "react-query";
 import { getMyPage } from "../api/user";
 
 const Mypage = () => {
-	/** 로그인 후 이용가능한 페이지 */
-	const { userInfo, isLoggedIn} = useAuth();
- 	useEffect(()=>{
-		if(!isLoggedIn) {
-			alert("로그인이 필요한 페이지입니다.")
-			router.push("/users/login");
-			return;
-		}
-	},[isLoggedIn])
+	const { userInfo} = useAuth();
+	const router = useRouter();
 
 	//로그인한 정보 context api 에서 받아오는 id값 (1번 id / 사용자)
 	const loggedInUserId = userInfo ? userInfo.userId : null;
 
 	//url 에서 가져온 id값 : string type -> num으로 변환해줘야함 (2번 id / 페이지주인)
-	const router = useRouter();
 	const urlId = router.query.id;
 	const myPageUserId = Number(urlId);
 
@@ -41,14 +33,7 @@ const Mypage = () => {
 	return (
 		<div className="gradation">
 			<div className="bg-mypage bg-cover bg-no-repeat flex flex-col h-full">
-				<Introduce
-					age={age}
-					gender={gender}
-					nickname={nickname}
-					interest={interest}
-					loggedInUserId={loggedInUserId}
-					myPageUserId={myPageUserId}
-				/>
+				<Introduce age={age} gender={gender} nickname={nickname} interest={interest} loggedInUserId={loggedInUserId} myPageUserId={myPageUserId}/>
 				<Profile profileImageUrl={profileImageUrl} />
 				<MyPost userPosts={UserPosts} />
 			</div>

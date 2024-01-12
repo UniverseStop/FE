@@ -3,7 +3,8 @@ import { useRouter } from "next/router";
 import React, { useState } from 'react'
 
 const UserReport = () => {
-  const [selectedReason, setSelectedReason] = useState("");
+  const [selectedReason, setSelectedReason] = useState<string>("");
+  const [reportDetail, setReportDetail] = useState<string>("")
   const router = useRouter();
 
   const handleCancel = () => {
@@ -15,6 +16,42 @@ const UserReport = () => {
   const handleReasonChange = (reason: string) => {
     setSelectedReason(reason);
   };
+
+	const reportData = {
+		report: selectedReason,
+		reportDetail : reportDetail
+	};
+
+	// /** 통신로직 */
+	// const postAddMutation = useMutation(postBusStop, {
+	// 	onSuccess: (response) => {
+	// 		alert("게시글이 등록되었습니다.");
+	// 		router.push("/main");
+	// 	},
+	// 	onError: () => {
+	// 		alert("오류가 발생하였습니다");
+	// 	},
+	// });
+
+	// // 등록하기 버튼 눌렀을때 함수
+	// const handleAddPost = () => {
+	// 	if (!postCategory || !postTitle || !postContent || !postLoaction || !postDateTime || !postSubLimit || postImage.length === 0) {
+	// 		alert("모든 필수 항목을 입력해주세요.");
+	// 		return;
+	// 	}
+
+	// 	const formdata = new FormData();
+
+	// 	// 1. 이미지를 FormData로 형변환, 자바가 인식할수 있도록 요건 type을 지정할 필요가 없는 이윤 자바에서 다 하나하나 뭐시기하기떄문?
+	// 	postImage.map((img) => {
+	// 		formdata.append("file", img);
+	// 	});
+
+	// 	// blob | string  객체는 해당하지 않아서string 으로 바꿔주는것
+	// 	// 2. 이미지 외 게시물 등록 정보
+	// 	formdata.append("data", new Blob([JSON.stringify(postData)], { type: "application/json" }));
+	// 	postAddMutation.mutate(formdata);
+	// };
 
   return (
     <div className="flex flex-col content-center items-center h-full">
@@ -29,7 +66,7 @@ const UserReport = () => {
       </section>
       <section>
           <textarea className="pl-4 pt-4 border reszie-none border-gray rounded-2xl w-[500px] h-60"
-        	placeholder="구체적인 신고 사유를 입력해주세요."/>
+        	placeholder="구체적인 신고 사유를 입력해주세요." maxLength={1500}/>
       </section>
       <section>
            <h2 className=" pr-[420px] text-lg mt-5 mb-5 font-bold">신고사진</h2>

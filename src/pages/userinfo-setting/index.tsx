@@ -20,13 +20,13 @@ function UserInfoSetting() {
 
 	/** 로그인 후 이용가능한 페이지 */
 	const { userInfo, isLoggedIn} = useAuth();
-	useEffect(()=>{
-   		if(!isLoggedIn) {
-		   alert("로그인이 필요한 페이지입니다.")
-		   router.push("/users/login");
-	   	return;
-  		 }
-	},[isLoggedIn])
+	// useEffect(()=>{
+   	// 	if(isLoggedIn) {
+	// 		   router.push("/users/login");
+	// 		   alert("로그인이 필요한 페이지입니다.")
+	//    	return;
+  	// 	 }
+	// },[isLoggedIn])
 
 	const handleCategoryChange = (category: string) => {
 		setInterest(category);
