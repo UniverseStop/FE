@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 import { getBusStopMainItems } from "../api/post";
 import { PostPreviewType } from "@/types/postTypes";
-import PostDetail from "@/components/post/PostDetail";
+import PostPreview from "@/components/common/PostPreview";
 import { getDateFormat } from "@/utils/getDate";
 import Image from "next/image";
 import DateFilter from "@/components/main/DateFilter";
@@ -149,7 +149,7 @@ const MainPage = () => {
                                     ref={lastPostRef}
                                     onClick={() => router.push(`/detail/${p.id}`)}
                                 >
-                                    <PostDetail info={p} wSize="w-[100%]" hSize="h-[100%]" />
+                                    <PostPreview info={p} type={""}/>
                                 </button>
                             );
                         } else {
@@ -159,7 +159,7 @@ const MainPage = () => {
                                     key={p.id}
                                     onClick={() => router.push(`/detail/${p.id}`)}
                                 >
-                                    <PostDetail info={p} wSize="w-[100%]" hSize="h-[100%]" />
+                                    <PostPreview info={p} type={""}/>
                                 </button>
                             );
                         }

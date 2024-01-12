@@ -11,7 +11,7 @@ interface PostPreviewType {
 	gender: string;
 	id: number;
 	imageUrlList: string[];
-	thumbnailImageUrl: string[];
+	thumbnailImageUrl: string;
 	location: string;
 	nickname: string;
 	profileImageUrl: string;
