@@ -57,6 +57,7 @@ function MypageEdit() {
 			console.log("헤더", headers)
 			removeSession("access_Token");
 			saveSession("access_Token", newToken);
+			router.push(`/mypage/${userInfo.userId}`);
 		},
 		onError: (err) => {
 			console.log("putEditUserMutation통신에러", err);
@@ -72,8 +73,6 @@ function MypageEdit() {
 		}
 		if (isValidatedNickname && isConfirmNicknameSuccess) {
 			putEditUserMutation.mutate(myPageEditData);
-			router.push(`/mypage/${userInfo.userId}`);
-
 		} else alert("닉네임을 다시한번 확인해주세요.");
 	};
 

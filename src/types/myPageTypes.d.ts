@@ -21,3 +21,18 @@ export interface NewEditDataType {
     userId : string;
     userEditSettings : EditUserInfoType;
 }
+
+// 마이페이지 서버에서 받아오는 정보 타입
+
+export interface GetMyPageUserInfo {
+    age: string | null;
+    gender: string | null;
+    interest : string| null;
+    mannerTemplate: number | null;
+    nickname: string | null;
+    profileImageUrl : string | null;
+    userId : number| null;
+    userPosts: Array | null;
+}
+
+

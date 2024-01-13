@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-function Profile({ profileImageUrl }: { profileImageUrl: string }) {
+function Profile({ profileImageUrl }: { profileImageUrl: string | null}) {
 	return (
 		<div className="flex flex-col items-center">
 			<div className="relative w-[390px]">

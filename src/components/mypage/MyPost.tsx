@@ -12,8 +12,6 @@ function MyPost({ userPosts }: { userPosts: PostPreviewType[] }) {
 		},
 	});
 
-	console.log("하은님컴포넌트에 들어갈info", userPosts);
-
 	return (
 		<div>
 			<p className="text-white font-bold text-3xl pt-[70px] pl-6">내가 쓴 글</p>
