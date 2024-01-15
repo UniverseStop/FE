@@ -1,6 +1,6 @@
 import Category from "@/components/category/Category";
 import UserInput from "@/components/user-input/UserInput";
-import { useAuth } from "@/context/KakaoContext";
+import { GetCurrentUser } from "@/utils/getCurrentUser";
 import { removeSession } from "@/utils/removeSession";
 import { saveSession } from "@/utils/saveSession";
 import { useRouter } from "next/router";
@@ -19,14 +19,14 @@ function UserInfoSetting() {
 	const router = useRouter();
 
 	/** 로그인 후 이용가능한 페이지 */
-	const { userInfo, isLoggedIn} = useAuth();
-	// useEffect(()=>{
-   	// 	if(isLoggedIn) {
-	// 		   router.push("/users/login");
-	// 		   alert("로그인이 필요한 페이지입니다.")
-	//    	return;
-  	// 	 }
-	// },[isLoggedIn])
+	const userInfo = GetCurrentUser();
+	useEffect(()=>{
+		if(!userInfo.isLoggedIn) {
+			alert("로그인이 필요한 페이지입니다.")
+			router.push("/users/login");
+			return;
+		}
+	},[userInfo.isLoggedIn])
 
 	const handleCategoryChange = (category: string) => {
 		setInterest(category);
@@ -40,7 +40,7 @@ function UserInfoSetting() {
 	};
 
 	const myPageSetData = {
-		userId: userInfo ? userInfo.userId : null,
+		userId: userInfo.userId,
 		userSettings: userSettings,
 	};
 

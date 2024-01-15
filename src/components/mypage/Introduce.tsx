@@ -17,7 +17,7 @@ function Introduce({
 	gender: string | null;
 	nickname: string | null;
 	interest: string | null;
-	loggedInUserId: object | null;
+	loggedInUserId: string | null;
 	myPageUserId: number | null;
 }) {
 	//영어 -> 한국어
