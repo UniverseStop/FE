@@ -40,7 +40,7 @@ const Mypage = () => {
 
 	return (
 		<div className="gradation">
-			<div className="bg-mypage bg-cover bg-no-repeat flex flex-col h-full">
+			<div className="sm:bg-mypageDesktop bg-mypageMobile bg-cover bg-no-repeat flex flex-col h-full">
 				<Introduce age={age} gender={gender} nickname={nickname} interest={interest} loggedInUserId={loggedInUserId} myPageUserId={Number(myPageUserId)}/>
 				<Profile profileImageUrl={profileImageUrl} />
 				<MyPost userPosts={UserPosts} />

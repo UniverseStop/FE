@@ -20,7 +20,9 @@ const config: Config = {
         },
         backgroundImage: {
             login: "url('/images/login2.png')",
-            mypage: "url('/images/mypage-background.png')",
+            loginMobile: "url('/images/login-Mobile.png')",
+            mypageMobile: "url('/images/mypage-background-Mobile.png')",
+            mypageDesktop: "url('/images/mypage-background-Desktop.png')",
         },
         extend: {
             spacing: {
