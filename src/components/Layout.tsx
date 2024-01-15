@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { LayoutProps } from "@/types/propsTypes";
 import Nav from "./nav/Nav";
+import { LayoutProps } from "@/types/propsTypes";
 
 const Layout = ({ children }: LayoutProps) => {
     const router = useRouter();

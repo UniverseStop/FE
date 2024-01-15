@@ -56,7 +56,6 @@ export const useAuth = () => {
     }
 
     const { userInfo, isLoggedIn, ...rest} = context;
-
     const isUserInfoValid = userInfo && userInfo.sub;
 
     return { userInfo, isLoggedIn: isLoggedIn && isUserInfoValid, ...rest };

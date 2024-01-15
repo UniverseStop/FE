@@ -1,8 +1,5 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { useKeenSlider } from "keen-slider/react";
-import "keen-slider/keen-slider.min.css"
-import { useAuth } from "@/context/KakaoContext";
 import { getBusStopDetail } from "@/pages/api/post";
 import { getCategory } from "@/utils/getCategory";
 import KakaoMap from "./KakaoMap";
@@ -10,13 +7,16 @@ import ChatParticipate from "./ChatParticipate";
 import ChatApplication from "./ChatApplication";
 import UserInfo from "./UserInfo";
 import DeleteModal from "./DeleteModal";
+import { useKeenSlider } from "keen-slider/react";
+import "keen-slider/keen-slider.min.css"
+import { GetCurrentUser } from "@/utils/getCurrentUser";
 
 const Post = ({postId}: {postId: number}) => {
     const { data: post } = useQuery("post", () => getBusStopDetail(postId));
 
     // 현재 로그인된 사용자 정보
-    const { userInfo } = useAuth();
-    const isWriter = Number(userInfo?.userId) === post?.userId; // 내가 작성한 글 유무 확인
+    const userInfo = GetCurrentUser();
+    const isWriter = Number(userInfo.userId) === post?.userId; // 내가 작성한 글 유무 확인
 
     // 이미지 슬라이더
     const [sliderRef] = useKeenSlider({
@@ -75,7 +75,7 @@ const Post = ({postId}: {postId: number}) => {
                 {/* 신청자 정보 */}
                 {isWriter ? <ChatParticipate applicants={post.applicants} postId={post.id} userId={post.userId}/> : <></>}
                 {/* 참가 신청 버튼 */}
-                {userInfo && !isWriter && !post.isAlreadyApplicant ? <ChatApplication postId={post.id}/> : <></>}
+                {userInfo.isLoggedIn && !isWriter && !post.isAlreadyApplicant ? <ChatApplication postId={post.id}/> : <></>}
             </div>}
             <div className="h-[80px]" />
         </div>
