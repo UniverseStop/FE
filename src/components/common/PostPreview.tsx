@@ -17,10 +17,10 @@ const PostPreview = ({ info, type }: { info: PostPreviewType, type: string }) =>
 	};
 
 	// 반응형 고려
-	let [textSize, titleSize] = ["text-sm", "text-2xl"];
+	let [textSize, titleSize] = ["text-sm", "text-lg"];
 	if (type === "aboutus") {
 		textSize = "text-xl";
-		titleSize = "text-3xl";
+		titleSize = "text-2xl";
 	}
 
 	return (
@@ -52,7 +52,7 @@ const PostPreview = ({ info, type }: { info: PostPreviewType, type: string }) =>
 					<span className={`${textSize} w-20 border rounded-[20px]`}>{getCategory(info.category)}</span>
 				</div>
 				<div className="flex space-x-1 items-center">
-					<img className="w-[15px] h-[20px]" alt="location" src="/images/location.png"/>
+					<img className="w-3" alt="location" src="/images/location.png"/>
 					<span className="text-xs">{getTruncateText(info.location, 15)}</span>
 				</div>
 			</section>
