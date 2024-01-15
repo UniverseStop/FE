@@ -44,6 +44,7 @@ const Mypage = () => {
 				<Introduce age={age} gender={gender} nickname={nickname} interest={interest} loggedInUserId={loggedInUserId} myPageUserId={Number(myPageUserId)}/>
 				<Profile profileImageUrl={profileImageUrl} />
 				<MyPost userPosts={UserPosts} />
+				<div className="h-[65px]"></div>
 			</div>
 		</div>
 	);
