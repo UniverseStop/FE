@@ -57,6 +57,7 @@ function MypageEdit() {
 			console.log("헤더", headers)
 			removeSession("access_Token");
 			saveSession("access_Token", newToken);
+			router.push(`/mypage/${userInfo.userId}`);
 		},
 		onError: (err) => {
 			console.log("putEditUserMutation통신에러", err);
@@ -72,19 +73,17 @@ function MypageEdit() {
 		}
 		if (isValidatedNickname && isConfirmNicknameSuccess) {
 			putEditUserMutation.mutate(myPageEditData);
-			router.push(`/mypage/${userInfo.userId}`);
-
 		} else alert("닉네임을 다시한번 확인해주세요.");
 	};
 
 	return (
-		<div className="flex flex-col justify-between h-screen ">
+		<div className="flex flex-col justify-between h-screen">
 			<section>
 				<Category title="나의 관심사를 선택해주세요" handleCategoryChange={handleCategoryChange}/>
 				<UserInput title="닉네임" placeholder="닉네임을 입력해주세요" isShowDuplicateCheckBtn={true} nickname={changedNickname} setNickname={setChangedNickname}
 				isValidatedNickname={isValidatedNickname} setIsValidatedNickname={setIsValidatedNickname} setIsConfirmNicknameSuccess={setIsConfirmNicknameSuccess}/>
 			</section>
-			<section className="flex justify-center mb-10 gap-5">
+			<section className="flex justify-center mb-20 gap-5">
 				<button onClick={handleCancel} className="border text-mainColor border-mainColor h-14 rounded-2xl w-1/4">취소</button>
 				<button onClick={handleSubmitUserInfo} className="bg-mainColor text-white h-14 rounded-2xl w-1/4">수정하기</button>
 			</section>

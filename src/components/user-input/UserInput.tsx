@@ -39,30 +39,33 @@ function UserInput({
 		}
 	};
 
-	/** title '닉네임'일 경우 : 영어대소문자,한글,숫자 가능 2자리이상 10자리이하 */
+	/** title '닉네임'일 경우 : 영어대소문자,한글,숫자 가능 2자리이상 7자리이하 */
 	const [errorMsg, setErrorMsg] = useState("");
 	const validateNickname = (inputValue: string) => {
-		if (inputValue === "") {
-			setErrorMsg("");
-		} else if (inputValue.length < 2 || inputValue.length > 10) {
-			setErrorMsg("2자 이상 10자 이하로 입력해주세요.");
-			if (setIsValidatedNickname) setIsValidatedNickname(false);
-		} else {
-			const nicknameRegex = /^[a-zA-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ]*$/;
-			const hasOnlyConsonantsOrVowels = /^[ㄱ-ㅎㅏ-ㅣ]+$/;
+  	  if (inputValue === "") {
+        setErrorMsg("");
+        if (setIsValidatedNickname) setIsValidatedNickname(false);
+  	  } else if (inputValue.length < 2 || inputValue.length > 7) {
+      	  setErrorMsg("2자 이상 7자 이하로 입력해주세요.");
+	  if (setIsValidatedNickname) setIsValidatedNickname(false);
+    	} else {
+       	 const nicknameRegex = /^[a-zA-Z0-9가-힣]*$/;
+       	 const hasOnlyConsonantsOrVowels = /^[ㄱ-ㅎㅏ-ㅣ]+$/;
 
-			if (title === "닉네임" && (!nicknameRegex.test(inputValue) || hasOnlyConsonantsOrVowels.test(inputValue))) {
-				setErrorMsg("영어 대소문자, 한글, 숫자만 사용가능합니다.");
-				if (setIsValidatedNickname) setIsValidatedNickname(false);
-			} else {
-				setErrorMsg("");
-				if (setIsValidatedNickname) setIsValidatedNickname(true);
-			}
-		}
-		if (setNickname) {
-			setNickname(inputValue);
-		}
+        	if (title === "닉네임" && (!nicknameRegex.test(inputValue) || hasOnlyConsonantsOrVowels.test(inputValue))) {
+           	 setErrorMsg("영어 대소문자, 한글, 숫자만 사용가능하며, 중간에 자음이나 모음만 사용할 수 없습니다.");
+        	    if (setIsValidatedNickname) setIsValidatedNickname(false);
+      	  } else {
+       	     setErrorMsg("");
+       	     if (setIsValidatedNickname) setIsValidatedNickname(true);
+       	 }
+    	}
+
+    	if (setNickname) {
+    	    setNickname(inputValue);
+    	}
 	};
+
 
 	/** title '닉네임'일 경우 : 통신로직 */
 	const [textBlue, setTextBlue] = useState(false);

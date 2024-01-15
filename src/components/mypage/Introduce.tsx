@@ -13,12 +13,12 @@ function Introduce({
 	loggedInUserId,
 	myPageUserId,
 }: {
-	age: string;
-	gender: string;
-	nickname: string;
-	interest: string;
-	loggedInUserId: object;
-	myPageUserId: number;
+	age: string | null;
+	gender: string | null;
+	nickname: string | null;
+	interest: string | null;
+	loggedInUserId: object | null;
+	myPageUserId: number | null;
 }) {
 	//영어 -> 한국어
 	const userInterest = getCategory(interest);
