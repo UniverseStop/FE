@@ -1,19 +1,19 @@
 import Introduce from "@/components/mypage/Introduce";
 import MyPost from "@/components/mypage/MyPost";
 import Profile from "@/components/mypage/Profile";
-import { useAuth } from "@/context/KakaoContext";
 import { GetMyPageUserInfo } from "@/types/myPageTypes";
+import { GetCurrentUser } from "@/utils/getCurrentUser";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { getMyPage } from "../api/user";
 
 const Mypage = () => {
-	const { userInfo} = useAuth();
+	const userInfo = GetCurrentUser();
 	const router = useRouter();
 
 	//로그인한 정보 context api 에서 받아오는 id값 (1번 id / 사용자)
-	const loggedInUserId = userInfo ? userInfo.userId : null;
+	const loggedInUserId = userInfo.userId;
 
 	//url 에서 가져온 id값 : string type -> num으로 변환해줘야함 (2번 id / 페이지주인)3
 	const urlId = router.query.id;
