@@ -1,19 +1,36 @@
-import ImageSlider from "@/components/aboutus/ImageSlider";
-import { useAuth } from "@/context/KakaoContext";
 import { useRouter } from "next/router";
+import { useSetRecoilState } from "recoil";
+import ImageSlider from "@/components/aboutus/ImageSlider";
+import { currentUser } from "@/recoil/atoms/currentUser";
+import { removeSession } from "@/utils/removeSession";
+import { GetCurrentUser } from "@/utils/getCurrentUser";
 
 export default function AboutUs() {
-    const { userInfo, logout } = useAuth();
     const router = useRouter();
 
+    // 로그인
     let buttonName = "로그인";
     let handleClickButto = () => {
         router.push("/users/login");
     };
-    if (userInfo) {
+
+    // 로그아웃
+    const userInfo = GetCurrentUser(); // 현재 로그인된 사용자 정보
+    const setUserInfo = useSetRecoilState(currentUser); // 로그아웃 시 리코일도 초기화 
+    if (userInfo.isLoggedIn) {
         buttonName = "로그아웃";
         handleClickButto = () => {
-            logout();
+            removeSession("access_Token");
+            removeSession("refresh_Token");
+            setUserInfo({
+                isLoggedIn: false,
+                userId: "",
+                nickname: "",
+                age: "",
+                auth: "",
+                interest: "",
+                profileImageUrl: "",
+            });
         };
     }
 

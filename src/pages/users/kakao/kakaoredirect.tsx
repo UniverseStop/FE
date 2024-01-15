@@ -1,43 +1,44 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useMutation } from "react-query";
+import { decode } from "js-base64";
 import { getKakaoLogin } from "@/pages/api/rest";
-import { useAuth } from "@/context/KakaoContext";
+import { getSession } from "@/utils/getSession";
+import { useRecoilState } from "recoil";
+import { currentUser } from "@/recoil/atoms/currentUser";
 
 const KakaoRedirect = () => {
+	// 위쪽 코드 제거 필요
 	const router = useRouter();
 	const { code }: any = router.query;
-	const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
-	const [isLoginFailed, setIsLoginFailed] = useState(false);
-	const [isLoginAttempted, setIsLoginAttempted] = useState(false);
-	const auth = useAuth();
-	const { userInfo } = auth;
 
+	// 로그인 시도
+	const [userState, setUserState] = useRecoilState(currentUser); // 리코일에 현재 로그인된 사용자 정보 저장
 	const loginMutation = useMutation(getKakaoLogin, {
 		onSuccess: () => {
-			setIsLoginSuccessful(true);
+			const token = getSession("access_Token");
+			if (token) {
+				const payload = token.split('.')[1];
+				const decodedPayload = decode(payload);
+				const payloadObject = JSON.parse(decodedPayload);
+				setUserState({ isLoggedIn: true, ...payloadObject});
+
+				// 처음 로그인한 사용자
+				if (!payloadObject.age) router.push("/userinfo-setting");
+				else router.push("/main");
+			}
 		},
 		onError: () => {
-			router.push("/");
-			setIsLoginFailed(true);
+			alert("로그인이 실패했습니다. 다시 시도해주세요.")
+			router.push("/users/login");
 		},
 	});
 
 	useEffect(() => {
-		if (code && !isLoginAttempted) {
+		if (code) {
 			loginMutation.mutate(code);
-			setIsLoginAttempted(true);
 		}
-	}, [code, loginMutation]);
-
-	useEffect(() => {
-		// 초기세팅값이 들어있는 유저는 메인페이지로, 없다면 세팅페이지로 이동
-		if (isLoginSuccessful && userInfo && !userInfo.age) {
-			router.push("/userinfo-setting");
-		} else if (isLoginSuccessful) {
-			router.push("/main");
-		}
-	}, [isLoginSuccessful, router, userInfo]);
+	}, [code]);
 
 	if (!code) {
 		return <div>Loading...</div>;
