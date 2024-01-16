@@ -1,7 +1,7 @@
 import { postChatApproval, postChatRefuse } from "@/pages/api/post";
 import { ChatApprovalType } from "@/types/postTypes";
 import { useMutation, useQueryClient } from "react-query";
-import UserInfo from "./UserInfo";
+import { getGender } from "@/utils/getGender";
 
 const ChatParticipate = ({applicants, postId, userId}: {applicants: ChatApprovalType[], postId: number, userId: number}) => {
     console.log(applicants)
@@ -37,14 +37,20 @@ const ChatParticipate = ({applicants, postId, userId}: {applicants: ChatApproval
 
     return (
         <div className="p-2 pt-7">
-            <span className="pl-1 pb-4 text-2xl font-bold">👩🏻‍🚀 신청자 정보</span>
+            <span className="pl-1 pb-4 text-2xl font-bold">신청자 정보</span>
             {applicants.map((info: ChatApprovalType) => {
                 return (
-                    <div key={info.userId} className="flex justify-between items-center">
-                        <UserInfo userId={info.userId} nickname={info.nickname} age={info.age} gender={info.gender} imageUrl={info.profileImageUrl}/>
-                        <div className="text-sm font-bold text-white mr-7 space-x-2">
-                            <button onClick={()=>handleClickApproval(info.userId)} className="w-16 h-9 bg-mainColor rounded-2xl">참가수락</button>
-                            <button onClick={()=>handleClickRefuse(info.userId)} className="w-16 h-9 bg-mainColor rounded-2xl">참가거절</button>
+                    <div className="flex justify-between items-center p-4" key={info.userId}>
+                        <div className="flex space-x-4">
+                            <img className="w-[60px] h-[60px] rounded-full" alt="profile" src={info.profileImageUrl}/>
+                            <div className="flex flex-col text-start">
+                                <span className="font-bold">{info.nickname}</span>
+                                <span className="text-xs">{info.age}세 • {getGender(info.gender)}</span>
+                            </div>
+                        </div>
+                        <div className="space-x-2 text-gray">
+                            <button onClick={()=>handleClickApproval(info.userId)} className="hover:text-black hover:font-bold">수락</button>
+                            <button onClick={()=>handleClickRefuse(info.userId)} className="hover:text-black hover:font-bold">거절</button>
                         </div>
                     </div>
                 );
