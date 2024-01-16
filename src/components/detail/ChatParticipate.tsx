@@ -4,7 +4,6 @@ import { useMutation, useQueryClient } from "react-query";
 import { getGender } from "@/utils/getGender";
 
 const ChatParticipate = ({applicants, postId, userId}: {applicants: ChatApprovalType[], postId: number, userId: number}) => {
-    console.log(applicants)
     // 아래 모두 본인 작성글에서만 가능
     // 참여 승인
     const queryClient = useQueryClient();
@@ -21,7 +20,7 @@ const ChatParticipate = ({applicants, postId, userId}: {applicants: ChatApproval
         approvalMutation.mutate({postId, userId: id});
     };
 
-    // 참여 거절 
+    // 참여 거절
     const chatRefuseMutation = useMutation(postChatRefuse, {
         onSuccess: () => {
             queryClient.invalidateQueries("post");

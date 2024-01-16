@@ -81,7 +81,8 @@ const UserReport = () => {
 				<button className="font-bold bg-mainColor text-white h-14 rounded-2xl w-[200px]">
             신고
 				</button>
-			</section>
+	  </section>
+	  <div className="h-[65px]"></div>
     </div>
   )
 }

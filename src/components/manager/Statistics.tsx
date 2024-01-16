@@ -3,8 +3,7 @@ import { useQuery } from "react-query";
 
 const Statistics = () => {
     const { data: PostLocation } = useQuery("PostLocation", getPostLocationStatic);
-
-    console.log("PostLocation", PostLocation);
+\
     return (
         <div className="flex items-center justify-center pt-10">
             <div className="flex justify-center p-5 space-x-10 w-[1300px] h-[600px]">
