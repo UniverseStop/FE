@@ -32,7 +32,6 @@ export const useChat = () => {
     // 메시지 보내기
     const sendMessage = () => {
         if (clientRef.current && isConnected && inputMessage.trim() !== "") {
-            console.log("Sending message:", inputMessage);
             try {
                 clientRef.current.send(
                     "/pub/chat/message",

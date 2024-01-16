@@ -24,7 +24,6 @@ const Mypage = () => {
 	const [myPageInfo, setMyPageInfo] = useState<GetMyPageUserInfo | null>(null)
 	useEffect(()=>{
 		if (mypage) setMyPageInfo(mypage)
-		console.log('안녕')
 	}, [mypage]);
 
 
