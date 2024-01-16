@@ -33,7 +33,7 @@ const Post = ({postId}: {postId: number}) => {
                     <PostImageSlider imageUrlList={post.imageUrlList} selectImg={selectImg} setSelectImg={setSelectImg}/>
                 </section>
                 <section className="pl-5 pr-5 pt-5 flex flex-col space-y-1">
-                    <span className="font-bold text-2xl">{post.title}</span>
+                    <span className="font-bold text-2xl break-all">{post.title}</span>
                 </section>
                 <section className="p-5">
                     <UserInfo post={post} isDeleteModal={isDeleteModal} setIsDeleteModal={setIsDeleteModal}/>
