@@ -27,6 +27,11 @@ const KakaoMap = ({ location }: { location: string }) => {
                         position: coords
                     });
 
+                    var infowindow = new kakao.maps.InfoWindow({
+                        content: `<div style="width:300px;text-align:center;padding:6px 0;">${location}</div>`
+                    });
+                    infowindow.open(map, marker);
+                
                     // 지도의 중심을 결과값으로 받은 위치로 이동
                     map.setCenter(coords);
                 }
@@ -37,8 +42,7 @@ const KakaoMap = ({ location }: { location: string }) => {
 
     return (
         <div>
-            <span className="pl-5">{location}</span>
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center pt-2">
                 <div id="map" className="w-[95%] h-72" />
             </div>
         </div>
