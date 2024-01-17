@@ -11,7 +11,7 @@ const InterestButton = ({ onInterestChange }: { onInterestChange: (interest: str
         <div className="w-full">
             <button
                 className={`${
-                    interest == "Eats" ? "bg-mainColor" : "border"
+                    interest == "Eats" ? "bg-mainColor text-white" : "border"
                 } border-mainColor mb-[20px] mr-[5px] ml-[15px] w-[95px] h-[35px] rounded-[20px]`}
                 onClick={() => handleInterestChange("Eats")}
             >
@@ -19,7 +19,7 @@ const InterestButton = ({ onInterestChange }: { onInterestChange: (interest: str
             </button>
             <button
                 className={`${
-                    interest == "Culture" ? "bg-mainColor" : "border"
+                    interest == "Culture" ? "bg-mainColor text-white" : "border"
                 } border-mainColor mb-[20px] mr-[5px] ml-[15px] w-[95px] h-[35px] rounded-[20px]`}
                 onClick={() => handleInterestChange("Culture")}
             >
@@ -27,7 +27,7 @@ const InterestButton = ({ onInterestChange }: { onInterestChange: (interest: str
             </button>
             <button
                 className={`${
-                    interest == "Exercise" ? "bg-mainColor" : "border"
+                    interest == "Exercise" ? "bg-mainColor text-white" : "border"
                 } border-mainColor mb-[20px] mr-[5px] ml-[15px] w-[95px] h-[35px] rounded-[20px]`}
                 onClick={() => handleInterestChange("Exercise")}
             >
@@ -35,7 +35,7 @@ const InterestButton = ({ onInterestChange }: { onInterestChange: (interest: str
             </button>
             <button
                 className={`${
-                    interest == "Study" ? "bg-mainColor" : "border"
+                    interest == "Study" ? "bg-mainColor text-white" : "border"
                 } border-mainColor mb-[20px] mr-[5px] ml-[15px] w-[95px] h-[35px] rounded-[20px]`}
                 onClick={() => handleInterestChange("Study")}
             >
@@ -43,7 +43,7 @@ const InterestButton = ({ onInterestChange }: { onInterestChange: (interest: str
             </button>
             <button
                 className={`${
-                    interest == "Etc" ? "bg-mainColor" : "border"
+                    interest == "Etc" ? "bg-mainColor text-white" : "border"
                 } border-mainColor mb-[20px] mr-[5px] ml-[15px] w-[95px] h-[35px] rounded-[20px]`}
                 onClick={() => handleInterestChange("Etc")}
             >

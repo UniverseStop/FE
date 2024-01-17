@@ -3,8 +3,7 @@ import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 import { getBusStopMainItems } from "../api/post";
 import { PostPreviewType } from "@/types/postTypes";
-import PostPreview from "@/components/common/PostPreview";
-import { getDateFormat } from "@/utils/getDate";
+import PostDetail from "@/components/post/PostDetail";
 import Image from "next/image";
 import DateFilter from "@/components/main/DateFilter";
 import LocationFilter from "@/components/main/LocationFilter";
@@ -74,8 +73,8 @@ const MainPage = () => {
     const handleComponentToggle = () => {
         setComponentToggle("");
     };
-    const handleDateChange = (date: Date) => {
-        setDate(getDateFormat(date));
+    const handleDateChange = (date: string) => {
+        setDate(date);
     };
     const handleLocationChange = (location: string) => {
         setLocation(location);
@@ -165,6 +164,7 @@ const MainPage = () => {
                         }
                     })}
             </div>
+            <div className="h-[50px]" />
         </div>
     );
 };
