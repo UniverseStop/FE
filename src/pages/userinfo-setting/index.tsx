@@ -1,10 +1,10 @@
 import Category from "@/components/category/Category";
 import UserInput from "@/components/user-input/UserInput";
-import { useAuth } from "@/context/KakaoContext";
+import { GetCurrentUser } from "@/utils/getCurrentUser";
 import { removeSession } from "@/utils/removeSession";
 import { saveSession } from "@/utils/saveSession";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { putUserInfoSet } from "../api/user";
 
@@ -15,9 +15,18 @@ function UserInfoSetting() {
 	const [gender, setGender] = useState<string>("");
 	const [isValidatedNickname, setIsValidatedNickname] = useState<boolean>(false); //닉네임 형식에 맞는지 체크
 	const [isConfirmNicknameSuccess, setIsConfirmNicknameSuccess] = useState<boolean>(false); //닉네임 중복확인 체크
-	const { userInfo } = useAuth();
 	const queryClient = useQueryClient();
 	const router = useRouter();
+
+	/** 로그인 후 이용가능한 페이지 */
+	const userInfo = GetCurrentUser();
+	useEffect(()=>{
+		if(!userInfo.isLoggedIn) {
+			alert("로그인이 필요한 페이지입니다.")
+			router.push("/users/login");
+			return;
+		}
+	},[userInfo.isLoggedIn])
 
 	const handleCategoryChange = (category: string) => {
 		setInterest(category);
@@ -31,7 +40,7 @@ function UserInfoSetting() {
 	};
 
 	const myPageSetData = {
-		userId: userInfo ? userInfo.userId : null,
+		userId: userInfo.userId,
 		userSettings: userSettings,
 	};
 

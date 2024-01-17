@@ -1,6 +1,5 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-// import { SessionProvider } from "next-auth/react";
 import { RecoilRoot } from "recoil";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
@@ -18,19 +17,17 @@ export default function App({ Component, pageProps }: AppProps) {
             },
         },
     });
-    // const { session } = pageProps;
     const isLoading = useLoading();
 
     return (
-        <RecoilRoot>
-            <AuthProvider>
-                <QueryClientProvider client={queryClient}>
-                    {/* <SessionProvider session={session}> */}
-                    <ReactQueryDevtools />
+        <QueryClientProvider client={queryClient}>
+            <RecoilRoot>
+                <AuthProvider>
+                    {/* React Query Devtools: 필요한 경우 주석 해제 후 사용 */}
+                    {/* <ReactQueryDevtools initialIsOpen={false}/> */}
                     <Layout>{isLoading ? <Spinner /> : <Component {...pageProps} />}</Layout>
-                    {/* </SessionProvider> */}
-                </QueryClientProvider>
-            </AuthProvider>
-        </RecoilRoot>
+                </AuthProvider>
+            </RecoilRoot>
+        </QueryClientProvider>
     );
 }

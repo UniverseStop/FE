@@ -6,7 +6,7 @@ export default function Detail() {
     const { query } = router; 
 
     return (
-        <div className="fle">
+        <div>
             {query && query.id && <Post postId={Number(query.id)}/>}
         </div>
     )

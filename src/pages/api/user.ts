@@ -25,7 +25,7 @@ export const credentialLogin = async () => {
 export const getMyPage = async (userId: Number) => {
 	try {
 		const response = await instance.get(`/api/mypage/${userId}`);
-		return response.data;
+		return response.data.data;
 	} catch (error) {
 		console.error("getMyPage error:", error);
 		throw error;

@@ -6,11 +6,6 @@
     background: linear-gradient(170deg, rgba(30, 24, 32, 1) 0%, rgba(98, 96, 147, 1) 100%);
 }
 
-[class^="number-slide"],
-[class*=" number-slide"] {
-    height: 150px;
-    padding-left: 20px;
-}
 
 /* 날짜선택 css */
 .react-datepicker__month-container {

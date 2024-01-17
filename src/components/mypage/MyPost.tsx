@@ -1,27 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import { PostPreviewType } from "@/types/postTypes";
-import PostDetail from "../post/PostDetail";
+import PostPreview from "../common/PostPreview";
 
 function MyPost({ userPosts }: { userPosts: PostPreviewType[] }) {
-	const [ref] = useKeenSlider<HTMLDivElement>({
+	const [ref, internalSlider] = useKeenSlider<HTMLDivElement>({
 		slides: {
 			perView: 3,
 			spacing: 10,
 		},
 	});
 
-	console.log("하은님컴포넌트에 들어갈info", userPosts);
+	useEffect(()=>{
+		internalSlider?.current?.update()
+	},[userPosts])
+
 
 	return (
 		<div>
 			<p className="text-white font-bold text-3xl pt-[70px] pl-6">내가 쓴 글</p>
-			<div ref={ref} className="keen-slider p-5">
+			<div ref={ref} className="keen-slider p-4 w-full">
 				{Array.isArray(userPosts) && userPosts.length > 0 ? (
 					userPosts.slice(0, 6).map((item: PostPreviewType) => (
-						<div key={item.id} className="keen-slider__slide number-slide1">
-							<PostDetail info={item} wSize="w-[full]" hSize="h-[150px]" />
+						<div key={item.id} className="keen-slider__slide pl-[20px]">
+							<PostPreview info={item} type={""}/>
 						</div>
 					))
 				) : (

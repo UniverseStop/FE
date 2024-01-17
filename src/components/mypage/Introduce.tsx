@@ -1,6 +1,7 @@
 import { getCategory } from "@/utils/getCategory";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 import { FaPen } from "react-icons/fa6";
 
@@ -12,12 +13,12 @@ function Introduce({
 	loggedInUserId,
 	myPageUserId,
 }: {
-	age: string;
-	gender: string;
-	nickname: string;
-	interest: string;
-	loggedInUserId: object;
-	myPageUserId: number;
+	age: string | null;
+	gender: string | null;
+	nickname: string | null;
+	interest: string | null;
+	loggedInUserId: string | null;
+	myPageUserId: number | null;
 }) {
 	//영어 -> 한국어
 	const userInterest = getCategory(interest);
@@ -43,7 +44,7 @@ function Introduce({
 						</Link>
 					</button>
 				) : (
-					<button className="cursor=pointer">
+					<Link href="/user-report">
 						<Image
 							alt="신고_사이렌아이콘"
 							width={200}
@@ -51,7 +52,7 @@ function Introduce({
 							src="/images/siren.png"
 							className="w-8 h-8 ml-2"
 						/>
-					</button>
+					</Link>
 				)}
 			</div>
 		</div>

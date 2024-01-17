@@ -5,9 +5,10 @@ import AddImage from "@/components/create-post/AddImage";
 import AddMeetingLimit from "@/components/create-post/AddMeetingLimit";
 import AddPlace from "@/components/create-post/AddPlace";
 import AddTitle from "@/components/create-post/AddTitle";
+import { GetCurrentUser } from "@/utils/getCurrentUser";
 import { getDateTimeFormat } from "@/utils/getDate";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMutation} from "react-query";
 import { postBusStop } from "../api/post";
 
@@ -20,7 +21,20 @@ function CreatePost() {
 	const [postDateTime, setPostDateTime] = useState<Date>(new Date());
 	const [postSubLimit, setpostSubLimit] = useState<number>(1);
 
+	/** 로그인 후 이용가능한 페이지 */
+	const userInfo = GetCurrentUser();
+	useEffect(()=>{
+		if(!userInfo.isLoggedIn) {
+			alert("로그인이 필요한 페이지입니다.")
+			router.push("/users/login");
+			return;
+		}
+	},[userInfo.isLoggedIn])
+
 	const router = useRouter();
+	const handleCancel = () => {
+		router.back();
+	}
 
 	const handleCategoryChange = (category: string) => {
 		setPostCategory(category);
@@ -78,7 +92,7 @@ function CreatePost() {
 				<AddPlace postLoaction={postLoaction} setPostLoaction={setPostLoaction} />
 			</section>
 			<section className="flex justify-center mb-10 mt-[100px] gap-10">
-				<button className="border text-mainColor border-mainColor h-14 rounded-2xl w-1/4">취소</button>
+				<button onClick={handleCancel}className="border text-mainColor border-mainColor h-14 rounded-2xl w-1/4">취소</button>
 				<button onClick={handleAddPost} className="bg-mainColor text-white h-14 rounded-2xl w-1/4">
 					등록하기
 				</button>

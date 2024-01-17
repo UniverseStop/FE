@@ -11,14 +11,14 @@ function AddImage({ postImage, setpostImage }: { postImage: File[]; setpostImage
 		}
 		const targetFiles = e.target.files as FileList;
 		const selectedFiles: File[] = Array.from(targetFiles);
-		console.log(targetFiles);
-		console.log(selectedFiles);
+
 		setImagePreview((prev) => [...prev, ...selectedFiles]);
 
 		return;
 	};
 
 	setpostImage(imagePreview);
+
 
 	return (
 		<div>

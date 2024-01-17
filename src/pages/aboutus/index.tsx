@@ -1,21 +1,31 @@
-import ImageSlider from "@/components/aboutus/ImageSlider";
-import { useAuth } from "@/context/KakaoContext";
 import { useRouter } from "next/router";
+import { useResetRecoilState } from "recoil";
+import ImageSlider from "@/components/aboutus/ImageSlider";
+import { currentUser } from "@/recoil/atoms/currentUser";
+import { removeSession } from "@/utils/removeSession";
+import { GetCurrentUser } from "@/utils/getCurrentUser";
+import { useEffect, useState } from "react";
 
 export default function AboutUs() {
-    const { userInfo, logout } = useAuth();
     const router = useRouter();
 
-    let buttonName = "로그인";
-    let handleClickButto = () => {
-        router.push("/users/login");
+    const [buttonName, setButtonName] = useState("로그인");
+    const userInfo = GetCurrentUser(); // 현재 로그인된 사용자 정보
+    useEffect(()=>{
+        // 처음 렌더링될 때 로그인 유무 확인 후 버튼 이름 변경
+        if (userInfo.isLoggedIn) setButtonName("로그아웃");
+    });
+    
+    const reset = useResetRecoilState(currentUser); // recoil 데이터 초기화
+    const handleClickButto = () => {
+        if (buttonName === "로그인") router.push("/users/login");
+        else { // 로그아웃
+            removeSession("access_Token");
+            removeSession("refresh_Token");
+            reset();
+            setButtonName("로그인");
+        } 
     };
-    if (userInfo) {
-        buttonName = "로그아웃";
-        handleClickButto = () => {
-            logout();
-        };
-    }
 
     return (
         <div className="gradation h-screen relative">
@@ -44,12 +54,8 @@ export default function AboutUs() {
                     </div>
                     <div className="w-[70%] mx-auto">
                         <div className="fixed bottom-10 w-[70%] max-w-[410px] flex justify-between items-center font-bold text-3xl text-white">
-                            <button className="z-40" onClick={() => handleClickButto()}>
-                                {buttonName}
-                            </button>
-                            <button className="z-40" onClick={() => router.push("/main")}>
-                                둘러보기
-                            </button>
+                            <button className="z-40" onClick={() => handleClickButto()}>{buttonName}</button>
+                            <button className="z-40" onClick={() => router.push("/main")}>둘러보기</button>
                         </div>
                     </div>
                 </section>

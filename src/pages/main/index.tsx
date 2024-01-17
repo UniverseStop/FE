@@ -148,7 +148,7 @@ const MainPage = () => {
                                     ref={lastPostRef}
                                     onClick={() => router.push(`/detail/${p.id}`)}
                                 >
-                                    <PostDetail info={p} wSize="w-[100%]" hSize="h-[100%]" />
+                                    <PostPreview info={p} type={""}/>
                                 </button>
                             );
                         } else {
@@ -158,7 +158,7 @@ const MainPage = () => {
                                     key={p.id}
                                     onClick={() => router.push(`/detail/${p.id}`)}
                                 >
-                                    <PostDetail info={p} wSize="w-[100%]" hSize="h-[100%]" />
+                                    <PostPreview info={p} type={""}/>
                                 </button>
                             );
                         }

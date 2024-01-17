@@ -1,4 +1,3 @@
-
 export function convertTime(time: string): string {
     if (time === null || time === undefined || time.trim() === "") return "";
 
