@@ -3,35 +3,38 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
 
-
 const Search = () => {
     const [searchValue, handleSearchChange, resetSearchValue] = useInput("");
     const router = useRouter();
 
-    // // 추천 검색어 (선택된 추천 검색어로만 검색)
-    // const handleClickRecommend = (val: string) => {
-    //     onSearchChange(val); // 선택된 추천 검색어로 업데이트
-    //     resetSearchValue; // 검색어 초기화
-    // };
+    // 엔터 검색
+    const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key !== "Enter") return 
+        router.push(`/main?search=${searchValue}`);
+        resetSearchValue; // 검색어 초기화
+    };
+
+
+    // 추천 검색어 (선택된 추천 검색어로만 검색)
+    const handleClickRecommend = (val: string) => {
+        router.push(`/main?search=${val}`);
+        resetSearchValue; // 검색어 초기화
+    };
 
     return (
         <div className="flex flex-col text-center pt-28 h-screen">
-            {/* <section className="relative">
-                <button className="absolute bottom-14 left-10">
-                    <Image alt="back_icon" width={20} height={20} src="/images/back.svg" />
-                </button>
-            </section> */}
             <section>
                 <span className="flex pl-16 font-bold text-2xl">무엇을 찾으시나요?</span>
                 <div className="relative right-4">
                     <input
-                        className="text-xl pb-2 focus:outline-none border-b-2 w-[475px] pt-9 pl-4"
+                        className="text-xl pb-2 focus:outline-none border-b-2 w-[475px] pt-9 pl-4 pr-16"
                         placeholder="검색어를 입력해주세요."
                         value={searchValue}
                         onChange={handleSearchChange}
+                        onKeyDown={handleEnter}
                     />
-                    <button className="absolute top-2 right-4 px-2 py-1 pr-14" onClick={() => router.push(`/main?search=${searchValue}`)}>
-                        <Image alt="search_icon" width={32} height={32} src="/images/search.png" />
+                    <button className="absolute top-7 right-4 px-2 py-1 pr-14" onClick={() => router.push(`/main?search=${searchValue}`)}>
+                        <Image alt="search_icon" width={30} height={30} src="/images/search.png" />
                     </button>
                 </div>
             </section>
@@ -45,7 +48,7 @@ const Search = () => {
                                     className="text-mainColor flex items-center justify-center m-2 border rounded-2xl w-[98px] h-[35px] text-xl"
                                     key={index}
                                     value={item}
-                                    // onClick={() => handleClickRecommend(item)}
+                                    onClick={() => handleClickRecommend(item)}
                                 >
                                     #{item}
                                 </button>
