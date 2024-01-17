@@ -31,7 +31,7 @@ const KakaoMap = ({ location }: { location: string }) => {
                         content: `<div style="width:300px;text-align:center;padding:6px 0;">${location}</div>`
                     });
                     infowindow.open(map, marker);
-                
+
                     // 지도의 중심을 결과값으로 받은 위치로 이동
                     map.setCenter(coords);
                 }

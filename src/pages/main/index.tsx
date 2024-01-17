@@ -3,11 +3,12 @@ import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 import { getBusStopMainItems } from "../api/post";
 import { PostPreviewType } from "@/types/postTypes";
-import PostDetail from "@/components/post/PostDetail";
+
 import Image from "next/image";
 import DateFilter from "@/components/main/DateFilter";
 import LocationFilter from "@/components/main/LocationFilter";
 import InterestButton from "@/components/main/InterestButton";
+import PostPreview from "@/components/common/PostPreview";
 const MainPage = () => {
     const router = useRouter();
     const { search } = router.query
