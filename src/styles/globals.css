@@ -44,14 +44,14 @@
 /* 위치선택 css */
 
 .rs-picker-cascader-menu-items {
-    width: 420px !important;
+    width: 375px !important;
 }
 .rs-picker-cascader-menu-items > div {
-    width: 420px !important;
+    width: 375px !important;
 }
 
 .rs-picker-cascader-menu-column {
-    width: 140px !important;
+    width: 125px !important;
     height: 500px !important;
 }
 

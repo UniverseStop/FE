@@ -21,21 +21,21 @@ const Nav = ({isHide}: {isHide: boolean}) => {
 
     return (
         <div>
-            {isHide ? <div className="z-[100] fixed bottom-0 flex justify-between items-center border p-[20px] rounded-tl-[15px] rounded-tr-[15px] h-[61px] w-[598px] box-border bg-white z-[999]">
+            {isHide ? <div className="border border-slate-300 fixed bottom-0 flex justify-between items-center  p-[20px] rounded-tl-[15px] rounded-tr-[15px] h-[50px] min-w-[375px] max-w-[600px] w-full box-border bg-white z-[999]">
                 <Link href="/main">
-                    <Image src="/images/nav-home.svg" alt="home" width={30} height={30} />
+                    <Image src="/images/nav-home.png" alt="home" width={45} height={35} />
                 </Link>
                 <Link href="/search">
-                    <Image src="/images/nav-search.svg" alt="search" width={35} height={35} />
+                    <Image src="/images/nav-search.png" alt="search" width={45} height={35} />
                 </Link>
                 <Link href={isLoggedIn ? "/create-post" : ""} onClick={handleLinkClick}>
-                    <Image src="/images/nav-post.svg" alt="create-post" width={34} height={34} />
+                    <Image src="/images/nav-post.png" alt="create-post" width={45} height={35} />
                 </Link>
                 <Link href={isLoggedIn ? "/chat" : ""} onClick={handleLinkClick}>
-                    <Image src="/images/nav-chat.svg" alt="chat" width={32} height={32} />
+                    <Image src="/images/nav-chat.png" alt="chat" width={45} height={35} />
                 </Link>
                 <Link href={isLoggedIn ? `/mypage/${userInfo.userId}` : ""} onClick={handleLinkClick}>
-                    <Image src="/images/nav-profile.svg" alt="profile" width={32} height={32} />
+                    <Image src="/images/nav-profile.png" alt="profile" width={45} height={35} />
                 </Link>
             </div>: <></>}
         </div>
