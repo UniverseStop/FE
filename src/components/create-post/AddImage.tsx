@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React, { ChangeEvent, useState } from "react";
 
-function AddImage({ postImage, setpostImage }: { postImage: File[]; setpostImage: (postImage: File[]) => void }) {
+function AddImage({ postImage, setPostImage }: { postImage: File[]; setPostImage: (postImage: File[]) => void }) {
 	const [imagePreview, setImagePreview] = useState<File[]>([]);
 	const [isButtonDisabled, setIsButtonDisabled] = useState<Boolean>(true);
 
@@ -9,15 +9,22 @@ function AddImage({ postImage, setpostImage }: { postImage: File[]; setpostImage
 		if (imagePreview.length >= 2) {
 			setIsButtonDisabled(false);
 		}
+
 		const targetFiles = e.target.files as FileList;
 		const selectedFiles: File[] = Array.from(targetFiles);
-
+		for(let i=0; i<selectedFiles.length; i++) {
+			let maxSize = 20 * 1024 * 1024;
+			if(selectedFiles[i].size > maxSize) {
+				alert("첨부파일 사이즈는 20MB 이내로 등록 가능합니다.")
+				return;
+			}
+		}
 		setImagePreview((prev) => [...prev, ...selectedFiles]);
 
 		return;
 	};
 
-	setpostImage(imagePreview);
+	setPostImage(imagePreview);
 
 
 	return (
