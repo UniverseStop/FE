@@ -11,11 +11,6 @@ export default function AboutUs() {
 
     const [buttonName, setButtonName] = useState("로그인");
     const userInfo = GetCurrentUser(); // 현재 로그인된 사용자 정보
-    useEffect(()=>{
-        // 처음 렌더링될 때 로그인 유무 확인 후 버튼 이름 변경
-        if (userInfo.isLoggedIn) setButtonName("로그아웃");
-    });
-    
     const reset = useResetRecoilState(currentUser); // recoil 데이터 초기화
     const handleClickButto = () => {
         if (buttonName === "로그인") router.push("/users/login");
@@ -26,6 +21,16 @@ export default function AboutUs() {
             setButtonName("로그인");
         } 
     };
+
+    useEffect(()=>{
+        // 처음 렌더링될 때 로그인 유무 확인 후 버튼 이름 변경
+        if (userInfo.isLoggedIn) setButtonName("로그아웃");
+
+        return () => {
+            reset(); // 언마운트될 때 리코일 저장소 초기화
+        };
+      
+    });
 
     return (
         <div className="gradation h-screen relative">
