@@ -20,6 +20,26 @@ export const getBlackUserList = async (pageNum: number) => {
     }
 };
 
+// 사용자 차단
+export const postBlackUser = async (userId: number) => {
+	try {
+		const res = await instance.post(`/user/black/${userId}`);
+		return res;
+	} catch (error) {
+		throw error;
+	}
+};
+
+// 사용자 구제
+export const postSalvationUser = async (userId: number) => {
+	try {
+		const res = await instance.delete(`/user/salvation/${userId}`);
+		return res;
+	} catch (error) {
+		throw error;
+	}
+};
+
 // 전체 모임장소 위치 조회
 export const getPostLocationStatic = async () => {
     try {
