@@ -2,7 +2,13 @@ import { UserType } from "@/types/managerTypes";
 import { convertTime } from "@/utils/convertTime";
 import { getGender } from "@/utils/getGender";
 
-const ManagementTable = ({users, totalPages, selectPage, setSelectPage}: {users: UserType[], totalPages: number, selectPage: number, setSelectPage: (selectPage: number) => void}) => {
+const ManagementTable = ({users, totalPages, selectPage, setSelectPage, selectBox, setSelectBox}: {users: UserType[], totalPages: number, selectPage: number, setSelectPage: (selectPage: number) => void, selectBox: number[], setSelectBox: (selectBox: number[]) => void}) => {
+    const handleCheckBox = (userId: number) => {
+        let temps = [...selectBox]; // 기존에 선택된 유저 임시로 저장
+        if (!temps.includes(userId)) temps.push(userId); // 선택된적 없는 유저면 추가
+        else temps = temps.filter(id => id !== userId); // 선택된적 있던 유저면 제거
+        setSelectBox(temps);
+    };
 
     return (
         <section className="w-[600px] border border-managerPointColor rounded-sm">
@@ -19,7 +25,7 @@ const ManagementTable = ({users, totalPages, selectPage, setSelectPage}: {users:
                         return (
                         <tr className="border-b border-managerGrayColor h-[70px] text-center" key={u.id}>
                             <td className="flex justify-center items-center space-x-3 h-[70px]">
-                                <input type="checkbox" className="form-checkbox h-5 w-5 text-indigo-600" />
+                                <input onClick={()=>handleCheckBox(u.id)} type="checkbox" className="form-checkbox h-5 w-5 text-indigo-600" />
                                 <img className="border border-gray w-[50px] h-[50px] rounded-full" alt="profile" src={u.profileImageUrl} />
                             </td>
                             <td>{u.nickname}</td>
