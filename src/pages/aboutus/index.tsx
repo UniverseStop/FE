@@ -19,17 +19,17 @@ export default function AboutUs() {
             removeSession("refresh_Token");
             reset();
             setButtonName("로그인");
-        } 
+        }
     };
 
     useEffect(()=>{
         // 처음 렌더링될 때 로그인 유무 확인 후 버튼 이름 변경
         if (userInfo.isLoggedIn) setButtonName("로그아웃");
 
-        return () => {
-            reset(); // 언마운트될 때 리코일 저장소 초기화
-        };
-      
+        // return () => {
+        //     reset(); // 언마운트될 때 리코일 저장소 초기화
+        // };
+
     });
 
     return (
