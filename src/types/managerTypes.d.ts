@@ -10,3 +10,22 @@ export interface UserType {
     reportCount: number, // 신고 횟수
     mannerTemplate: number, // 온도
 }
+
+export interface UserReportType {
+    createdAt: string, // 신고 일시
+    report: string, // 신고 종류
+    reportDetail: string, // 신고 내용
+    reportImages: string[], // 신고 이미지
+    reportedUserId: number, // 신고한 유저 ID
+    reporter: string, // 신고자 닉네임
+}
+
+export type ReportType = {
+	[key: string]: string;
+};
+
+export interface SalvationReasonType {
+    content: string, // 구제 내용
+    createdAt: string, // 구제 신청 일시
+    isView: boolean, // 서버 DTO 분리용
+}
