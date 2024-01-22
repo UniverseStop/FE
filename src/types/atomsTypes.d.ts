@@ -7,3 +7,10 @@ export interface CurrentUserType {
     interest: string, // 관심사
     profileImageUrl: string, // 프로필 이미지
 }
+
+export interface filterType {
+    titleOrContent:string,
+    endDate :string,
+    location: string,
+    interest:string,
+}

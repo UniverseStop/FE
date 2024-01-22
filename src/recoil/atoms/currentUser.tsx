@@ -1,5 +1,5 @@
 
-import { CurrentUserType } from "@/types/userTypes";
+import { CurrentUserType } from "@/types/atomsTypes";
 import { atom } from "recoil";
 import { recoilPersist } from "recoil-persist";
 
@@ -18,4 +18,4 @@ export const currentUser  = atom<CurrentUserType>({
         profileImageUrl: "",
     },
     effects_UNSTABLE: [persistAtom],
-});
+})

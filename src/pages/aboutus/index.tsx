@@ -5,6 +5,7 @@ import { currentUser } from "@/recoil/atoms/currentUser";
 import { removeSession } from "@/utils/removeSession";
 import { GetCurrentUser } from "@/utils/getCurrentUser";
 import { useEffect, useState } from "react";
+import { filterState } from "@/recoil/atoms/filterState";
 
 export default function AboutUs() {
     const router = useRouter();
@@ -17,12 +18,15 @@ export default function AboutUs() {
     });
     
     const reset = useResetRecoilState(currentUser); // recoil 데이터 초기화
+    const filterReset = useResetRecoilState(filterState); // recoil 데이터 초기화
+
     const handleClickButto = () => {
         if (buttonName === "로그인") router.push("/users/login");
         else { // 로그아웃
             removeSession("access_Token");
             removeSession("refresh_Token");
             reset();
+            filterReset();
             setButtonName("로그인");
         } 
     };
