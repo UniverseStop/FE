@@ -7,7 +7,7 @@ import { useResetRecoilState } from "recoil";
 import { currentUser } from "@/recoil/atoms/currentUser";
 import { removeSession } from "@/utils/removeSession";
 
-const Nav = ({isHide}: {isHide: boolean}) => {
+const Nav = ({ isHide }: { isHide: boolean }) => {
     const router = useRouter();
     const [buttonName, setButtonName] = useState("로그인");
     const [isActiveBoxVisible, setIsActiveBoxVisible] = useState<boolean>(false)
@@ -19,10 +19,11 @@ const Nav = ({isHide}: {isHide: boolean}) => {
 
     // 로그인 후 이용할 수 있는 기능에 비로그인된 유저가 접근한 경우
     const handleLinkClick = (e: MouseEvent<HTMLAnchorElement>) => {
-        if (!isLoggedIn) { // isLoggedIn이 false이면서 링크를 클릭했을 때
-          e.preventDefault(); // 기본 동작 막기
-          alert("로그인 후 이용 가능합니다.");
-          router.push("/users/login"); // 로그인 페이지로 이동
+        if (!isLoggedIn) {
+            // isLoggedIn이 false이면서 링크를 클릭했을 때
+            e.preventDefault(); // 기본 동작 막기
+            alert("로그인 후 이용 가능합니다.");
+            router.push("/users/login"); // 로그인 페이지로 이동
         }
         if (isActiveBoxVisible) {
             setIsActiveBoxVisible(false)

@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <RecoilRoot>
                 <AuthProvider>
                     {/* React Query Devtools: 필요한 경우 주석 해제 후 사용 */}
-                    {/* <ReactQueryDevtools initialIsOpen={false}/> */}
+                    {/* <ReactQueryDevtools initialIsOpen={false} /> */}
                     <Layout>{isLoading ? <Spinner /> : <Component {...pageProps} />}</Layout>
                 </AuthProvider>
             </RecoilRoot>

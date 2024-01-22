@@ -18,7 +18,6 @@ const Statistics = () => {
                     </div>
                 </section>
             </div>
-            
         </div>
     );
 };
