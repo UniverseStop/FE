@@ -29,9 +29,10 @@ const Management = () => {
         onSuccess: () => {
             queryClient.invalidateQueries("users");
             queryClient.invalidateQueries("blackUsers");
+            alert("사용자 차단에 성공했습니다.");
         },
         onError: () => {
-            alert("에러가 발생했습니다. 다시 한번 시도해주세요.");
+            alert("사용자 차단을 실패했습니다. 다시 한번 시도해주세요.");
         },
     });
     const handleBlack = () => {
@@ -46,9 +47,10 @@ const Management = () => {
         onSuccess: () => {
             queryClient.invalidateQueries("users");
             queryClient.invalidateQueries("blackUsers");
+            alert("사용자 구제를 완료했습니다.");
         },
         onError: (error) => {
-            alert("에러가 발생했습니다. 다시 한번 시도해주세요.");
+            alert("사용자 구제를 실패했습니다. 다시 한번 시도해주세요.");
         },
     });
     const handleSalvation = () => {
