@@ -15,7 +15,7 @@ interface QueryParams {
     location?: string;
     interest?: string;
 }
-
+        
 const MainPage = () => {
     const queryParams = (data: QueryParams): string => {
         const { search, endDate, location, interest } = data;

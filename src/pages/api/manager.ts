@@ -10,6 +10,16 @@ export const getUserList = async (pageNum: number) => {
     }
 };
 
+// 유저별 신고 내역 조회
+export const getUserReport = async (userId: number) => {
+    try {
+        const res = await instance.get(`/user/reportList/${userId}`);
+        return res.data.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
 // 차단된 사용자 전체 조회
 export const getBlackUserList = async (pageNum: number) => {
     try {
@@ -18,6 +28,36 @@ export const getBlackUserList = async (pageNum: number) => {
     } catch (error) {
         throw error;
     }
+};
+
+// 사용자 차단
+export const postBlackUser = async (userId: number) => {
+	try {
+		const res = await instance.post(`/user/black/${userId}`);
+		return res;
+	} catch (error) {
+		throw error;
+	}
+};
+
+// 사용자 구제 신청 사유 가져오기
+export const getSalvationReason = async (userId: number) => {
+	try {
+		const res = await instance.get(`/api/salvation/${userId}`);
+		return res.data.data;
+	} catch (error) {
+		throw error;
+	}
+};
+
+// 사용자 구제
+export const postSalvationUser = async (userId: number) => {
+	try {
+		const res = await instance.post(`/user/user/${userId}`);
+		return res;
+	} catch (error) {
+		throw error;
+	}
 };
 
 // 전체 모임장소 위치 조회

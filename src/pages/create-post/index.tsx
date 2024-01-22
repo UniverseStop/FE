@@ -14,7 +14,7 @@ import { postBusStop } from "../api/post";
 
 function CreatePost() {
 	const [postCategory, setPostCategory] = useState<string>("");
-	const [postImage, setpostImage] = useState<File[]>([]);
+	const [postImage, setPostImage] = useState<File[]>([]);
 	const [postTitle, setPostTitle] = useState<string>("");
 	const [postContent, setPostContent] = useState<string>("");
 	const [postLoaction, setPostLoaction] = useState<string>("");
@@ -84,7 +84,7 @@ function CreatePost() {
 		<div>
 			<section>
 				<Category title="🗂️ 카테고리" handleCategoryChange={handleCategoryChange} />
-				<AddImage postImage={postImage} setpostImage={setpostImage} />
+				<AddImage postImage={postImage} setPostImage={setPostImage} />
 				<AddTitle postTitle={postTitle} setPostTitle={setPostTitle} />
 				<AddContent postContent={postContent} setPostContent={setPostContent} />
 				<AddMeetingLimit postSubLimit={postSubLimit} setpostSubLimit={setpostSubLimit} />

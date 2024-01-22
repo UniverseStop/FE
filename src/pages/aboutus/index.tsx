@@ -1,22 +1,16 @@
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useResetRecoilState } from "recoil";
 import ImageSlider from "@/components/aboutus/ImageSlider";
 import { currentUser } from "@/recoil/atoms/currentUser";
 import { removeSession } from "@/utils/removeSession";
 import { GetCurrentUser } from "@/utils/getCurrentUser";
-import { useEffect, useState } from "react";
-import { filterState } from "@/recoil/atoms/filterState";
 
 export default function AboutUs() {
     const router = useRouter();
 
     const [buttonName, setButtonName] = useState("로그인");
     const userInfo = GetCurrentUser(); // 현재 로그인된 사용자 정보
-    useEffect(()=>{
-        // 처음 렌더링될 때 로그인 유무 확인 후 버튼 이름 변경
-        if (userInfo.isLoggedIn) setButtonName("로그아웃");
-    });
-    
     const reset = useResetRecoilState(currentUser); // recoil 데이터 초기화
     const filterReset = useResetRecoilState(filterState); // recoil 데이터 초기화
 
@@ -26,10 +20,28 @@ export default function AboutUs() {
             removeSession("access_Token");
             removeSession("refresh_Token");
             reset();
-            filterReset();
             setButtonName("로그인");
-        } 
+        }
     };
+
+    useEffect(()=>{
+        // 처음 렌더링될 때 로그인 유무 확인 후 버튼 이름 변경
+        if (userInfo.isLoggedIn) setButtonName("로그아웃");
+
+        // 브라우저 닫기 시 리코일 초기화
+        const handleBeforeUnload = () => {
+            reset();
+        };
+    
+        // beforeunload 이벤트에 대한 리스너 추가 (브라우저가 닫힐 때 실행 예정)
+        window.addEventListener("beforeunload", handleBeforeUnload);
+    
+        return () => {
+            // 브라우저 닫기 시에만 초기화 되도록 beforeunload 이벤트에 등록된 리스너를 제거하여 함수 실행
+            window.removeEventListener("beforeunload", handleBeforeUnload);
+        };
+
+    });
 
     return (
         <div className="gradation h-screen relative">
