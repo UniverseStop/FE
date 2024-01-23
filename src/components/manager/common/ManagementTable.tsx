@@ -5,25 +5,25 @@ import { getGender } from "@/utils/getGender";
 import ManagementModal from "./ManagementModal";
 
 const ManagementTable = ({users, totalPages, selectPage, setSelectPage, selectBox, setSelectBox}: {users: UserType[], totalPages: number, selectPage: number, setSelectPage: (selectPage: number) => void, selectBox: number[], setSelectBox: (selectBox: number[]) => void}) => {
-    const handleCheckBox = (event: React.MouseEvent<HTMLInputElement>, userId: number) => {
-        event.stopPropagation(); // 사용자 상세 정보 모달 안열리게 이벤트 중지
-        let temps = [...selectBox]; // 기존에 선택된 유저 임시로 저장
-        if (!temps.includes(userId)) temps.push(userId); // 선택된적 없는 유저면 추가
-        else temps = temps.filter(id => id !== userId); // 선택된적 있던 유저면 제거
+    const handleCheckBox = (event: React.MouseEvent<HTMLInputElement>, userId: number) => { // 시용자 선택
+        event.stopPropagation(); // 체크박스 선택 시에는 상세 정보 안열기
+        let temps = [...selectBox]; // 임시로 기존 선택 유저 ID 저장
+        if (!temps.includes(userId)) temps.push(userId); // 선택된적 없는 유저인 경우 추가
+        else temps = temps.filter(id => id !== userId); // 선택된적 있던 유저인 경우 제거
         setSelectBox(temps);
     };
 
     // 사용자 정보 상세 모달
-    const [isModal, setIsModal] = useState<boolean>(false);
-    const [selectUser, setSelectUser] = useState<UserType>();
+    const [isModal, setIsModal] = useState<boolean>(false); // false: 안열기, true: 열기
+    const [selectUserInfo, setSelectUserInfo] = useState<UserType>();
     const handleClickUser = (userInfo: UserType) => {
-        setSelectUser(userInfo);
-        setIsModal(!isModal);
+        setSelectUserInfo(userInfo); // 선택된 유저 정보 저장
+        setIsModal(!isModal); // 상세 모달 열기로 변경
     };
 
     return (
-        <section className="w-[600px] border border-managerPointColor rounded-sm">
-            {isModal && selectUser ? <ManagementModal isModal={isModal} setIsModal={setIsModal} selectUser={selectUser} setSelectUser={setSelectUser}/> : <></>}
+        <section className="w-[600px] h-[815px] border border-managerPointColor rounded-sm">
+            {isModal && selectUserInfo ? <ManagementModal isModal={isModal} setIsModal={setIsModal} selectUserInfo={selectUserInfo} setSelectUserInfo={setSelectUserInfo}/> : <></>}
             <table className="text-xs whitespace-no-wrap w-full ">
                 <thead className="bg-managerGrayColor">
                     <tr>

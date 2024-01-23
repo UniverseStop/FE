@@ -5,13 +5,13 @@ import { ReportType, UserReportType, UserType } from "@/types/managerTypes";
 import { convertTime } from "@/utils/convertTime";
 import { getGender } from "@/utils/getGender";
 
-const ManagementModal = ({isModal, setIsModal, selectUser, setSelectUser}: {isModal: boolean, setIsModal: (isModal: boolean) => void, selectUser: UserType, setSelectUser: (selectUser: UserType) => void}) => {
+const ManagementModal = ({isModal, setIsModal, selectUserInfo, setSelectUserInfo}: {isModal: boolean, setIsModal: (isModal: boolean) => void, selectUserInfo: UserType, setSelectUserInfo: (selectUserInfo: UserType) => void}) => {
     // 모달 영역 외 클릭시 닫기
     const backdropRef = useRef<HTMLDivElement>(null);
     const handleClickOutside = (event: MouseEvent) => {
         if (event.target === backdropRef.current) {
             setIsModal(!isModal);
-            setSelectUser({
+            setSelectUserInfo({
                 age: "",
                 createdAt: "",
                 lastAccessed: "",
@@ -31,7 +31,7 @@ const ManagementModal = ({isModal, setIsModal, selectUser, setSelectUser}: {isMo
     }, []);
 
     // 신고된 내역 확인
-    const { data: reports } = useQuery("reports", () => getUserReport(selectUser.id));
+    const { data: reports } = useQuery("reports", () => getUserReport(selectUserInfo.id));
 
     // 신고 사유 종류
     let ReportTypeDict: ReportType = {
@@ -46,7 +46,7 @@ const ManagementModal = ({isModal, setIsModal, selectUser, setSelectUser}: {isMo
     const [learnMoreImage, setLearnMoreImage] = useState<string>("");
 
     // 구제 신청 사유 보기
-    const { data: salvationReason } = useQuery("salvationReason", () => getSalvationReason(selectUser.id));
+    const { data: salvationReason } = useQuery("salvationReason", () => getSalvationReason(selectUserInfo.id));
 
     return (
         <div ref={backdropRef} className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -66,14 +66,14 @@ const ManagementModal = ({isModal, setIsModal, selectUser, setSelectUser}: {isMo
                         </thead>
                         <tbody>
                             <tr className="border-b border-managerGrayColor h-[70px] text-center items-center">
-                                <td className="flex h-[70px] items-center justify-center"><img className=" h-12 w-12 rounded-full" alt="profile" src={selectUser.profileImageUrl}/></td>
-                                <td>{selectUser.nickname}</td>
-                                <td>{selectUser.id}</td>
-                                <td>{convertTime(selectUser.lastAccessed)}</td>
-                                <td>{selectUser.age}</td>
-                                <td>{getGender(selectUser.gender)}</td>
-                                <td>{selectUser.mannerTemplate}</td>
-                                <td>{selectUser.reportCount}</td>
+                                <td className="flex h-[70px] items-center justify-center"><img className=" h-12 w-12 rounded-full" alt="profile" src={selectUserInfo.profileImageUrl}/></td>
+                                <td>{selectUserInfo.nickname}</td>
+                                <td>{selectUserInfo.id}</td>
+                                <td>{convertTime(selectUserInfo.lastAccessed)}</td>
+                                <td>{selectUserInfo.age}</td>
+                                <td>{getGender(selectUserInfo.gender)}</td>
+                                <td>{selectUserInfo.mannerTemplate}</td>
+                                <td>{selectUserInfo.reportCount}</td>
                             </tr>
                         </tbody>
                     </table>
