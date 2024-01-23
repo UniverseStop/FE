@@ -66,3 +66,16 @@ export const postConfirmNickname = async (userNickname: string) => {
 		throw error;
 	}
 };
+
+//불순한 유저 신고하기
+export const postReportUser = async ({userId , formdata} : {userId : string; formdata: FormData}) => {
+	try {
+		const response = await instance.post(`/user/report/${userId}`, formdata, {
+			headers: { "Context-Type": "multipart/form-data" },
+		});
+		return response;
+	} catch (error) {
+		console.error("postReportUser error:", error);
+		throw error;
+	}
+}
