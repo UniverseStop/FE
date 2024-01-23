@@ -44,7 +44,7 @@ function Introduce({
 						</Link>
 					</button>
 				) : (
-					<Link href="/user-report">
+					<Link href={`/user-report/${myPageUserId}`}>
 						<Image
 							alt="신고_사이렌아이콘"
 							width={200}
