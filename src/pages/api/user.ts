@@ -13,7 +13,6 @@ export const credentialLogin = async () => {
 		const refreshToken = response.headers.refreshtoken;
 		Cookies.set("access_Token", accessToken, { path: "/" });
 		Cookies.set("refresh_Token", refreshToken, { path: "/" });
-		// console.log(response)
 		return response;
 	} catch (error) {
 		console.error("Login error:", error);

@@ -38,7 +38,6 @@ export const useChat = () => {
                     {Authorization: token},
                     JSON.stringify({ type: "TALK", roomId: roomIdQuery, message: inputMessage})
                 );
-                console.log("Message sent successfully:", inputMessage);
             } catch (error) {
                 console.error("Error sending message:", error);
             }
