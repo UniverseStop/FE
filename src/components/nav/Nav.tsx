@@ -15,6 +15,7 @@ const Nav = ({ isHide }: { isHide: boolean }) => {
     // 현재 로그인된 사용자 정보
     const userInfo = GetCurrentUser();
     const isLoggedIn = userInfo.isLoggedIn; // 로그인 유무
+    const isAdmin = userInfo.auth === "ADMIN"; // 관리자 계정 유무
     const reset = useResetRecoilState(currentUser); // recoil 데이터 초기화
 
     // 로그인 후 이용할 수 있는 기능에 비로그인된 유저가 접근한 경우
@@ -34,9 +35,6 @@ const Nav = ({ isHide }: { isHide: boolean }) => {
         setIsActiveBoxVisible((prev)=>!prev)
     }
 
-
-
-
     const handleLoginLogout = () => {
         if (buttonName === "로그인") router.push("/users/login");
         else {
@@ -51,12 +49,11 @@ const Nav = ({ isHide }: { isHide: boolean }) => {
     }
     }
 
-
     useEffect(()=>{
-        if (userInfo.isLoggedIn) setButtonName("로그아웃");
-        if (!userInfo.isLoggedIn) setButtonName("로그인");
+        if (isLoggedIn) setButtonName("로그아웃");
+        if (!isLoggedIn) setButtonName("로그인");
 
-    },[userInfo.isLoggedIn]);
+    },[isLoggedIn]);
 
     return (
         <div>
@@ -78,10 +75,9 @@ const Nav = ({ isHide }: { isHide: boolean }) => {
                     <Image src="/images/nav-profile.png" alt="profile" width={45} height={35} />
                 </button>
                  {isActiveBoxVisible && (
-                    <div className="absolute bottom-[40px] right-[10px] w-[180px] h-[95px] flex flex-col justify-center items-center border rounded-[10px] border-slate-300 bg-white">
-                           <Link href={isLoggedIn ? `/mypage/${userInfo.userId}` : ""} onClick={handleLinkClick} className="block w-[170px] h-[40px] rounded-[10px] font-semibold text-center hover:no-underline hover:bg-[#efefef] hover:text-black text-[#989898] flex items-center justify-center">
-                            마이페이지 이동
-                           </Link>
+                    <div className={`absolute bottom-[40px] right-[10px] w-[180px] ${isAdmin ? "h-[130px]" : "h-[90px]"} flex flex-col justify-center items-center border rounded-[10px] border-slate-300 bg-white`}>
+                        <Link href={isLoggedIn ? `/mypage/${userInfo.userId}` : ""} onClick={handleLinkClick} className="block w-[170px] h-[40px] rounded-[10px] font-semibold text-center hover:no-underline hover:bg-[#efefef] hover:text-black text-[#989898] flex items-center justify-center">마이페이지 이동</Link>
+                        {isLoggedIn && userInfo.auth === "ADMIN" ? <Link href="/manager" className="block w-[170px] h-[40px] rounded-[10px] font-semibold text-center hover:no-underline hover:bg-[#efefef] hover:text-black text-[#989898] flex items-center justify-center">관리자 페이지 이동</Link> : <></>}
                         <button onClick={handleLoginLogout} className="w-[170px] h-[40px] rounded-[10px] font-semibold text-center text-[#989898] hover:bg-[#efefef] hover:text-black">{buttonName}</button>
                     </div>
                  )}
