@@ -22,7 +22,7 @@ const LoginPage = () => {
     // Render the login page only if not authenticated
     return !auth.isLoggedIn ? (
         <div className="gradation">
-            <div className="sm:bg-login bg-loginMobile h-screen center center bg-no-repeat relative">
+            <div className="sm:bg-login bg-loginMobile h-screen">
                 <div className="text-base font-bold fixed bottom-20 left-1/2 flex flex-col space-y-5 transform -translate-x-1/2">
                     <button onClick={onKakaoLogin} className="text-black font-bold w-80 flex gap-4 bg-[#fef01b] hover:bg-[#fef01b]/90 rounded-3xl px-5 py-4 text-center items-center justify-between pr-[95px]"><RiKakaoTalkFill className="w-6 h-6"/>카카오로 로그인하기</button>
                     <button onClick={()=>router.push("/main")} style={{ background: "linear-gradient(to right, #9C3FE4, #C65647)" }} className="text-white w-80 flex gap-4 bg-[#9C3FE4] font-medium rounded-3xl px-5 py-4 text-center items-center justify-between pr-[135px]">

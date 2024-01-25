@@ -19,7 +19,7 @@ const config: Config = {
             serif: ["Merriweather", "serif"],
         },
         backgroundImage: {
-            login: "url('/images/login2.png')",
+            login: "url('/images/login.png')",
             loginMobile: "url('/images/login-Mobile.png')",
             mypageMobile: "url('/images/mypage-background-Mobile.png')",
             mypageDesktop: "url('/images/mypage-background-Desktop.png')",
