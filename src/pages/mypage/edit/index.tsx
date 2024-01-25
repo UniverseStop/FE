@@ -1,6 +1,7 @@
 import Category from "@/components/category/Category";
 import UserInput from "@/components/user-input/UserInput";
 import { putUserInfoEdit } from "@/pages/api/user";
+import { ConfirmPermissions } from "@/utils/confirmPermissions";
 import { GetCurrentUser } from "@/utils/getCurrentUser";
 import { removeSession } from "@/utils/removeSession";
 import { saveSession } from "@/utils/saveSession";
@@ -16,16 +17,7 @@ function MypageEdit() {
 	const queryClient = useQueryClient();
 	const router = useRouter();
 
-	/** 로그인 후 이용가능한 페이지 */
-	const userInfo = GetCurrentUser();
-	useEffect(()=>{
-		if(!userInfo.isLoggedIn) {
-			alert("로그인이 필요한 페이지입니다.")
-			router.push("/users/login");
-			return;
-		}
-	},[userInfo.isLoggedIn])
-
+	ConfirmPermissions(); // 로그인 후 이용가능한 페이지
 
 	const handleCategoryChange = (category: string) => {
 		setChangedCategory(category)
@@ -36,6 +28,7 @@ function MypageEdit() {
 		interest: changedCategory
 	}
 
+	const userInfo = GetCurrentUser();
 	const myPageEditData = {
 		userId : userInfo.userId,
 		userEditSettings :  userEditSettings

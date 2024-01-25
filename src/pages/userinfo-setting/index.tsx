@@ -4,9 +4,10 @@ import { GetCurrentUser } from "@/utils/getCurrentUser";
 import { removeSession } from "@/utils/removeSession";
 import { saveSession } from "@/utils/saveSession";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { putUserInfoSet } from "../api/user";
+import { ConfirmPermissions } from "@/utils/confirmPermissions";
 
 function UserInfoSetting() {
 	const [nickname, setNickname] = useState<string>("");
@@ -18,15 +19,7 @@ function UserInfoSetting() {
 	const queryClient = useQueryClient();
 	const router = useRouter();
 
-	/** 로그인 후 이용가능한 페이지 */
-	const userInfo = GetCurrentUser();
-	useEffect(()=>{
-		if(!userInfo.isLoggedIn) {
-			alert("로그인이 필요한 페이지입니다.")
-			router.push("/users/login");
-			return;
-		}
-	},[userInfo.isLoggedIn])
+	ConfirmPermissions(); // 로그인 후 이용가능한 페이지
 
 	const handleCategoryChange = (category: string) => {
 		setInterest(category);
@@ -39,6 +32,7 @@ function UserInfoSetting() {
 		gender,
 	};
 
+	const userInfo = GetCurrentUser();
 	const myPageSetData = {
 		userId: userInfo.userId,
 		userSettings: userSettings,
@@ -77,8 +71,7 @@ function UserInfoSetting() {
 		<form onSubmit={handleSubmitUserInfo} className="flex flex-col justify-between h-screen">
 			<section>
 				<Category title="나의 관심사를 선택해주세요" handleCategoryChange={handleCategoryChange} />
-				<UserInput title="닉네임" placeholder="닉네임을 입력해주세요" isShowDuplicateCheckBtn={true} nickname={nickname} setNickname={setNickname}
-			isValidatedNickname={isValidatedNickname} setIsValidatedNickname={setIsValidatedNickname} setIsConfirmNicknameSuccess={setIsConfirmNicknameSuccess}/>
+				<UserInput title="닉네임" placeholder="닉네임을 입력해주세요" isShowDuplicateCheckBtn={true} nickname={nickname} setNickname={setNickname} isValidatedNickname={isValidatedNickname} setIsValidatedNickname={setIsValidatedNickname} setIsConfirmNicknameSuccess={setIsConfirmNicknameSuccess}/>
 				<UserInput title="나이" placeholder="만 나이를 입력해주세요" isShowDuplicateCheckBtn={false} age={age} setAge={setAge}/>
 				<UserInput title="성별" placeholder="성별을 입력해주세요" isShowDuplicateCheckBtn={false} gender={gender} setGender={setGender}/>
 			</section>
@@ -87,7 +80,7 @@ function UserInfoSetting() {
 					시작하기
 				</button>
 			</section>
-		</form>
+		</form> 
 	);
 }
 
