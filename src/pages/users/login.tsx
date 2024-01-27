@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useAuth } from '@/context/KakaoContext';
 import { RiKakaoTalkFill } from 'react-icons/ri';
+import { useRecoilValue, useResetRecoilState } from "recoil";
+import { blackUser } from "@/recoil/atoms/blackUser";
+import Image from "next/image";
 
 const LoginPage = () => {
     const auth = useAuth();
@@ -19,9 +22,28 @@ const LoginPage = () => {
         window.location.href = KAKAO_AUTH_URL;
     };
 
-    // Render the login page only if not authenticated
+    // 차단된 사용자인 경우
+    const blackUserNickname = useRecoilValue(blackUser);
+    const isBlack = blackUserNickname !== "";
+    const reset = useResetRecoilState(blackUser); // recoil 저장소 초기화 (차단 유저)
+
     return !auth.isLoggedIn ? (
         <div className="gradation">
+            {isBlack ? 
+            <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
+                <div className="bg-white p-8 w-5/6 max-w-[515px] h-96 max-h-[360px] rounded-lg z-50 justify-center items-center flex">
+                    <div className="flex flex-col items-center justify-center w-full">
+                        <span className="text-2xl font-bold">차단된 사용자 입니다.</span>
+                        <span><span className="text-mainColor">구제신청</span>을 하시겠습니까?</span>
+                        <Image width={190} height={190} alt="blackLock" src="/images/blackLock.png"/>
+                        <div className="w-5/6 h-[50px] space-x-4 text-xl flex items-center justify-center font-bold">
+                            <button onClick={()=>reset()} className="text-mainColor border border-mainColor w-5/6 h-full rounded-2xl">취소하기</button>
+                            <button onClick={()=>router.push("/salvation-application")} className="text-white bg-mainColor w-5/6 h-full rounded-2xl">신청하기</button>
+                        </div>
+                    </div>
+                </div>   
+            </div> 
+            : <></>}
             <div className="sm:bg-login bg-loginMobile h-screen">
                 <div className="text-base font-bold fixed bottom-20 left-1/2 flex flex-col space-y-5 transform -translate-x-1/2">
                     <button onClick={onKakaoLogin} className="text-black font-bold w-80 flex gap-4 bg-[#fef01b] hover:bg-[#fef01b]/90 rounded-3xl px-5 py-4 text-center items-center justify-between pr-[95px]"><RiKakaoTalkFill className="w-6 h-6"/>카카오로 로그인하기</button>
