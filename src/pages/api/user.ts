@@ -78,3 +78,13 @@ export const postReportUser = async ({userId , formdata} : {userId : string; for
 		throw error;
 	}
 }
+
+// 차단된 사용자 구제 신청하기
+export const postSalvationApplication = async (formdata: FormData) => {
+	try {
+		const response = await instance.post("/api/salvation", formdata);
+		return response;
+	} catch (error) {
+		throw error;
+	}
+}
