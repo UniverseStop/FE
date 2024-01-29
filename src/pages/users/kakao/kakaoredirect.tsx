@@ -18,11 +18,11 @@ const KakaoRedirect = () => {
 	const [blackUserState, setBlackUserState] = useRecoilState(blackUser); // 리코일에 현재 로그인된 사용자 정보 저장
 	const loginMutation = useMutation(getKakaoLogin, {
 		onSuccess: (data) => {
-			// 차단된 사용자
-			if (data.error.status === 401) {
+			if (data && data.error && data.error.status === 401) {
+				// 차단된 사용자
 				setBlackUserState(data.data);
 				router.push("/users/login");
-			} else {
+			} else { // 일반 사용자
 				const token = getSession("access_Token");
 				if (token) {
 					const payload = token.split('.')[1];
