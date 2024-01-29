@@ -16,7 +16,7 @@ const Management = () => {
                 <ManagementInquiry queryKey="totalUsers" isRequest={isRequestBlack} setSelectUserIds={setBlackedUsers}/>
                 <section className="flex flex-col items-center justify-center space-y-1">
                     <button onClick={()=>handleBlack()}><img className="border rounded-sm" alt="clear" src="/images/move.png"/></button>
-                    <button onClick={()=>handleSalvation()}><img className="border rounded-sm transform scale-x-[-1]" alt="clear" src="/images/move.png"/></button> 
+                    <button onClick={()=>handleSalvation()}><img className="border rounded-sm transform scale-x-[-1]" alt="clear" src="/images/move.png"/></button>
                 </section>
                 <ManagementInquiry queryKey="blackUsers" isRequest={isRequestSalvation} setSelectUserIds={setSalvationUsers}/>
             </div>
