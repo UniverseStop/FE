@@ -8,43 +8,43 @@ import { useRecoilState } from "recoil";
 import { currentUser } from "@/recoil/atoms/currentUser";
 
 const KakaoRedirect = () => {
-	// 위쪽 코드 제거 필요
-	const router = useRouter();
-	const { code }: any = router.query;
+    // 위쪽 코드 제거 필요
+    const router = useRouter();
+    const { code }: any = router.query;
 
-	// 로그인 시도
-	const [userState, setUserState] = useRecoilState(currentUser); // 리코일에 현재 로그인된 사용자 정보 저장
-	const loginMutation = useMutation(getKakaoLogin, {
-		onSuccess: () => {
-			const token = getSession("access_Token");
-			if (token) {
-				const payload = token.split('.')[1];
-				const decodedPayload = decode(payload);
-				const payloadObject = JSON.parse(decodedPayload);
-				setUserState({ isLoggedIn: true, ...payloadObject});
+    // 로그인 시도
+    const [userState, setUserState] = useRecoilState(currentUser); // 리코일에 현재 로그인된 사용자 정보 저장
+    const loginMutation = useMutation(getKakaoLogin, {
+        onSuccess: () => {
+            const token = getSession("access_Token");
+            if (token) {
+                const payload = token.split(".")[1];
+                const decodedPayload = decode(payload);
+                const payloadObject = JSON.parse(decodedPayload);
+                setUserState({ isLoggedIn: true, ...payloadObject });
 
-				// 처음 로그인한 사용자
-				if (!payloadObject.age) router.push("/userinfo-setting");
-				else router.push("/main");
-			}
-		},
-		onError: () => {
-			alert("로그인이 실패했습니다. 다시 시도해주세요.")
-			router.push("/users/login");
-		},
-	});
+                // 처음 로그인한 사용자
+                if (!payloadObject.age) router.push("/userinfo-setting");
+                else router.push("/main");
+            }
+        },
+        onError: () => {
+            alert("로그인이 실패했습니다. 다시 시도해주세요.");
+            router.push("/users/login");
+        },
+    });
 
-	useEffect(() => {
-		if (code) {
-			loginMutation.mutate(code);
-		}
-	}, [code]);
+    useEffect(() => {
+        if (code) {
+            loginMutation.mutate(code);
+        }
+    }, [code]);
 
-	if (!code) {
-		return <div>Loading...</div>;
-	}
+    if (!code) {
+        return <div>Loading...</div>;
+    }
 
-	return <div />;
+    return <div />;
 };
 
 export default KakaoRedirect;

@@ -11,12 +11,12 @@ export default function AboutUs() {
 
     const [buttonName, setButtonName] = useState("로그인");
     const userInfo = GetCurrentUser(); // 현재 로그인된 사용자 정보
-    const reset = useResetRecoilState(currentUser); // recoil 데이터 초기화
-    const filterReset = useResetRecoilState(filterState); // recoil 데이터 초기화
+    const reset = useResetRecoilState(currentUser); // recoil 데이터 초기화 데이터 초기화
 
     const handleClickButto = () => {
         if (buttonName === "로그인") router.push("/users/login");
-        else { // 로그아웃
+        else {
+            // 로그아웃
             removeSession("access_Token");
             removeSession("refresh_Token");
             reset();
@@ -24,7 +24,7 @@ export default function AboutUs() {
         }
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         // 처음 렌더링될 때 로그인 유무 확인 후 버튼 이름 변경
         if (userInfo.isLoggedIn) setButtonName("로그아웃");
 
@@ -32,15 +32,14 @@ export default function AboutUs() {
         const handleBeforeUnload = () => {
             reset();
         };
-    
+
         // beforeunload 이벤트에 대한 리스너 추가 (브라우저가 닫힐 때 실행 예정)
         window.addEventListener("beforeunload", handleBeforeUnload);
-    
+
         return () => {
             // 브라우저 닫기 시에만 초기화 되도록 beforeunload 이벤트에 등록된 리스너를 제거하여 함수 실행
             window.removeEventListener("beforeunload", handleBeforeUnload);
         };
-
     });
 
     return (
@@ -70,8 +69,12 @@ export default function AboutUs() {
                     </div>
                     <div className="w-[70%] mx-auto">
                         <div className="fixed bottom-10 w-[70%] max-w-[410px] flex justify-between items-center font-bold text-3xl text-white">
-                            <button className="z-40" onClick={() => handleClickButto()}>{buttonName}</button>
-                            <button className="z-40" onClick={() => router.push("/main")}>둘러보기</button>
+                            <button className="z-40" onClick={() => handleClickButto()}>
+                                {buttonName}
+                            </button>
+                            <button className="z-40" onClick={() => router.push("/main")}>
+                                둘러보기
+                            </button>
                         </div>
                     </div>
                 </section>
