@@ -32,9 +32,9 @@ function AddImage({ postImage, setPostImage }: { postImage: File[]; setPostImage
 		const targetFiles = e.target.files as FileList;
 		const selectedFiles: File[] = Array.from(targetFiles);
 		for(let i=0; i<selectedFiles.length; i++) {
-			let maxSize = 20 * 1024 * 1024;
+			let maxSize = 10 * 1024 * 1024;
 			if(selectedFiles[i].size > maxSize) {
-				alert("첨부파일 사이즈는 20MB 이내로 등록 가능합니다.")
+				alert("첨부파일 사이즈는 10MB 이내로 등록 가능합니다.")
 				return;
 			}
 		}
@@ -54,7 +54,7 @@ function AddImage({ postImage, setPostImage }: { postImage: File[]; setPostImage
           			  <div key={i} onMouseEnter={() => handleMouseEnter(i)} onMouseLeave={handleMouseLeave} >
             			  <img className="rounded-2xl object-cover h-36 w-36" src={URL.createObjectURL(file)} alt={`image${i}`}/>
            		     {hoveredIndex === i && (
-						<div className="absolute top-[36%] flex justify-center items-center rounded-2xl h-36 w-36 bg-black bg-opacity-50">
+						<div className="absolute top-[29%] flex justify-center items-center rounded-2xl h-36 w-36 bg-black bg-opacity-50">
                 	    	<button onClick={handleDeleteImage}>
                  			   <FiTrash className="w-5 h-5 text-white"/>
                   		    </button>

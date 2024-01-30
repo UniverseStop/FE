@@ -14,6 +14,8 @@ const Nav = ({ isHide }: { isHide: boolean }) => {
 
     const currentPath = router.pathname;
 
+    console.log('isActiveBoxVisible', isActiveBoxVisible)
+
     // 현재 로그인된 사용자 정보
     const userInfo = GetCurrentUser();
     const isLoggedIn = userInfo.isLoggedIn; // 로그인 유무
@@ -78,7 +80,8 @@ const Nav = ({ isHide }: { isHide: boolean }) => {
                     {isActiveBoxVisible && (
                     <div className={`absolute bottom-[40px] right-[10px] w-[180px] ${isAdmin ? "h-[130px]" : "h-[90px]"} flex flex-col justify-center items-center border rounded-[10px] border-slate-300 bg-white`}>
                         <Link href={isLoggedIn ? `/mypage/${userInfo.userId}` : ""} onClick={handleLinkClick} className="block w-[170px] h-[40px] rounded-[10px] font-semibold text-center hover:no-underline hover:bg-[#efefef] hover:text-black text-[#989898] flex items-center justify-center">마이페이지 이동</Link>
-                        {isLoggedIn && userInfo.auth === "ADMIN" || userInfo.auth === "SUPER" ? <Link href="/manager" className="block w-[170px] h-[40px] rounded-[10px] font-semibold text-center hover:no-underline hover:bg-[#efefef] hover:text-black text-[#989898] flex items-center justify-center">관리자 페이지 이동</Link> : <></>}
+                        {isLoggedIn && userInfo.auth === "ADMIN" || userInfo.auth === "SUPER" ?
+                        <Link href="/manager" onClick={handleLinkClick} className="block w-[170px] h-[40px] rounded-[10px] font-semibold text-center hover:no-underline hover:bg-[#efefef] hover:text-black text-[#989898] flex items-center justify-center">관리자 페이지 이동</Link> : <></>}
                         <button onClick={handleLoginLogout} className="w-[170px] h-[40px] rounded-[10px] font-semibold text-center text-[#989898] hover:bg-[#efefef] hover:text-black">{buttonName}</button>
                     </div>
                  )}
