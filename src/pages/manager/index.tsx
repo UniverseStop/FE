@@ -9,7 +9,7 @@ export default function Manager() {
     const [select, setSelect] = useState<number>(0);
 
     const userInfo = GetCurrentUser(); // 현재 로그인된 사용자 정보
-    const isAdmin = userInfo.auth == "ADMIN";
+    const isAdmin = userInfo.auth == "ADMIN" || userInfo.auth === "SUPER";
     const router = useRouter();
     useEffect(()=>{
         if (!isAdmin) router.back();
@@ -25,7 +25,7 @@ export default function Manager() {
                     <ul className="flex items-center w-[100%] justify-center space-x-[60px]">
                         {["사용자 통계", "사용자 관리", "관리자 권한"].map((name, index) => {
                             return (
-                                <li key={index} className="flex flex-col">
+                                <li key={index} className="flex flex-col h-[54px] gap-[13px] mt-[40px]">
                                     <button onClick={()=>setSelect(index)} className={`text-[20px] ${index===select ? "text-mainColor" : "text-managerFontColor"}`}>{name}</button>
                                     {select === index ? <div className="h-[5px] w-[110px] bg-mainColor"></div> : <></>}
                                 </li>
@@ -33,7 +33,7 @@ export default function Manager() {
                         })}
                     </ul>
                 </section>
-                <section className="bg-managerColor h-full">
+                <section className="bg-managerGrayColor h-full">
                     {/* Statistics: 통계,  Management: 관리, Authority: 권한 */}
                     {select === 0 ? <Statistics /> : select === 1 ? <Management /> : <Authority />}
                 </section>

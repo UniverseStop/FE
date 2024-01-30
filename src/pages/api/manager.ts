@@ -1,3 +1,4 @@
+import { ErrorResponse } from "@remix-run/router";
 import { instance } from "./instance";
 
 // 전체 사용자 조회 (차단된 사용자 제외)
@@ -81,3 +82,57 @@ export const getStaticLocation = async () => {
         throw error;
     }
 };
+
+//사용자 검색 (관리자로 추가하기 위한 목적)
+export const getAllUserList = async (nickname : string) => {
+    try {
+        const res = await instance.get(`/api/search?nickname=${nickname}`);
+        return res
+    } catch (error) {
+        console.error("getAllUserList error:", error);
+		throw error;
+    }
+}
+
+//관리자 추가
+export const postAddManager = async (nickname : string) => {
+    try {
+        const res = await instance.post(`/api/admin/up`, JSON.stringify({ nickname: nickname }), {
+			headers: { "Content-Type": "application/json" },
+		});
+		return res;
+	} catch (error) {
+		console.error("postAddManager error:", error);
+		throw error;
+	}
+}
+
+//관리자 삭제
+
+//관리자 목록
+export const getManagerList = async () => {
+    try {
+        const res = await instance.get(`/api/admin`);
+		return res.data.data;
+	} catch (error) {
+		console.error("getManagerList error:", error);
+		throw error;
+	}
+}
+
+//차단된 게시물 목록
+export const getBlockPostList = async () => {
+    try {
+        const res = await instance.get(`/api/post/block`);
+		return res.data.data;
+	} catch (error) {
+		console.error("getManagerList error:", error);
+		throw error;
+	}
+}
+
+//게시물 차단하기
+
+//게시물 차단해제
+
+//차단된 게시물 영구삭제

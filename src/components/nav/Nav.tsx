@@ -17,7 +17,7 @@ const Nav = ({ isHide }: { isHide: boolean }) => {
     // 현재 로그인된 사용자 정보
     const userInfo = GetCurrentUser();
     const isLoggedIn = userInfo.isLoggedIn; // 로그인 유무
-    const isAdmin = userInfo.auth === "ADMIN"; // 관리자 계정 유무
+    const isAdmin = userInfo.auth === "ADMIN" || userInfo.auth === "SUPER"; // 관리자 계정 유무
     const reset = useResetRecoilState(currentUser); // recoil 데이터 초기화
 
     // 로그인 후 이용할 수 있는 기능에 비로그인된 유저가 접근한 경우

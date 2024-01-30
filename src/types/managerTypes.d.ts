@@ -25,9 +25,33 @@ export type ReportType = {
 };
 
 export interface SalvationReasonType {
-    content: string; // 구제 내용
-    createdAt: string; // 구제 신청 일시
-    isView: boolean; // 서버 DTO 분리용
+    content: string, // 구제 내용
+    createdAt: string, // 구제 신청 일시
+    isView: boolean, // 서버 DTO 분리용
+}
+
+export interface AdminListType {
+    age: string;
+    gender : string;
+    nickname : string;
+    profileImg : string;
+    super : boolean;
+}
+
+export interface UserSearchListType {
+    age: string;
+    gender : string;
+    nickname : string;
+    profileImg : string;
+}
+
+export interface BlockPostListType {
+    authorAge: string;
+    authorGender : string;
+    authorImg : string;
+    authorNickname : string;
+    blockedDate : string;
+    postTitle : string;
 }
 
 export interface StatisticsType {
