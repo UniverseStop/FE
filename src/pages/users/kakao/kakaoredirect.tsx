@@ -9,9 +9,9 @@ import { currentUser } from "@/recoil/atoms/currentUser";
 import { blackUser } from "@/recoil/atoms/blackUser";
 
 const KakaoRedirect = () => {
-	// 위쪽 코드 제거 필요
-	const router = useRouter();
-	const { code }: any = router.query;
+    // 위쪽 코드 제거 필요
+    const router = useRouter();
+    const { code }: any = router.query;
 
 	// 로그인 시도
 	const [userState, setUserState] = useRecoilState(currentUser); // 리코일에 현재 로그인된 사용자 정보 저장
@@ -42,17 +42,17 @@ const KakaoRedirect = () => {
 		},
 	});
 
-	useEffect(() => {
-		if (code) {
-			loginMutation.mutate(code);
-		}
-	}, [code]);
+    useEffect(() => {
+        if (code) {
+            loginMutation.mutate(code);
+        }
+    }, [code]);
 
-	if (!code) {
-		return <div>Loading...</div>;
-	}
+    if (!code) {
+        return <div>Loading...</div>;
+    }
 
-	return <div />;
+    return <div />;
 };
 
 export default KakaoRedirect;

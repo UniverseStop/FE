@@ -15,7 +15,7 @@ interface QueryParams {
     location?: string;
     interest?: string;
 }
-        
+
 const MainPage = () => {
     const queryParams = (data: QueryParams): string => {
         const { search, endDate, location, interest } = data;
@@ -93,14 +93,9 @@ const MainPage = () => {
                         <Image alt="cancel_icon" width={20} height={20} className="cursor-pointer" src="/images/cancel.png" onClick={() => router.push(`/main`)} />
                     </div>
                 ) : (
-                    <img className="mr-auto mt-[30px] ml-[30px] cursor-pointer" src="https://i.ibb.co/LY7XF2w/Group-172.png" alt="로고" onClick={() => router.push("/")}></img>
+                    <img className="h-[50px] mr-auto mt-[30px] ml-[30px] cursor-pointer" src="/images/unibus_logo.png" alt="로고" onClick={() => router.push("/")}></img>
                 )}
-                <img
-                    className="h-[47px] mt-[33px] mr-[30px] cursor-pointer"
-                    src="https://github.com/tph7897/tph7897/assets/132332533/7a3eed66-2a45-40c4-ad0c-ee1c671601fc"
-                    alt="검색버튼"
-                    onClick={() => router.push(`/search`)}
-                ></img>
+                <img className="h-[47px] mt-[33px] mr-[30px] cursor-pointer" src="/images/search.png" alt="검색버튼" onClick={() => router.push(`/search`)}></img>
             </div>
             <div className="border border-t border-mainDivisionLine my-[20px] "></div>
             <div className="w-full">
