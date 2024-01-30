@@ -33,38 +33,50 @@ export const getBlackUserList = async (pageNum: number) => {
 
 // 사용자 차단
 export const postBlackUser = async (userId: number) => {
-	try {
-		const res = await instance.post(`/user/black/${userId}`);
-		return res;
-	} catch (error) {
-		throw error;
-	}
+    try {
+        const res = await instance.post(`/user/black/${userId}`);
+        return res;
+    } catch (error) {
+        throw error;
+    }
 };
 
 // 사용자 구제 신청 사유 가져오기
 export const getSalvationReason = async (userId: number) => {
-	try {
-		const res = await instance.get(`/api/salvation/${userId}`);
-		return res.data.data;
-	} catch (error) {
-		throw error;
-	}
+    try {
+        const res = await instance.get(`/api/salvation/${userId}`);
+        return res.data.data;
+    } catch (error) {
+        throw error;
+    }
 };
 
 // 사용자 구제
 export const postSalvationUser = async (userId: number) => {
-	try {
-		const res = await instance.post(`/user/user/${userId}`);
-		return res;
-	} catch (error) {
-		throw error;
-	}
+    try {
+        const res = await instance.post(`/user/user/${userId}`);
+        return res;
+    } catch (error) {
+        throw error;
+    }
 };
 
-// 전체 모임장소 위치 조회
-export const getPostLocationStatic = async () => {
+// 사용자 통계
+export const getStatic = async () => {
     try {
         const res = await instance.get(`/api/static`);
+        console.log("res", res);
+        return res.data.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
+// 정류장 위치 통계
+export const getStaticLocation = async () => {
+    try {
+        const res = await instance.get(`/api/static/location`);
+        console.log("StaticLocation", res);
         return res.data;
     } catch (error) {
         throw error;

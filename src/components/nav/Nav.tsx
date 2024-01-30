@@ -10,7 +10,9 @@ import { removeSession } from "@/utils/removeSession";
 const Nav = ({ isHide }: { isHide: boolean }) => {
     const router = useRouter();
     const [buttonName, setButtonName] = useState("로그인");
-    const [isActiveBoxVisible, setIsActiveBoxVisible] = useState<boolean>(false)
+    const [isActiveBoxVisible, setIsActiveBoxVisible] = useState<boolean>(false);
+
+    const currentPath = router.pathname;
 
     // 현재 로그인된 사용자 정보
     const userInfo = GetCurrentUser();
@@ -27,7 +29,7 @@ const Nav = ({ isHide }: { isHide: boolean }) => {
             router.push("/users/login"); // 로그인 페이지로 이동
         }
         if (isActiveBoxVisible) {
-            setIsActiveBoxVisible(false)
+            setIsActiveBoxVisible(false);
         }
     };
 
@@ -42,47 +44,51 @@ const Nav = ({ isHide }: { isHide: boolean }) => {
             removeSession("refresh_Token");
             reset();
             setButtonName("로그인");
-        if (isActiveBoxVisible) {
-            setIsActiveBoxVisible(false)
+            if (isActiveBoxVisible) {
+                setIsActiveBoxVisible(false);
+            }
+            router.push("/users/login");
         }
-        router.push("/users/login")
-    }
-    }
+    };
 
-    useEffect(()=>{
-        if (isLoggedIn) setButtonName("로그아웃");
-        if (!isLoggedIn) setButtonName("로그인");
-
-    },[isLoggedIn]);
+    useEffect(() => {
+        if (userInfo.isLoggedIn) setButtonName("로그아웃");
+        if (!userInfo.isLoggedIn) setButtonName("로그인");
+    }, [userInfo.isLoggedIn]);
 
     return (
         <div>
-            {isHide ?
-             <div className="border border-slate-300 fixed bottom-0 flex justify-between items-center  p-[20px] rounded-tl-[15px] rounded-tr-[15px] h-[50px] min-w-[375px] max-w-[600px] w-full box-border bg-white z-[999]">
-                <Link href="/main">
-                    <Image src="/images/nav-home.png" alt="home" width={45} height={35} />
-                </Link>
-                <Link href="/search">
-                    <Image src="/images/nav-search.png" alt="search" width={45} height={35} />
-                </Link>
-                <Link href={isLoggedIn ? "/create-post" : ""} onClick={handleLinkClick}>
-                    <Image src="/images/nav-post.png" alt="create-post" width={45} height={35} />
-                </Link>
-                <Link href={isLoggedIn ? "/chat" : ""} onClick={handleLinkClick}>
-                    <Image src="/images/nav-chat.png" alt="chat" width={45} height={35} />
-                </Link>
-                <button onClick={handleOpenActiveBox} className="relative">
-                    <Image src="/images/nav-profile.png" alt="profile" width={45} height={35} />
-                </button>
-                 {isActiveBoxVisible && (
-                    <div className={`absolute bottom-[40px] right-[10px] w-[180px] ${isAdmin ? "h-[130px]" : "h-[90px]"} flex flex-col justify-center items-center border rounded-[10px] border-slate-300 bg-white`}>
-                        <Link href={isLoggedIn ? `/mypage/${userInfo.userId}` : ""} onClick={handleLinkClick} className="block w-[170px] h-[40px] rounded-[10px] font-semibold text-center hover:no-underline hover:bg-[#efefef] hover:text-black text-[#989898] flex items-center justify-center">마이페이지 이동</Link>
-                        {isLoggedIn && isAdmin ? <Link href="/manager" className="block w-[170px] h-[40px] rounded-[10px] font-semibold text-center hover:no-underline hover:bg-[#efefef] hover:text-black text-[#989898] flex items-center justify-center">관리자 페이지 이동</Link> : <></>}
-                        <button onClick={handleLoginLogout} className="w-[170px] h-[40px] rounded-[10px] font-semibold text-center text-[#989898] hover:bg-[#efefef] hover:text-black">{buttonName}</button>
-                    </div>
-                 )}
-            </div>: <></>
-            }
+            {isHide ? (
+                <div className="border border-slate-300 fixed bottom-0 flex justify-between items-center  p-[20px] rounded-tl-[15px] rounded-tr-[15px] h-[50px] min-w-[375px] max-w-[600px] w-full box-border bg-white z-[999]">
+                    <Link href="/main">
+                        <Image className={currentPath == "/main" ? "brightness-50" : "hover:brightness-50"} src="/images/nav-home.png" alt="home" width={45} height={35} />
+                    </Link>
+                    <Link href="/search">
+                        <Image className={currentPath == "/search" ? "brightness-50" : "hover:brightness-50"} src="/images/nav-search.png" alt="search" width={45} height={35} />
+                    </Link>
+                    <Link href={isLoggedIn ? "/create-post" : ""} onClick={handleLinkClick}>
+                        <Image className={currentPath == "/create-post" ? "brightness-50" : "hover:brightness-50"} src="/images/nav-post.png" alt="create-post" width={45} height={35} />
+                    </Link>
+                    <Link href={isLoggedIn ? "/chat" : ""} onClick={handleLinkClick}>
+                        <Image className={currentPath == "/chat" || currentPath == "/chat/[room]" ? "brightness-50" : "hover:brightness-50"} src="/images/nav-chat.png" alt="chat" width={45} height={35} />
+                    </Link>
+                    <button onClick={handleOpenActiveBox} className="relative">
+                        <Image className={currentPath == "/mypage/[id]" ? "brightness-50" : "hover:brightness-50"} src="/images/nav-profile.png" alt="profile" width={45} height={35} />
+                    </button>
+                    {isActiveBoxVisible && (
+                        <div className="absolute bottom-[40px] right-[10px] w-[180px] h-[95px] flex flex-col justify-center items-center border rounded-[10px] border-slate-300 bg-white">
+                            <Link href={isLoggedIn ? `/mypage/${userInfo.userId}` : ""} onClick={handleLinkClick} className="block w-[170px] h-[40px] rounded-[10px] font-semibold text-center hover:no-underline hover:bg-[#efefef] hover:text-black text-[#989898] flex items-center justify-center">
+                                마이페이지 이동
+                            </Link>
+                            <button onClick={handleLoginLogout} className="w-[170px] h-[40px] rounded-[10px] font-semibold text-center text-[#989898] hover:bg-[#efefef] hover:text-black">
+                                {buttonName}
+                            </button>
+                        </div>
+                    )}
+                </div>
+            ) : (
+                <></>
+            )}
         </div>
     );
 };
