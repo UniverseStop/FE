@@ -108,6 +108,17 @@ export const postAddManager = async (nickname : string) => {
 }
 
 //관리자 삭제
+export const postDeleteManager = async (nickname : string) => {
+    try {
+        const res = await instance.post(`/api/admin/down`, JSON.stringify({ nickname: nickname }), {
+			headers: { "Content-Type": "application/json" },
+		});
+		return res;
+	} catch (error) {
+		console.error("postDeleteManager error:", error);
+		throw error;
+	}
+}
 
 //관리자 목록
 export const getManagerList = async () => {
@@ -126,13 +137,40 @@ export const getBlockPostList = async () => {
         const res = await instance.get(`/api/post/block`);
 		return res.data.data;
 	} catch (error) {
-		console.error("getManagerList error:", error);
+		console.error("getBlockPostList error:", error);
 		throw error;
 	}
 }
 
 //게시물 차단하기
+export const postBlockDetailPost = async (postId : string) => {
+    try {
+        const res = await instance.post(`/api/post/block/${postId}`)
+        return res
+    } catch (error) {
+        console.error("postBlockDetailPost error:", error);
+		throw error;
+    }
+}
 
 //게시물 차단해제
+export const postBackBlockedlPost = async (postId : string) => {
+    try {
+        const res = await instance.post(`/api/post/unBlock/${postId}`)
+        return res
+    } catch (error) {
+        console.error("postBackBlockedlPost error:", error);
+		throw error;
+    }
+}
 
 //차단된 게시물 영구삭제
+export const deleteRemovePost = async (postId : string) => {
+    try {
+        const res = await instance.delete(`/api/post/block/${postId}`)
+        return res
+    } catch (error) {
+        console.error("deleteRemovePost error:", error);
+		throw error;
+    }
+}

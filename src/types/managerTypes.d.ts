@@ -43,6 +43,7 @@ export interface UserSearchListType {
     gender : string;
     nickname : string;
     profileImg : string;
+    role : string;
 }
 
 export interface BlockPostListType {
