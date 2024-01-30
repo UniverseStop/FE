@@ -4,7 +4,7 @@ import BlockPostList from "./authority/BlockPostList";
 
 const Authority = () => {
     return (
-        <div className="flex flex-col gap-11 items-center h-screen pt-11">
+        <div className="flex flex-col gap-11 items-center h-full pt-11 pb-[200px]">
             <SearchUser />
             <AdminList />
             <BlockPostList />
