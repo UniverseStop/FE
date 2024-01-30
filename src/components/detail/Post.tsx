@@ -47,7 +47,7 @@ const Post = ({postId}: {postId: number}) => {
                 </section>
                 <section className="pt-2">
                     <span className="pl-5 text-2xl font-bold">위치</span>
-                    <KakaoMap location={post.location}/>
+                    <KakaoMap location={post.location} placeName={post.placeName} lat={post.lat} lng={post.lng}/>
                 </section>
                 {/* 신청자 정보 */}
                 {isWriter ? <ChatParticipate applicants={post.applicants} postId={post.id} userId={post.userId}/> : <></>}

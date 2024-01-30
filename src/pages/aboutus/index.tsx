@@ -5,6 +5,7 @@ import ImageSlider from "@/components/aboutus/ImageSlider";
 import { currentUser } from "@/recoil/atoms/currentUser";
 import { removeSession } from "@/utils/removeSession";
 import { GetCurrentUser } from "@/utils/getCurrentUser";
+import { getSession } from "@/utils/getSession";
 
 export default function AboutUs() {
     const router = useRouter();
@@ -25,8 +26,14 @@ export default function AboutUs() {
     };
 
     useEffect(() => {
+        const token = getSession("access_Token");
+
         // 처음 렌더링될 때 로그인 유무 확인 후 버튼 이름 변경
         if (userInfo.isLoggedIn) setButtonName("로그아웃");
+        else if (token){
+            removeSession("access_Token");
+            removeSession("refresh_Token");
+        }
 
         // 브라우저 닫기 시 리코일 초기화
         const handleBeforeUnload = () => {
@@ -40,7 +47,7 @@ export default function AboutUs() {
             // 브라우저 닫기 시에만 초기화 되도록 beforeunload 이벤트에 등록된 리스너를 제거하여 함수 실행
             window.removeEventListener("beforeunload", handleBeforeUnload);
         };
-    });
+    }, []);
 
     return (
         <div className="gradation h-screen relative">
