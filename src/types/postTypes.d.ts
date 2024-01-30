@@ -30,7 +30,7 @@ interface ChatApprovalType {
 }
 
 // 게시물 상세 타입
-interface PostDetailType extends PostPreviewType {
+interface PostDetailType extends PostPreviewType, myPlaceType {
     chatParticipants: string[]; // 채탕방 참여자들 정보
     chatroomId: string; // 채팅방 ID
     content: string; // 게시물 내용
