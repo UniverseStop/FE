@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { ConfirmPermissions } from "@/utils/confirmPermissions";
 
 export default function Assessment() {
+    ConfirmPermissions(); // 로그인 후 이용가능한 페이지
+
     const nums = new Array(6).fill(0).map((_, index) => index); // 0~5로 이루어진  숫자 배열 생성
 
     const [select, setSelect] = useState<number|null>(); // 선택한 번호
@@ -18,6 +21,6 @@ export default function Assessment() {
                 ))}
             </ul>
             <button className="w-32 h-9 rounded-3xl text-xl text-white bg-mainColor mt-16">완료</button>
-        </div>
+        </div> 
     )
 }

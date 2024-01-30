@@ -14,7 +14,6 @@ export const getBusStopItems = async () => {
 export const getBusStopMainItems = async (page: number, queryString: string) => {
     try {
         const res = await instance.get(`/api/post?page=${page}${queryString}`);
-        console.log("res", res);
         return res.data.data.content;
     } catch (error) {
         throw error;

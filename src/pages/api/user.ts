@@ -13,7 +13,6 @@ export const credentialLogin = async () => {
 		const refreshToken = response.headers.refreshtoken;
 		Cookies.set("access_Token", accessToken, { path: "/" });
 		Cookies.set("refresh_Token", refreshToken, { path: "/" });
-		// console.log(response)
 		return response;
 	} catch (error) {
 		console.error("Login error:", error);
@@ -66,3 +65,26 @@ export const postConfirmNickname = async (userNickname: string) => {
 		throw error;
 	}
 };
+
+//불순한 유저 신고하기
+export const postReportUser = async ({userId , formdata} : {userId : string; formdata: FormData}) => {
+	try {
+		const response = await instance.post(`/user/report/${userId}`, formdata, {
+			headers: { "Context-Type": "multipart/form-data" },
+		});
+		return response;
+	} catch (error) {
+		console.error("postReportUser error:", error);
+		throw error;
+	}
+}
+
+// 차단된 사용자 구제 신청하기
+export const postSalvationApplication = async (formdata: FormData) => {
+	try {
+		const response = await instance.post("/api/salvation", formdata);
+		return response;
+	} catch (error) {
+		throw error;
+	}
+}

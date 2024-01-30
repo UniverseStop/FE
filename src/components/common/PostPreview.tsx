@@ -8,7 +8,7 @@ const PostPreview = ({ info, type }: { info: PostPreviewType, type: string }) =>
 	// 날짜 포맷 변경 (2024.01.10 수 09:30 => 01.10.수)
 	const date = new Date(info.endDate.split(" ")[0].replaceAll(".", "-"));
 	const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
-	const time = [date.getMonth()+1, date.getDay(), daysOfWeek[date.getDay()]].join(".");
+	const time = [date.getMonth()+1, date.getDate(), daysOfWeek[date.getDay()]].join(".");
 
 	// 게시물로 이동
 	const router = useRouter();

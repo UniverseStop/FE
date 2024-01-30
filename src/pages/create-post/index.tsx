@@ -5,13 +5,12 @@ import AddImage from "@/components/create-post/AddImage";
 import AddMeetingLimit from "@/components/create-post/AddMeetingLimit";
 import AddPlace from "@/components/create-post/AddPlace";
 import AddTitle from "@/components/create-post/AddTitle";
-import { GetCurrentUser } from "@/utils/getCurrentUser";
 import { getDateTimeFormat } from "@/utils/getDate";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import { useMutation } from "react-query";
+import React, { useState } from "react";
+import { useMutation} from "react-query";
 import { postBusStop } from "../api/post";
-import { myPlaceType } from "@/types/postTypes";
+import { ConfirmPermissions } from "@/utils/confirmPermissions";
 
 function CreatePost() {
     const [postCategory, setPostCategory] = useState<string>("");
@@ -27,15 +26,7 @@ function CreatePost() {
     const [postDateTime, setPostDateTime] = useState<Date>(new Date());
     const [postSubLimit, setpostSubLimit] = useState<number>(1);
 
-    /** 로그인 후 이용가능한 페이지 */
-    const userInfo = GetCurrentUser();
-    useEffect(() => {
-        if (!userInfo.isLoggedIn) {
-            alert("로그인이 필요한 페이지입니다.");
-            router.push("/users/login");
-            return;
-        }
-    }, [userInfo.isLoggedIn]);
+	ConfirmPermissions(); // 로그인 후 이용가능한 페이지
 
     const router = useRouter();
     const handleCancel = () => {
