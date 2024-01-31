@@ -3,7 +3,7 @@ import { AdminListType } from "@/types/managerTypes";
 import { GetCurrentUser } from "@/utils/getCurrentUser";
 import React from 'react'
 import { useMutation, useQuery, useQueryClient } from "react-query"
-import ProfileAtom from "./AuthorityProfileAtom"
+import AuthorityProfileAtom from "./AuthorityProfileAtom"
 
 function AuthorityAdminList() {
 
@@ -38,7 +38,7 @@ function AuthorityAdminList() {
       <h1 className="text-2xl font-bold text-black">관리자 목록</h1>
           {AdminList && AdminList.sort((a : AdminListType, b : AdminListType) => (b.super ? 1 : -1)).map((item: AdminListType, i: number) => (
             <div key={i} className="flex gap-[630px] items-center w-[950px] h-[75px] bg-white rounded-3xl">
-                <ProfileAtom nickname={item.nickname} age={item.age} gender={item.gender} profileImg={item.profileImg} />
+                <AuthorityProfileAtom nickname={item.nickname} age={item.age} gender={item.gender} profileImg={item.profileImg} />
                   {item.super ? ( <div className="ml-[30px] font-bold">SUPER</div>)
                   : (<button onClick={()=>handleDeleteManager(item.nickname)} className="bg-mainColor w-[95px] h-[33px] rounded-3xl text-white font-semibold">권한 삭제</button> )}
             </div>

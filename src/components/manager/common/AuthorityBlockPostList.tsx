@@ -3,7 +3,7 @@ import Image from "next/image"
 import { useRouter } from "next/router";
 import React from 'react'
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import ProfileAtom from "./AuthorityProfileAtom"
+import AuthorityProfileAtom from "./AuthorityProfileAtom"
 
 function AuthorityBlockPostList() {
   const router = useRouter();
@@ -47,7 +47,7 @@ const handleRemovePost = (postId : string) => {
     <h1 className="text-2xl font-bold text-black">차단된 게시물 목록</h1>
     {BlockPostList && BlockPostList.map((item : any, i: number)=> (
       <div className="flex items-center w-[950px] h-[75px] bg-white rounded-3xl gap-5">
-            <ProfileAtom nickname={item.authorNickname} age={item.authorAge} gender={item.authorGender} profileImg={item.authorImg}/>
+            <AuthorityProfileAtom nickname={item.authorNickname} age={item.authorAge} gender={item.authorGender} profileImg={item.authorImg}/>
            <button onClick={()=>(router.push(`/detail/${item.postId}`))} className="flex w-[430px] items-center justify-between">
                 <div className="text-lg font-semibold">{item.postTitle.replace(/\[차단 된 게시물\]/g, '')}</div>
                 <div>차단 일시 : {item.blockedDate}</div>

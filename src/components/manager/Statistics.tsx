@@ -1,7 +1,7 @@
 import { getStatic } from "@/pages/api/manager";
 import { useQuery } from "react-query";
-import DoughnutChart from "./common/StatiscticsDoughnut";
-import LineChart from "./common/StatiscticsLine";
+import StatiscticsDoughnut from "./common/StatiscticsDoughnut";
+import StatiscticsLine from "./common/StatiscticsLine";
 import StatisticsMap from "./common/StatisticsMap";
 
 const Statistics = () => {
@@ -12,10 +12,10 @@ const Statistics = () => {
             <div className="flex items-center justify-center pt-10">
                 <div className="flex justify-center space-x-10 w-[1300px] h-[515px]">
                     <section className="bg-white w-[460px] h-[480px] p-[20px]">
-                        <DoughnutChart statistics={statistics} />
+                        <StatiscticsDoughnut statistics={statistics} />
                     </section>
                     <section className="bg-white w-[800px] h-[480px] p-[20px]">
-                        <LineChart statistics={statistics} />
+                        <StatiscticsLine statistics={statistics} />
                     </section>
                 </div>
             </div>

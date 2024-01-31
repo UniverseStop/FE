@@ -2,7 +2,7 @@ import { getAllUserList, postAddManager } from "@/pages/api/manager";
 import { UserSearchListType } from "@/types/managerTypes";
 import React, { useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import ProfileAtom from "./AuthorityProfileAtom";
+import AuthorityProfileAtom from "./AuthorityProfileAtom";
 
 function AuthoritySearchUser() {
   const [userNickname, setUserNickname] = useState<string>("");
@@ -55,7 +55,7 @@ function AuthoritySearchUser() {
                         item.role === "USER" && (
                           <div key={i} className="flex flex-col gap-5 h-[300px]">
                               <div className="flex items-center gap-[550px] bg-white w-[870px] h-[75px] rounded-3xl">
-                                 <ProfileAtom nickname={item.nickname} age={item.age} gender={item.gender} profileImg={item.profileImg} />
+                                 <AuthorityProfileAtom nickname={item.nickname} age={item.age} gender={item.gender} profileImg={item.profileImg} />
                                  <button onClick={()=>handleAddManager(item.nickname)} className="bg-mainColor w-[95px] h-[33px] rounded-3xl text-white font-semibold">관리자 추가</button>
                              </div>
                           </div>
