@@ -1,7 +1,7 @@
 import { getStatic } from "@/pages/api/manager";
 import { useQuery } from "react-query";
-import DoughnutChart from "./common/DoughnutChart";
-import LineChart from "./common/LineChart";
+import DoughnutChart from "./common/StatiscticsDoughnut";
+import LineChart from "./common/StatiscticsLine";
 import StatisticsMap from "./common/StatisticsMap";
 
 const Statistics = () => {

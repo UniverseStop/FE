@@ -2,10 +2,10 @@ import { getManagerList, postDeleteManager } from "@/pages/api/manager"
 import { AdminListType } from "@/types/managerTypes";
 import { GetCurrentUser } from "@/utils/getCurrentUser";
 import React from 'react'
-import { QueryClient, useMutation, useQuery, useQueryClient } from "react-query"
-import ProfileAtom from "../common/ProfileAtom"
+import { useMutation, useQuery, useQueryClient } from "react-query"
+import ProfileAtom from "./AuthorityProfileAtom"
 
-function AdminList() {
+function AuthorityAdminList() {
 
   const userInfo = GetCurrentUser();
   const isSuperAdmin = userInfo.auth === "SUPER"; // 슈퍼관리자 계정 유무
@@ -47,4 +47,4 @@ function AdminList() {
   )
 }
 
-export default AdminList
+export default AuthorityAdminList;

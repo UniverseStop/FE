@@ -1,6 +1,6 @@
-import AdminList from "./authority/AdminList";
-import SearchUser from "./authority/SearchUser";
-import BlockPostList from "./authority/BlockPostList";
+import AdminList from "./common/AuthorityAdminList";
+import SearchUser from "./common/AuthoritySearchUser";
+import BlockPostList from "./common/AuthorityBlockPostList";
 
 const Authority = () => {
     return (

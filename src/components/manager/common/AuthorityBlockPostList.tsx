@@ -3,9 +3,9 @@ import Image from "next/image"
 import { useRouter } from "next/router";
 import React from 'react'
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import ProfileAtom from "../common/ProfileAtom"
+import ProfileAtom from "./AuthorityProfileAtom"
 
-function BlockPostList() {
+function AuthorityBlockPostList() {
   const router = useRouter();
   const queryClient = useQueryClient();
   const { data: BlockPostList, refetch } = useQuery("BlockPostList", getBlockPostList);
@@ -63,4 +63,4 @@ const handleRemovePost = (postId : string) => {
   )
 }
 
-export default BlockPostList
+export default AuthorityBlockPostList;
