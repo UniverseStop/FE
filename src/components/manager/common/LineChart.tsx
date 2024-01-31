@@ -46,7 +46,7 @@ const LineChart = ({ statistics }: { statistics: StatisticsType }) => {
 
     return (
         <div>
-            <ul className="flex w-[100%] space-x-[60px] h-20 p-[15px]">
+            <ul className="flex w-[100%] space-x-[60px] h-15 p-[10px]">
                 <li className="flex flex-col">
                     <span>일간 방문수</span>
                     <span className="m-auto">{monthCnt[monthCnt.length - 1]}</span>

@@ -1,4 +1,3 @@
-import { ErrorResponse } from "@remix-run/router";
 import { instance } from "./instance";
 
 // 전체 사용자 조회 (차단된 사용자 제외)
@@ -65,7 +64,6 @@ export const postSalvationUser = async (userId: number) => {
 export const getStatic = async () => {
     try {
         const res = await instance.get(`/api/static`);
-        console.log("res", res);
         return res.data.data;
     } catch (error) {
         throw error;
@@ -76,7 +74,6 @@ export const getStatic = async () => {
 export const getStaticLocation = async () => {
     try {
         const res = await instance.get(`/api/static/location`);
-        console.log("StaticLocation", res);
         return res.data;
     } catch (error) {
         throw error;

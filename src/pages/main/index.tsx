@@ -29,7 +29,7 @@ const MainPage = () => {
     };
     const router = useRouter();
     const updatedQuery = { ...router.query };
-    const { search, date, location } = updatedQuery;
+    const { search, endDate, location } = updatedQuery;
     const [componentToggle, setComponentToggle] = useState<string>("");
     const [page, setPage] = useState<number>(0);
     const [postData, setPostData] = useState<PostPreviewType[]>([]);
@@ -43,7 +43,6 @@ const MainPage = () => {
 
     const { isLoading } = useQuery(["postList", { page }], () => getBusStopMainItems(page, queryParams(updatedQuery)), {
         onSuccess: (newData) => {
-            newData.pop();
             setPostData((data) => (data ? [...data, ...newData] : newData));
             if (newData.length === 0) {
                 setInfiniteToggle(false);
@@ -100,7 +99,7 @@ const MainPage = () => {
             <div className="border border-t border-mainDivisionLine my-[20px] "></div>
             <div className="w-full">
                 <button className="border border-mainColor mb-[20px] mr-[5px] ml-[15px] w-[155px] h-[35px] rounded-[20px]" onClick={() => setComponentToggle("date")}>
-                    {date ? date : "날짜"}
+                    {endDate ? endDate : "날짜"}
                 </button>
                 <button className="border border-mainColor mb-[20px] mr-[5px] ml-[15px] w-[155px] h-[35px] rounded-[20px]" onClick={() => setComponentToggle("location")}>
                     {location ? location : "위치"}

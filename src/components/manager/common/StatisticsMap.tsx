@@ -16,7 +16,7 @@ const generateRandomNumber = (min: number, max: number, decimalPlaces: number): 
 const StatisticsMap = () => {
     const [positions, setPositions] = useState<positionsType[]>([]);
     const { data: staticLocation } = useQuery("staticLocation", getStaticLocation);
-    console.log("positions", positions);
+    console.log("staticLocation", staticLocation);
     useEffect(() => {
         const generateRandomCoordinates = () => {
             const newCoordinates: positionsType[] = [];
@@ -42,7 +42,7 @@ const StatisticsMap = () => {
             style={{
                 // 지도의 크기
                 width: "100%",
-                height: "450px",
+                height: "100%",
             }}
             level={13} // 지도의 확대 레벨
         >
