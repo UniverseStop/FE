@@ -25,7 +25,6 @@ instance.interceptors.request.use(
 // 토큰 갱신
 instance.interceptors.response.use(
 	(response) => {
-		console.log('response', response)
 		return response;
 	},
 	async (error) => {

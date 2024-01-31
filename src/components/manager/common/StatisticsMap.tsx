@@ -16,7 +16,7 @@ const generateRandomNumber = (min: number, max: number, decimalPlaces: number): 
 const StatisticsMap = () => {
     const [positions, setPositions] = useState<positionsType[]>([]);
     const { data: staticLocation } = useQuery("staticLocation", getStaticLocation);
-    console.log("staticLocation", staticLocation);
+
     useEffect(() => {
         const generateRandomCoordinates = () => {
             const newCoordinates: positionsType[] = [];
