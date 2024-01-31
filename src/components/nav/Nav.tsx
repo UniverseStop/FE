@@ -14,8 +14,6 @@ const Nav = ({ isHide }: { isHide: boolean }) => {
 
     const currentPath = router.pathname;
 
-    console.log('isActiveBoxVisible', isActiveBoxVisible)
-
     // 현재 로그인된 사용자 정보
     const userInfo = GetCurrentUser();
     const isLoggedIn = userInfo.isLoggedIn; // 로그인 유무

@@ -32,6 +32,12 @@ function UserInfoSetting() {
 		gender,
 	};
 
+	if (userSettings.gender === '남') {
+		userSettings.gender = 'male';
+	  } else if (userSettings.gender === '여') {
+		userSettings.gender = 'female';
+	  }
+
 	const userInfo = GetCurrentUser();
 	const myPageSetData = {
 		userId: userInfo.userId,
@@ -80,7 +86,7 @@ function UserInfoSetting() {
 					시작하기
 				</button>
 			</section>
-		</form> 
+		</form>
 	);
 }
 

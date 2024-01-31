@@ -1,4 +1,5 @@
 import { getCategory } from "@/utils/getCategory";
+import { getGender } from "@/utils/getGender";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -22,7 +23,7 @@ function Introduce({
 }) {
 	//영어 -> 한국어
 	const userInterest = getCategory(interest);
-
+	const userGender = getGender(gender);
 
 	return (
 		<div>
@@ -30,7 +31,7 @@ function Introduce({
 				<p className="text-white font-bold text-2xl mt-[220px]">
 					나는
 					<span className="text-mainColor">
-						#만 {age}세 #{gender}자
+						#만 {age}세 #{userGender}자
 					</span>
 					입니다.<br></br>내 관심사는 <span className="text-mainColor">#{userInterest}</span> 입니다.
 				</p>

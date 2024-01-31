@@ -23,7 +23,7 @@ const AddLocation = ({ setPostLoaction }: { setPostLoaction: (postPlace: myPlace
     // 엔터 검색
     const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key == "Enter") {
-            console.log("e", e);
+
             setMarkerSearch(searchValue);
             resetSearchValue;
         }
