@@ -19,7 +19,7 @@ const options = {
     },
 };
 
-const LineChart = ({ statistics }: { statistics: StatisticsType }) => {
+const StatiscticsLine = ({ statistics }: { statistics: StatisticsType }) => {
     let currentDate = new Date();
     let startDate = new Date();
     startDate.setDate(currentDate.getDate() - 29);
@@ -65,4 +65,4 @@ const LineChart = ({ statistics }: { statistics: StatisticsType }) => {
     );
 };
 
-export default LineChart;
+export default StatiscticsLine;

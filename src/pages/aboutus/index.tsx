@@ -14,6 +14,8 @@ export default function AboutUs() {
     const userInfo = GetCurrentUser(); // 현재 로그인된 사용자 정보
     const reset = useResetRecoilState(currentUser); // recoil 데이터 초기화
 
+
+    console.log('userInfo :>> ', userInfo);
     const handleClickButto = () => {
         if (buttonName === "로그인") router.push("/users/login");
         else {

@@ -2,9 +2,9 @@ import { getAllUserList, postAddManager } from "@/pages/api/manager";
 import { UserSearchListType } from "@/types/managerTypes";
 import React, { useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import ProfileAtom from "../common/ProfileAtom";
+import ProfileAtom from "./AuthorityProfileAtom";
 
-function SearchUser() {
+function AuthoritySearchUser() {
   const [userNickname, setUserNickname] = useState<string>("");
   const [isResultModalState, setIsResultModalState] = useState<boolean>(false);
   const { data: AllUserList, refetch } = useQuery("AllUserList", ()=> getAllUserList(userNickname));
@@ -70,4 +70,4 @@ function SearchUser() {
   )
 }
 
-export default SearchUser
+export default AuthoritySearchUser;

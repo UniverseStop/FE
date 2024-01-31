@@ -1,6 +1,6 @@
 import React from 'react'
 
-function ProfileAtom({nickname, age, gender, profileImg}: {nickname: string; age: string; gender: string; profileImg: string;}) {
+function AuthorityProfileAtom({nickname, age, gender, profileImg}: {nickname: string; age: string; gender: string; profileImg: string;}) {
   return (
     <div className="flex ml-5 gap-5 mt-2 w-[180px]">
         <div className="bg-managerGrayColor rounded-full w-[50px] h-[50px]">
@@ -17,4 +17,4 @@ function ProfileAtom({nickname, age, gender, profileImg}: {nickname: string; age
   )
 }
 
-export default ProfileAtom
+export default AuthorityProfileAtom

@@ -5,7 +5,7 @@ import { StatisticsType } from "@/types/managerTypes";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const DoughnutChart = ({ statistics }: { statistics: StatisticsType }) => {
+const StatiscticsDoughnut = ({ statistics }: { statistics: StatisticsType }) => {
     const [doughnutChart, setDoughnutChart] = useState<number>(0);
     const { tenCnt = 0, twentyCnt = 0, thirtyCnt = 0, fortyCnt = 0, fiftyCnt = 0, sixtyCnt = 0, ageEtcCnt = 0, eatsCnt = 0, cultureCnt = 0, exerciseCnt = 0, studyCnt = 0, categoryEtcCnt = 0, maleCnt = 0, femaleCnt = 0 } = statistics || {};
     const categoryData = {
@@ -73,4 +73,4 @@ const DoughnutChart = ({ statistics }: { statistics: StatisticsType }) => {
     );
 };
 
-export default DoughnutChart;
+export default StatiscticsDoughnut;
