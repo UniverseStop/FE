@@ -2,13 +2,14 @@ import dayjs, { Dayjs } from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import utc from "dayjs/plugin/utc";
 import "dayjs/locale/ko";
-import {useInfiniteQuery} from "react-query";
+import {useInfiniteQuery, InfiniteData} from "react-query";
 import {getMessageList} from "@/pages/api/chat";
 import {useInView} from "react-intersection-observer";
 import {useEffect, useRef, useState} from "react";
 import {useChat} from "@/hooks/useChat";
 import {useAuth} from "@/context/KakaoContext";
 import {MessageType, ResponseData} from "@/types/chatTypes";
+import { GetCurrentUser } from "@/utils/getCurrentUser";
 
 dayjs.locale("ko");
 dayjs.extend(relativeTime);
@@ -18,15 +19,17 @@ export default function Message() {
     const { messages, roomIdQuery, isConnected } = useChat();
     const roomId = Array.isArray(roomIdQuery) ? roomIdQuery[0] : roomIdQuery || '';
     const [combMessages, setCombMessages] = useState<MessageType[]>([])
-    const auth = useAuth();
-    const {userInfo} = auth;
+    const userInfo = GetCurrentUser();
+    const userId = userInfo.userId;
+
     const scrollRef = useRef<HTMLDivElement>(null);
-    const { data: messagesList, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery<ResponseData, Error, ResponseData>({
+    const { data: messagesList, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery<ResponseData, InfiniteData<ResponseData>, any, any>({
         queryKey: ['chat', 'messages', roomId],
+        initialPageParams: 0,
         queryFn: ({ pageParam = 0 }) => getMessageList({ roomId, pageNum: pageParam }),
         getNextPageParam: (lastPage) => {
-            if (lastPage && lastPage.data && lastPage.data.content.length > 0) {
-                return lastPage.data.number + 1;
+            if (lastPage && lastPage.content && lastPage.content.length > 0) {
+                return lastPage.number + 1;
             }
             return undefined;
         },
@@ -75,10 +78,10 @@ export default function Message() {
             <div ref={ref} style={{height: 50,}}/>
             {combMessages.map((message, index) => {
                 const isMyMessage = message.senderId == userInfo.userId;
-
+                const messageKey = message.messageId || `${message.createdAt}-${message.senderId}-${index}`;
                 return (
                     <>
-                        <div key={index} className={`flex flex-col items-${isMyMessage ? 'end' : 'start'} mb-6`}>
+                        <div key={messageKey} className={`flex flex-col items-${isMyMessage ? 'end' : 'start'} mb-6`}>
                             <div className="flex flex-row gap-3">
                                 {isMyMessage ? (
                                     <>

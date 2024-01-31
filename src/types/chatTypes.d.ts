@@ -7,7 +7,7 @@ export interface MessageType {
     profileImageUrl: string | null;
     roomId: string;
     sender: string;
-    senderId: number;
+    senderId: string;
     type: string;
     userCount: number | string;
 }
@@ -27,7 +27,15 @@ export interface PageContent {
 
 // 네트워크 응답 타입 정의
 export interface ResponseData {
-    data: PageContent;
+    content: MessageType[];
+    empty: boolean;
+    first: boolean;
+    last: boolean;
+    number: number;
+    numberOfElements: number;
+    pageable: any;
+    size: number;
+    sort: any;
     status: number;
     statusText: string;
     content: any;

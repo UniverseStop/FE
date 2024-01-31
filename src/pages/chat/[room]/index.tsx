@@ -11,9 +11,7 @@ const ChatRoom = () => {
             <Message  />
             <ChatForm />
         </div>
-
     )
-
 };
 
 export default ChatRoom;

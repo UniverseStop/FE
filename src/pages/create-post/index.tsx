@@ -11,6 +11,7 @@ import React, { useState } from "react";
 import { useMutation} from "react-query";
 import { postBusStop } from "../api/post";
 import { ConfirmPermissions } from "@/utils/confirmPermissions";
+import { myPlaceType } from "@/types/postTypes";
 
 function CreatePost() {
     const [postCategory, setPostCategory] = useState<string>("");

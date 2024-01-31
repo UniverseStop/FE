@@ -48,7 +48,7 @@ export const useChat = () => {
     useEffect(() => {
         if (roomIdQuery && token && !isConnected) {
             // 클라이언트 초기화 및 연결
-            const socket = new SockJS('http://43.201.7.171/ws-stomp');
+            const socket = new SockJS('http://3.37.62.9:8080/ws-stomp');
             const client = Stomp.over(socket);
 
             client.connect(
