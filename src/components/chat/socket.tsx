@@ -19,8 +19,8 @@ const Socket = () => {
 
     return (
         <div>
-            
-            </div>
+
+         </div>
     );
 };
 

@@ -1,29 +1,22 @@
-import Chat from "@/components/chat/ChatList";
+import ChatList from "@/components/chat/ChatList";
 import ChatNav from "@/components/chat/ChatNav";
-import Nav from "@/components/nav/Nav";
-import { useAuth } from "@/context/KakaoContext";
 import { useRouter } from "next/router";
 import React from "react";
-import {getRooms} from "@/pages/api/chat";
+import { ConfirmPermissions } from "@/utils/confirmPermissions";
 
 
-const ChatList = () => {
+const ChatListPage = () => {
     const router = useRouter();
-    const auth = useAuth();
 
-    if (!auth) {
-        return null;
-    }
+    ConfirmPermissions(); //로그인 후 이용가능한 페이지
 
-    // const rooms = await getRooms();
 
     return (
         <>
             <ChatNav />
-            <Chat />
-            <Nav />
+            <ChatList />
         </>
     );
 };
 
-export default ChatList;
+export default ChatListPage;

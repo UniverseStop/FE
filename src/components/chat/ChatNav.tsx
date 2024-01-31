@@ -4,13 +4,12 @@ import { IoMdArrowBack } from "react-icons/io";
 
 const ChatNav = () => {
     const router = useRouter();
-
     const onBackButtonHandler = () => {
         router.back();
     };
 
     return (
-        <div className="flex flex-row">
+        <div>
             <IoMdArrowBack size={50} className='p-3' onClick={onBackButtonHandler} />
         </div>
     );
