@@ -7,17 +7,20 @@ import { GetCurrentUser } from "@/utils/getCurrentUser";
 
 export default function Manager() {
     const [select, setSelect] = useState<number>(0);
+    const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
     const userInfo = GetCurrentUser(); // 현재 로그인된 사용자 정보
-    const isAdmin = userInfo.auth == "ADMIN" || userInfo.auth === "SUPER";
     const router = useRouter();
     useEffect(()=>{
-        if (!isAdmin) router.back();
-    });
+        const auth = userInfo.auth;
+        if (auth === "ADMIN" || auth === "SUPER")setIsAdmin(true)
+        else router.back();
+    }, []);
 
     return (
-        <div style={{ width: "100vw", marginLeft: "calc(-50vw + 50%" }}>
-            {isAdmin ? <div>
+        <div style={{ width: "100vw", marginLeft: "calc(-50vw + 50%)"}}>
+            {isAdmin ? 
+            <div>
                 <section className="h-[70px] p-4 flex items-center justify-between">
                     <button onClick={()=>(router.push('/main'))} className="absolute">
                         <img className="w-[140px] h-[40px] ml-[20px]" alt="logo" src="/images/unibus_logo.png"/>
@@ -34,10 +37,9 @@ export default function Manager() {
                     </ul>
                 </section>
                 <section className="bg-managerGrayColor h-full">
-                    {/* Statistics: 통계,  Management: 관리, Authority: 권한 */}
                     {select === 0 ? <Statistics /> : select === 1 ? <Management /> : <Authority />}
                 </section>
             </div> : <></>}
         </div>
-    );
+    )
 }

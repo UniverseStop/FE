@@ -84,7 +84,7 @@ const AddLocation = ({ setPostLoaction }: { setPostLoaction: (postPlace: myPlace
                 ))}
                 <ul className="absolute top-0 left-0 z-10 bg-zinc-200 space-y-1 bg-opacity-50 text-opacity-75 text-sm">
                     <li>
-                        <input placeholder="검색어를 입력해주세요." value={searchValue} onChange={handleSearchChange} onKeyDown={handleEnter} />
+                        <input className="border" placeholder="검색어를 입력해주세요." value={searchValue} onChange={handleSearchChange} onKeyDown={handleEnter} />
                     </li>
                     {markers.map((marker) => (
                         <li key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`} className="">
