@@ -17,8 +17,9 @@ const PostPreview = ({ info, type }: { info: PostPreviewType, type: string }) =>
 	};
 
 	// 반응형 고려
-	let [textSize, titleSize] = ["text-sm", "text-lg"];
+	let [nameSize, textSize, titleSize] = ["text-xs", "text-sm", "text-lg"];
 	if (type === "aboutus") {
+		nameSize = "text-xl";
 		textSize = "text-xl";
 		titleSize = "text-2xl";
 	}
@@ -37,8 +38,8 @@ const PostPreview = ({ info, type }: { info: PostPreviewType, type: string }) =>
 					<div>
 						<img className="rounded-full w-12 h-12" alt="profile" src={info.profileImageUrl}/>
 					</div>
-					<div className="flex flex-col text-start ">
-						<span className={`${textSize} font-medium`}>{info.nickname}</span>
+					<div className="flex flex-col text-start">
+						<span className={`${nameSize}`}>{info.nickname}</span>
 						<span className="text-xs">{info.age}세</span>
 					</div>
 				</div>
