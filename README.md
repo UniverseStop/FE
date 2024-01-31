@@ -30,7 +30,7 @@
 </br>
 
 ##  3. 아키텍처
-
+<img src="https://github.com/UniverseStop/FE/assets/130561236/02c1f561-e1ca-4519-97a3-6d43ad182845" alt="아키텍처">
 </br>
 
 ##  4. 팀원 소개
