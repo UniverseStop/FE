@@ -1,25 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import {CompatClient, Stomp, StompSubscription} from '@stomp/stompjs';
-import * as StompJs from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
-import { useAuth } from '@/context/KakaoContext';
-import {Simulate} from "react-dom/test-utils";
 import {MessageType} from "@/types/chatTypes";
 import { getSession } from "@/utils/getSession";
 
 export const useChat = () => {
-    const auth = useAuth()
-    const {userInfo} = auth;
     const router = useRouter();
     const roomIdQuery = router.query.room
     const token = getSession("access_Token");
     const clientRef = useRef<any>({});
     const [stompClient, setStompClient] = useState<CompatClient | null>();
     const [isConnected, setIsConnected] = useState(false);
-    const [messages, setMessages] = useState<MessageType[]>([]);
+    const [realTimeMessage, setRealTimeMessage] = useState<MessageType[]>([]);
     const [inputMessage, setInputMessage] = useState<any>("");
-
     let [client, changeClient] = useState(null);
 
 
@@ -30,10 +24,10 @@ export const useChat = () => {
     };
 
     // 메시지 보내기
-    const sendMessage = () => {
+    const sendMessage =  () => {
         if (clientRef.current && isConnected && inputMessage.trim() !== "") {
             try {
-                clientRef.current.send(
+                 clientRef.current.send(
                     "/pub/chat/message",
                     {Authorization: token},
                     JSON.stringify({ type: "TALK", roomId: roomIdQuery, message: inputMessage})
@@ -41,15 +35,17 @@ export const useChat = () => {
             } catch (error) {
                 console.error("Error sending message:", error);
             }
-            setInputMessage("");
         }
     };
 
     useEffect(() => {
-        if (roomIdQuery && token && !isConnected) {
-            // 클라이언트 초기화 및 연결
+        let client: any;
+
+        const connectStompClient = () => {
+            if (!roomIdQuery || !token || isConnected) return;
+
             const socket = new SockJS('http://3.37.62.9:8080/ws-stomp');
-            const client = Stomp.over(socket);
+            client = Stomp.over(socket);
 
             client.connect(
                 { Authorization: token },
@@ -61,32 +57,32 @@ export const useChat = () => {
                     // 구독 설정
                     client.subscribe(
                         `/sub/chat/room/${roomIdQuery}`,
-                        (message: any) => {
+                        (message:any) => {
                             if (message && message.body) {
                                 let newMessage = JSON.parse(message.body);
-                                setMessages(prevMessages => [...prevMessages, newMessage]);
+                                setRealTimeMessage(newMessage);
                             }
                         },
                         { Authorization: token }
                     );
                 },
-                (error: any) => {
+                (error:any) => {
                     console.error('Connection error:', error);
+                    setTimeout(connectStompClient, 3000); // 연결 실패 시 5초 후 재연결 시도
                 }
             );
+        };
 
-            // 클라이언트 연결 해제
-            return () => {
-                if (client.connected) {
-                    client.disconnect();
-                    setIsConnected(false);
-                }
-            };
-        }
+        connectStompClient();
+
+        // 클라이언트 연결 해제 로직
+        return () => {
+            if (client && client.connected) {
+                client.disconnect();
+            }
+        };
     }, [roomIdQuery, token]);
 
 
-
-    return { unsubscribe, isConnected, roomIdQuery, messages, sendMessage, inputMessage, setInputMessage };
+    return { unsubscribe, isConnected, roomIdQuery, realTimeMessage, sendMessage, inputMessage, setInputMessage };
 };
-
