@@ -8,6 +8,9 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const StatiscticsDoughnut = ({ statistics }: { statistics: StatisticsType }) => {
     const [doughnutChart, setDoughnutChart] = useState<number>(0);
     const { tenCnt = 0, twentyCnt = 0, thirtyCnt = 0, fortyCnt = 0, fiftyCnt = 0, sixtyCnt = 0, ageEtcCnt = 0, eatsCnt = 0, cultureCnt = 0, exerciseCnt = 0, studyCnt = 0, categoryEtcCnt = 0, maleCnt = 0, femaleCnt = 0 } = statistics || {};
+    const categorySum = eatsCnt + cultureCnt + exerciseCnt + studyCnt + categoryEtcCnt
+    const genderSum = maleCnt + femaleCnt
+    const ageSum = tenCnt + twentyCnt + thirtyCnt + fortyCnt + fiftyCnt + sixtyCnt + ageEtcCnt
     const categoryData = {
         labels: ["맛집", "문화생활", "운동", "스터디", "기타"],
         datasets: [
@@ -48,6 +51,11 @@ const StatiscticsDoughnut = ({ statistics }: { statistics: StatisticsType }) => 
     const options = {
         responsive: true,
         plugins: {
+            title: {
+            display: true,
+            text: doughnutChart === 0 ? `총 ${categorySum}명` : doughnutChart === 1 ? `총 ${genderSum}명` : `총 ${ageSum}명`,
+            position: "bottom" as const,
+        },
             legend: {
                 position: "right" as const,
             },
@@ -68,7 +76,7 @@ const StatiscticsDoughnut = ({ statistics }: { statistics: StatisticsType }) => 
                     );
                 })}
             </ul>
-            <Doughnut data={doughnutChart === 0 ? categoryData : doughnutChart === 1 ? genderData : ageData} options={options} />
+            <Doughnut data={doughnutChart === 0 ? categoryData : doughnutChart === 1 ? genderData : ageData} options={options}/>
         </div>
     );
 };

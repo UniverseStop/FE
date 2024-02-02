@@ -1,34 +1,23 @@
 import useInput from "@/hooks/useInput";
-import { filterState } from "@/recoil/atoms/filterState";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
-import { useRecoilState } from "recoil";
 
 const Search = () => {
     const [searchValue, handleSearchChange, resetSearchValue] = useInput("");
     const router = useRouter();
-    const [filter, setFilter] = useRecoilState(filterState);
     // 엔터 검색
     const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key == "Enter"){
-        setFilter({
-            ...filter,
-            titleOrContent: searchValue, 
-        });
-        resetSearchValue; 
-        router.push(`/main?search=${searchValue}`);
-    }
+            resetSearchValue; 
+            router.push(`/main?search=${searchValue}`);
+        }
     };
 
 
     // 추천 검색어 (선택된 추천 검색어로만 검색)
     const handleClickRecommend = (val: string) => {
         router.push(`/main?search=${val}`);
-        setFilter({
-            ...filter,
-            titleOrContent: val, 
-        });
         resetSearchValue; // 검색어 초기화
     };
 

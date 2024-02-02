@@ -18,7 +18,7 @@ export default function Manager() {
     }, []);
 
     return (
-        <div style={{ width: "100vw", marginLeft: "calc(-50vw + 50%)"}}>
+        <div style={{ width: "99.6vw", marginLeft: "calc(-50vw + 50%)"}}>
             {isAdmin ? 
             <div>
                 <section className="h-[70px] p-4 flex items-center justify-between">
