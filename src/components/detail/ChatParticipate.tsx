@@ -11,7 +11,7 @@ const ChatParticipate = ({applicants, postId, userId}: {applicants: ChatApproval
     // 참여 승인
     const queryClient = useQueryClient();
     const approvalMutation = useMutation(postChatApproval, {
-        onSuccess: () => {
+        onSuccess: (res) => {
             queryClient.invalidateQueries("post");
             alert("참가 수락을 성공했습니다.");
         },

@@ -10,7 +10,7 @@ const ChatNav = () => {
 
     return (
         <div>
-            <IoMdArrowBack size={50} className='p-3' onClick={onBackButtonHandler} />
+            <IoMdArrowBack size={50} className='p-3 cursor-pointer' onClick={onBackButtonHandler} />
         </div>
     );
 };
