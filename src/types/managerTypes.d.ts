@@ -55,6 +55,7 @@ export interface BlockPostListType {
     postTitle : string;
 }
 
+// 사용자 통계
 export interface StatisticsType {
     tenCnt: number;
     twentyCnt: number;
@@ -74,4 +75,15 @@ export interface StatisticsType {
     monthCnt: number[];
     weekCnt: number;
     allDayCnt: number;
+}
+
+// 정류장 모든 장소
+export interface positionsType {
+    postId: number;
+    placeName: string;
+    location:string;
+    date: string;
+    lat: number;
+    lng: number;
+    title: string;
 }

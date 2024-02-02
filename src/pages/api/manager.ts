@@ -74,7 +74,7 @@ export const getStatic = async () => {
 export const getStaticLocation = async () => {
     try {
         const res = await instance.get(`/api/static/location`);
-        return res.data;
+        return res.data.data;
     } catch (error) {
         throw error;
     }

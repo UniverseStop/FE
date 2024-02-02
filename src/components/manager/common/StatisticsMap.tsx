@@ -1,36 +1,21 @@
 import { getStaticLocation } from "@/pages/api/manager";
-import React, { useEffect, useRef, useState } from "react";
+import { positionsType } from "@/types/managerTypes";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
 import { Map, MapMarker, MapTypeControl, MarkerClusterer, ZoomControl } from "react-kakao-maps-sdk";
 import { useQuery } from "react-query";
 
-export interface positionsType {
-    lat: number;
-    lng: number;
-}
-
-const generateRandomNumber = (min: number, max: number, decimalPlaces: number): number => {
-    const randomValue = Math.random() * (max - min) + min;
-    return parseFloat(randomValue.toFixed(decimalPlaces));
-};
-
 const StatisticsMap = () => {
     const [positions, setPositions] = useState<positionsType[]>([]);
-    const { data: staticLocation } = useQuery("staticLocation", getStaticLocation);
+    const [info, setInfo] = useState<{ placeName: string } | null>(null);
+    const { data } = useQuery("staticLocation", getStaticLocation,{
+        onSuccess: (newData) => {
+            setPositions(newData)
+        },
+    });
 
-    useEffect(() => {
-        const generateRandomCoordinates = () => {
-            const newCoordinates: positionsType[] = [];
-            for (let i = 0; i < 100; i++) {
-                const lat = generateRandomNumber(35, 38, 4);
-                const lng = generateRandomNumber(126.5, 129.5, 4);
+    const router = useRouter();
 
-                newCoordinates.push({ lat, lng });
-            }
-            setPositions(newCoordinates);
-        };
-
-        generateRandomCoordinates();
-    }, []);
 
     return (
         <Map // 지도를 표시할 Container
@@ -52,12 +37,18 @@ const StatisticsMap = () => {
             >
                 {positions.map((pos) => (
                     <MapMarker
-                        key={`${pos.lat}-${pos.lng}`}
+                        key={`${pos.postId}`}
                         position={{
                             lat: pos.lat,
                             lng: pos.lng,
-                        }}
-                    />
+                        }} onClick={() => setInfo(pos)}
+                    >
+                        {info && info.placeName === pos.placeName && 
+                    <div className="flex flex-col justify-center text-center items-center w-[180px] min-w-max h-[50px] text-sm" onClick={()=>router.push(`/detail/${pos.postId}`)}>
+                        <span className="font-bold mx-1.5">{pos.title}</span>
+                        <span className="mx-1.5">{pos.placeName}</span>
+                    </div>}
+                    </MapMarker>
                 ))}
             </MarkerClusterer>
             <MapTypeControl position={"TOPRIGHT"} />
