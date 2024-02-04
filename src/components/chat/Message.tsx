@@ -36,7 +36,7 @@ export default function Message() {
         },
     });
 
-        console.log('realTimeMessage', realTimeMessage)
+    console.log('realTimeMessage', realTimeMessage)
 
     // 이전메세지
     const prevMessages = prevMessageLists?.pages.map(page => page.data.content).flat().reverse();

@@ -17,8 +17,6 @@ const Post = ({postId}: {postId: number}) => {
     const queryClient = useQueryClient();
     const { data: post } = useQuery<PostDetailType>("post", () => getBusStopDetail(postId));
 
-    console.log('post :>> ', post);
-
     // 현재 로그인된 사용자 정보
     const userInfo = GetCurrentUser();
     const isWriter = Number(userInfo.userId) === post?.userId; // 내가 작성한 글 유무 확인
