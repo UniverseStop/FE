@@ -1,3 +1,4 @@
+import { getGender } from "@/utils/getGender";
 import React from 'react'
 
 function AuthorityProfileAtom({nickname, age, gender, profileImg}: {nickname: string; age: string; gender: string; profileImg: string;}) {
@@ -10,7 +11,7 @@ function AuthorityProfileAtom({nickname, age, gender, profileImg}: {nickname: st
             <p className="font-bold">{nickname}</p>
             <div className="flex ">
                 <div>만{age}세</div>
-                <div className="ml-1">• {gender}</div>
+                <div className="ml-1">• {getGender(gender)}</div>
             </div>
         </div>
     </div>
