@@ -1,6 +1,7 @@
 import { postConfirmNickname } from "@/pages/api/user";
 import React, { useState } from "react";
 import { useMutation } from "react-query";
+import Select from "react-select";
 
 function UserInput({
 	title,
@@ -96,8 +97,20 @@ function UserInput({
 
 	/** title '성별'일 경우 : setGender이 있을 경우 진행 (타입에러방지)*/
 	const validateGender = (inputValue: string) => {
-		if (setGender) setGender(inputValue);
+		if (inputValue && setGender) setGender(inputValue);
 	};
+
+	const customStyles = {
+        control: (base: any) => ({
+			...base,
+			width: "47vw",
+			maxWidth: "285px",
+			height: "56px",
+			paddingLeft: "5px",
+			border: "1px solid #BC8E8E",
+			borderRadius: "1rem",
+        }),
+    };
 
 	return (
 		<div>
@@ -113,12 +126,15 @@ function UserInput({
 					<input type="text" value={age} onChange={(e) => validateAge(e.target.value)} placeholder={placeholder}
 						className="focus:outline-none pl-4 border border-mainColor rounded-2xl w-1/2 h-14" />
 				) : title === "성별" ? (
-					<div className="p-4 4 4 4 border border-mainColor rounded-2xl w-1/2 h-14">
-						<select className="w-full focus:outline-none" value={gender} onChange={(e) => validateGender(e.target.value)}>
-							<option value="남">남</option>
-							<option value="여">여</option>
-						</select>
+					<div>
+						<Select
+							options={[{value: "남", label: "남"}, {value: "여", label: "여"},]}
+							onChange={(e)=>{e && validateGender(e.value)}}
+							value={{value: "남", label: "남"}}
+							styles={customStyles}
+							/>		
 					</div>
+					
 				) : null}
 
 				{isShowDuplicateCheckBtn ? (
