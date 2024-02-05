@@ -16,6 +16,7 @@
     "@types/stompjs": "^2.3.9",
     "axios": "^1.6.2",
     "chart.js": "^4.4.1",
+    "classnames": "^2.5.1",
     "date-fns": "^3.0.6",
     "dayjs": "^1.11.10",
     "js-base64": "^3.7.5",
@@ -40,7 +41,8 @@
     "recoil-persist": "^5.1.0",
     "rsuite": "^5.48.1",
     "slick-carousel": "^1.8.1",
-    "sockjs-client": "^1.6.1"
+    "sockjs-client": "^1.6.1",
+    "usehooks-ts": "^2.12.1"
   },
   "devDependencies": {
     "@types/node": "^20",

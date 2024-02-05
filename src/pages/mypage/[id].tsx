@@ -7,8 +7,11 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { getMyPage } from "../api/user";
+import cx from "classnames"
+import { useMediaQuery } from "usehooks-ts";
 
 const Mypage = () => {
+	const isHeightMax = useMediaQuery("(height:1052px)")
 	const userInfo = GetCurrentUser();
 	const router = useRouter();
 
@@ -39,7 +42,7 @@ const Mypage = () => {
 
 	return (
 		<div className="gradation">
-			<div className="sm:bg-mypageDesktop bg-mypageMobile bg-cover bg-no-repeat flex flex-col h-full">
+			<div className={cx("sm:bg-mypageDesktop bg-mypageMobile bg-cover bg-no-repeat flex flex-col h-full", isHeightMax && "h-screen")}>
 				<Introduce age={age} gender={gender} nickname={nickname} interest={interest} loggedInUserId={loggedInUserId} myPageUserId={Number(myPageUserId)}/>
 				<Profile profileImageUrl={profileImageUrl} />
 				<MyPost userPosts={UserPosts} />

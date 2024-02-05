@@ -70,11 +70,27 @@ function UserInfoSetting() {
 			alert("나이를 입력해주세요");
 			return;
 		}
+		if (interest.trim() == "") {
+			alert("관심사를 선택해주세요")
+			return;
+		}
+		if (nickname.trim() == "") {
+			alert("닉네임을 입력해주세요")
+			return;
+		}
+		if (isConfirmNicknameSuccess && !isValidatedNickname) {
+			alert("올바르지 않은 닉네임입니다")
+			return;
+		}
+		if (isValidatedNickname && !isConfirmNicknameSuccess) {
+			alert("중복 확인이 필요합니다")
+			return;
+		}
 		if (isValidatedNickname && isConfirmNicknameSuccess) {
 			putUserSettingsMutation.mutate(myPageSetData);
 			router.push("/main");
 
-		} else alert("닉네임을 다시한번 확인해주세요.");
+		} else { alert ("닉네임을 확인해주세요") }
 	};
 
 	return (
