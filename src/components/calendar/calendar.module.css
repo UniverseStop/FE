@@ -19,14 +19,18 @@
     border-radius: 15px;
     box-sizing: border-box;
     height: 55px;
-    width: 580px;
+    width: 525px;
     color:  #8492a6;
-    /* text-align: center; */
     font-size: 17px;
-    margin-left: 20px;
+    margin-left: 22px;
     align-items: center;
-    padding-right: 14px;
+    padding-right: 16px;
     padding-left: 19px;
+}
+@media (max-width: 450px) {
+   .datePickerPost {
+    width: 515px;
+  }
 }
 
 .calenderWrapper {
