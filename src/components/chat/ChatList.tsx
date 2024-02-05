@@ -5,6 +5,7 @@ import {useMutation, useQuery, useQueryClient} from "react-query";
 import { GetCurrentUser } from "@/utils/getCurrentUser";
 import { ChatType } from "@/types/chatTypes";
 import { formatTime } from "@/utils/formatTime";
+import { getTruncateText } from "@/utils/getTruncateText";
 
 //nav에 채팅 아이콘 눌렀을 때 페이지 - 내가 구독한 채팅방 전체리스트
 const ChatList = () => {
@@ -51,17 +52,17 @@ const ChatList = () => {
                     className='flex flex-row items-center justify-between py-5 px-10 border-b border-[#EEE]
                     hover:bg-[rgba(0,5,0,0.1)] hover:no-underline'>
                     <div className='flex flex-row'>
-                        <div className='flex items-center justify-center bg-[#F1F1F1] rounded-[50%] w-15 h-14'>
+                        <div className='flex items-center justify-center bg-[#F1F1F1] rounded-full w-[60px] h-[60px]'>
                             {item.titleImageUrl && (
                                 <Image className="rounded-full w-[60px] h-[60px] object-cover" width={50} height={50} src={item.titleImageUrl} alt='' />
                             )}
                         </div>
-                        <div className='flex flex-col justify-center px-5'>
+                        <div className='flex flex-col justify-center px-5 sm:w-[350px] w-[260px]'>
                             <div className='flex flex-row items-center'>
                                 <div className='text-base font-bold'>{item.name}</div>
                                 <div className='pl-3 text-xs text-[#B1B1B1]'>{item.lastMessageTime ? formatTime(item.lastMessageTime) : null}</div>
                             </div>
-                            <div className='text-[#7C7C7C] text-sm'>{item.lastMessage}</div>
+                            <div className='text-[#7C7C7C] text-sm'>{item.lastMessage && getTruncateText(item.lastMessage,30)}</div>
                         </div>
                     </div>
                     <button onClick={(e) => handleDeleteChatRoom(item.roomId, e)} className="hover:brightness-50">
