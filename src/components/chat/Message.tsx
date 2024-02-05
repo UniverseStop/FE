@@ -116,24 +116,25 @@ export default function Message() {
                 return (
                     <>
                     { showDateHeader && ( <div className="text-center text-xs my-2">{`${messageDate}`}</div> )}
+                    { item.type === "ENTER" ? (<div className="text-center">{item.message}</div>) : (<>
                         <div key={messageKey} className={`flex flex-col items-${isMyMessage ? 'end' : 'start'} mb-6`}>
                             <div className="flex flex-row gap-3">
                                 {isMyMessage ? (
                                     <>
                                         <div className="flex items-end text-xs text-[#959595]">{time}</div>
                                         <div
-                                            className="bg-[#BBA1A1] py-3 px-4 leading-5 rounded-bl-xl rounded-br-xl rounded-tl-xl">
+                                            className="bg-[#BBA1A1] py-3 px-4 leading-5 rounded-bl-xl rounded-br-xl rounded-tl-xl sm:max-w-[350px] max-w-[260px]">
                                             {item.message}
                                         </div>
                                     </>
                                 ) : (
                                     <>
-                                       <div className="flex items-center mb-2">
-                                         <img src={item.profileImageUrl} alt={`${item.sender}의 프로필 이미지`} className="w-12 h-12 object-cover rounded-3xl mr-1" />
+                                       <div className="flex mb-2">
+                                         <img src={item.profileImageUrl} alt={`${item.sender}의 프로필 이미지`} className="w-12 h-12 object-cover rounded-full mr-1" />
                                        </div>
                                        <div>
                                             <div className="text-sm">{item.sender}</div>
-                                            <div className="bg-[#F1F1F1] py-3 px-4 leading-5 rounded-bl-xl rounded-br-xl rounded-tr-xl">
+                                            <div className="bg-[#F1F1F1] py-3 px-4 leading-5 rounded-bl-xl rounded-br-xl rounded-tr-xl sm:max-w-[330px] max-w-[260px]">
                                             {item.message}
                                             </div>
                                         </div>
@@ -142,6 +143,7 @@ export default function Message() {
                                 )}
                             </div>
                         </div>
+                    </>)}
                     </>
                 );
             }
