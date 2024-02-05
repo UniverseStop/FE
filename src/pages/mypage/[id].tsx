@@ -11,7 +11,8 @@ import cx from "classnames"
 import { useMediaQuery } from "usehooks-ts";
 
 const Mypage = () => {
-	const isHeightMax = useMediaQuery("(height:1052px)")
+	const isHeightMax = useMediaQuery("(max-height:1050px)")
+
 	const userInfo = GetCurrentUser();
 	const router = useRouter();
 
@@ -42,7 +43,7 @@ const Mypage = () => {
 
 	return (
 		<div className="gradation">
-			<div className={cx("sm:bg-mypageDesktop bg-mypageMobile bg-cover bg-no-repeat flex flex-col h-full", isHeightMax && "h-screen")}>
+			<div className={cx("sm:bg-mypageDesktop bg-mypageMobile bg-cover bg-no-repeat flex flex-col h-full", !isHeightMax && "h-screen")}>
 				<Introduce age={age} gender={gender} nickname={nickname} interest={interest} loggedInUserId={loggedInUserId} myPageUserId={Number(myPageUserId)}/>
 				<Profile profileImageUrl={profileImageUrl} />
 				<MyPost userPosts={UserPosts} />
