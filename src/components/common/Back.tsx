@@ -11,8 +11,8 @@ const Back = ({isBlack}: {isBlack: boolean}) => {
     return (
         <button onClick={goBack} className="z-[100] fixed top-10 pl-5">
                 {isBlack ? 
-                <Image alt="back_icon" width={20} height={20} src="/images/back.png"/>
-                : <Image alt="back_icon" width={20} height={20} src="/images/backWhite.png"/>
+                <Image alt="back_icon" width={20} height={20} src="/images/back.svg"/>
+                : <Image alt="back_icon" width={20} height={20} src="/images/backWhite.svg"/>
                 }
         </button>
 

@@ -1,3 +1,4 @@
+import Back from "@/components/common/Back";
 import useInput from "@/hooks/useInput";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -23,11 +24,12 @@ const Search = () => {
 
     return (
         <div className="flex flex-col text-center pt-28 h-screen">
+            <Back isBlack={true}/>
             <section>
-                <span className="flex pl-16 font-bold text-2xl">무엇을 찾으시나요?</span>
+                <span className="flex pl-14 font-bold text-2xl">무엇을 찾으시나요?</span>
                 <div className="relative right-4">
                     <input
-                        className="text-xl pb-2 focus:outline-none border-b-2 w-[475px] pt-9 pl-4 pr-16"
+                        className="text-xl pb-2 focus:outline-none border-b-2 w-9/12 pt-9 pl-4 pr-16"
                         placeholder="검색어를 입력해주세요."
                         value={searchValue}
                         onChange={handleSearchChange}
@@ -38,10 +40,10 @@ const Search = () => {
                     </button>
                 </div>
             </section>
-            <section className="pt-28">
-                <span className="flex pl-16 pb-7 font-bold text-2xl">추천 검색어</span>
-                <div className="pl-14">
-                    <ul className="flex flex-wrap justify-center items-center w-[350px]">
+            <section className="pt-28 flex flex-col items-center text-left">
+                <span className="w-full flex pl-14 font-bold text-2xl">추천 검색어</span>
+                <div className="flex justify-start items-start w-10/12">
+                    <ul className="w-[375px] flex flex-wrap">
                         {["산책", "맛집", "독서", "공방", "취미", "운동"].map((item, index) => {
                             return (
                                 <button
