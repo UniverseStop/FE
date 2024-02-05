@@ -9,9 +9,9 @@ const KakaoMap = ({ location, placeName, lat, lng }: { location: string, placeNa
                 className="w-[95%] h-72"
             >
                 <MapMarker position={{ lat: lat, lng: lng }}>
-                    <div className="flex flex-col justify-center text-center items-center w-[180px] h-[50px] text-sm">
-                        <span>{location}</span>
-                        <span>{placeName}</span>
+                    <div className="flex flex-col justify-center text-center items-center w-[180px] min-w-max h-[50px] text-sm">
+                        <span className="mx-1.5">{location}</span>
+                        <span className="mx-1.5">{placeName}</span>
                     </div>
                 </MapMarker>
             </Map>
