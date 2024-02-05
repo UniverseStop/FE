@@ -13,6 +13,7 @@ export const useChat = () => {
     const [stompClient, setStompClient] = useState<CompatClient | null>();
     const [isConnected, setIsConnected] = useState(false);
     const [realTimeMessage, setRealTimeMessage] = useState<MessageType[]>([]);
+    const [realTimeMessageResponse, setRealTimeMessageResponse] = useState<MessageType[]>([]);
     const [inputMessage, setInputMessage] = useState<any>("");
     let [client, changeClient] = useState(null);
 
@@ -61,6 +62,7 @@ export const useChat = () => {
                             if (message && message.body) {
                                 let newMessage = JSON.parse(message.body);
                                 setRealTimeMessage(newMessage);
+                                setRealTimeMessageResponse(message);
                             }
                         },
                         { Authorization: token }
@@ -84,5 +86,5 @@ export const useChat = () => {
     }, [roomIdQuery, token]);
 
 
-    return { unsubscribe, isConnected, roomIdQuery, realTimeMessage, sendMessage, inputMessage, setInputMessage };
+    return { unsubscribe, isConnected, roomIdQuery, realTimeMessage, sendMessage, inputMessage, setInputMessage, realTimeMessageResponse };
 };

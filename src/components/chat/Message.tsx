@@ -15,7 +15,7 @@ dayjs.extend(relativeTime);
 dayjs.extend(utc);
 
 export default function Message() {
-    const { realTimeMessage, roomIdQuery, isConnected } = useChat();
+    const { realTimeMessage, realTimeMessageResponse, roomIdQuery, isConnected } = useChat();
     const roomId = Array.isArray(roomIdQuery) ? roomIdQuery[0] : roomIdQuery || '';
     const [allMessageList, setAllMessageList] = useState<MessageType[]>([])
     const [today, setToday] = useState(dayjs());
@@ -37,6 +37,8 @@ export default function Message() {
     });
 
     console.log('realTimeMessage', realTimeMessage)
+    console.log("realTimeMessageResponse", realTimeMessageResponse)
+    console.log('prevMessageLists', prevMessageLists)
 
     // 이전메세지
     const prevMessages = prevMessageLists?.pages.map(page => page.data.content).flat().reverse();
