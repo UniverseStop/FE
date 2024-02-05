@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { FiTrash } from "react-icons/fi";
 
 function AddImage({ postImage, setPostImage }: { postImage: File[]; setPostImage: (postImage: File[]) => void }) {
@@ -43,11 +43,13 @@ function AddImage({ postImage, setPostImage }: { postImage: File[]; setPostImage
 		return;
 	};
 
-	setPostImage(imagePreview);
+	useEffect(() => {
+		setPostImage(imagePreview);
+	  }, [imagePreview, setPostImage]);
 
 
 	return (
-		<div>
+		<div className="relative">
 			<p className="text-2xl font-bold m-6 0 6 6">☝🏻표지에 쓰일 이미지를 골라주세요!</p>
 			<div className="flex gap-3 ml-6">
 					{imagePreview && imagePreview.map((file, i) => (

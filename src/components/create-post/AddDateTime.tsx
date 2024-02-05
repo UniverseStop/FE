@@ -10,12 +10,8 @@ function AddDateTime({
 }) {
 	return (
 		<section className="flex flex-col justify-center">
-			<div className=" w-[580px]">
-				<p className="text-2xl font-bold m-6 0 6 6">🗓️ 날짜 및 시간</p>
-				<section className="place-items-center">
-					<Calendar showTime={true} onDateChange={setPostDateTime} />
-				</section>
-			</div>
+		  <p className="text-2xl font-bold m-6 0 6 6">🗓️ 날짜 및 시간</p>
+		  <Calendar showTime={true} onDateChange={setPostDateTime} />
 		</section>
 	);
 }

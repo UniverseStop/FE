@@ -13,8 +13,8 @@ function AddPlace({ postLoaction, setPostLoaction }: { postLoaction: myPlaceType
         <div>
             <p className="text-2xl font-bold m-6 0 6 6">📍 장소</p>
             <section className="flex flex-col items-center gap-4 ">
-                <button onClick={handleClick} className="flex justify-start border border-mainColor rounded-2xl w-[580px] h-14 ml-5">
-                    {!postLoaction.placeName ? <p className="text-gray p-4 0 0 6">장소를 입력해주세요</p> : <p className="text-gray p-4 0 0 6">{postLoaction.placeName}</p>}
+                <button onClick={handleClick} className="flex justify-start border border-mainColor rounded-2xl sm:w-[525px] w-[520px] h-14 sm:ml-5 ml-7">
+                    {!postLoaction.placeName ? <span className="text-gray p-4 0 0 6">장소를 입력해주세요</span> : <span className="text-gray p-4 0 0 6">{postLoaction.placeName}</span>}
                 </button>
                 {isShowLocationModal && (
                     <section className="w-[95%] ml-5">
