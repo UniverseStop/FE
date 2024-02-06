@@ -87,7 +87,7 @@ const MainPage = () => {
         <div>
             <div className="flex flex-row">
                 {search ? (
-                    <div className="flex items-center mr-auto mt-[30px]">
+                    <div className="flex items-center mr-auto mt-[30px] ml-[30px]">
                         <span className="mr-[10px] text-4xl text-black">{search}</span>
                         <Image alt="cancel_icon" width={20} height={20} className="cursor-pointer" src="/images/cancel.png" onClick={() => router.push(`/main`)} />
                     </div>
@@ -106,9 +106,9 @@ const MainPage = () => {
                 </button>
             </div>
             <InterestButton />
-            <div className="flex flex-wrap">
-                {postData &&
-                    postData.map((p: PostPreviewType, index: number) => {
+            {postData.length > 0 ? (
+                <div className="flex flex-wrap">
+                    {postData.map((p: PostPreviewType, index: number) => {
                         if (index === postData.length - 1) {
                             return (
                                 <button className="w-[46%] sm:w-[30%] min-w-[145px] aspect-square box-border m-[1.66%]" key={p.id} ref={lastPostRef} onClick={() => router.push(`/detail/${p.id}`)}>
@@ -123,7 +123,12 @@ const MainPage = () => {
                             );
                         }
                     })}
-            </div>
+                </div>
+            ) : (
+                <div className="flex justify-center items-center">
+                    <img className="w-[46%] sm:w-[30%] min-w-[145px]" src="/images/no_post.png" alt="아직 게시글이 없습니다"></img>
+                </div>
+            )}
 
             <div className="h-[50px]" />
         </div>

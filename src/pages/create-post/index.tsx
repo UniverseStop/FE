@@ -83,7 +83,7 @@ function CreatePost() {
 
     return (
         <div>
-            <section>
+            <section className="w-11/12" >
                 <Category title="🗂️ 카테고리" handleCategoryChange={handleCategoryChange} />
                 <AddImage postImage={postImage} setPostImage={setPostImage} />
                 <AddTitle postTitle={postTitle} setPostTitle={setPostTitle} />
