@@ -3,52 +3,33 @@ import React from "react";
 
 const InterestButton = () => {
     const router = useRouter();
-    const updatedQuery = { ...router.query };
-    const { interest } = updatedQuery;
-    const handleInterestChange = (selectedInterest: string) => {
-        updatedQuery.interest = selectedInterest;
+    const { interest, ...updatedQuery } = router.query;
+
+    const handleToggle = (selectedInterest: string | null) => {
+        const newQuery = selectedInterest ? { ...updatedQuery, interest: selectedInterest } : updatedQuery;
         router.push(
             {
                 pathname: router.pathname,
-                query: updatedQuery,
+                query: newQuery,
             },
             undefined,
             { shallow: false }
         );
     };
 
+    const toggleButton = (interestType: string, label: string) => (
+        <button className={`${interest === interestType ? "bg-mainColor text-white" : "border"} flex-shrink-0 border-mainColor mb-[20px] mr-[5px] ml-[15px] w-[95px] h-[35px] rounded-[20px]`} onClick={() => handleToggle(interest === interestType ? null : interestType)}>
+            {label}
+        </button>
+    );
+
     return (
-        <div className="w-full">
-            <button
-                className={`${interest == "Eats" ? "bg-mainColor text-white" : "border"} border-mainColor mb-[20px] mr-[5px] ml-[15px] w-[95px] h-[35px] rounded-[20px]`}
-                onClick={() => handleInterestChange("Eats")}
-            >
-                🍰 맛집
-            </button>
-            <button
-                className={`${interest == "Culture" ? "bg-mainColor text-white" : "border"} border-mainColor mb-[20px] mr-[5px] ml-[15px] w-[95px] h-[35px] rounded-[20px]`}
-                onClick={() => handleInterestChange("Culture")}
-            >
-                🎬 문화
-            </button>
-            <button
-                className={`${interest == "Exercise" ? "bg-mainColor text-white" : "border"} border-mainColor mb-[20px] mr-[5px] ml-[15px] w-[95px] h-[35px] rounded-[20px]`}
-                onClick={() => handleInterestChange("Exercise")}
-            >
-                🏀 운동
-            </button>
-            <button
-                className={`${interest == "Study" ? "bg-mainColor text-white" : "border"} border-mainColor mb-[20px] mr-[5px] ml-[15px] w-[95px] h-[35px] rounded-[20px]`}
-                onClick={() => handleInterestChange("Study")}
-            >
-                📖 스터디
-            </button>
-            <button
-                className={`${interest == "Etc" ? "bg-mainColor text-white" : "border"} border-mainColor mb-[20px] mr-[5px] ml-[15px] w-[95px] h-[35px] rounded-[20px]`}
-                onClick={() => handleInterestChange("Etc")}
-            >
-                🎸 기타
-            </button>
+        <div className="flex overflow-x-auto whitespace-nowrap">
+            {toggleButton("Eats", "🍰 맛집")}
+            {toggleButton("Culture", "🎬 문화")}
+            {toggleButton("Exercise", "🏀 운동")}
+            {toggleButton("Study", "📖 스터디")}
+            {toggleButton("Etc", "🎸 기타")}
         </div>
     );
 };
