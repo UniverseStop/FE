@@ -25,10 +25,6 @@
 
 </br>
 
-##  2. 화면 구성 및 주요 기능
-
-</br>
-
 ##  3. 기술적 의사결정
 [FE 기술적 의사결정](https://github.com/UniverseStop/FE/wiki/%08%EA%B8%B0%EC%88%A0%EC%A0%81-%EC%9D%98%EC%82%AC%EA%B2%B0%EC%A0%95)
 </br>
@@ -73,7 +69,6 @@
 <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white">
 <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white">
 <img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
-
 
 ### 라이브러리
 <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white"/>
