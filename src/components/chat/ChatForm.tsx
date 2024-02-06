@@ -45,13 +45,15 @@ const ChatForm = () => {
                                   onCompositionStart={handleComposition}
                                   onCompositionEnd={handleComposition}
                                   onKeyDown={onEnter}
-                                  className="h-10 w-full bg-transparent outline-0 rounded-full border px-4 py-2 flex-1 resize-none"
+                                  maxLength={1500}
+                                  rows={1}
+                                  className="max-h-[100px] h-10 w-full bg-transparent outline-0 rounded-2xl border px-4 py-2 flex-1 resize-none"
                                   placeholder="새 쪽지 작성하기"/>
                 <button className="hover:brightness-110" type="submit" disabled={!inputMessage?.trim()}>
                     <Image width={25} height={25} src="/images/chat-send-button.svg" alt="button"/>
                 </button>
             </form>
-            <div className="h-[100px]"></div>
+            <div className="h-[150px]"></div>
         </div>
     );
 };

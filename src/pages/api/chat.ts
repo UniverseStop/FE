@@ -15,6 +15,7 @@ export const getRoomList = async () => {
 export const getMessageList = async ({roomId, pageNum}: {roomId: string, pageNum: number}) => {
     try {
         const res = await instance.get(`/chat/${roomId}?page=${pageNum}`)
+        // console.log(res)
         return res;
     } catch (error) {
         console.error('getMessageList Error:', error);

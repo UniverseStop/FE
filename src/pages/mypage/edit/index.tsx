@@ -62,9 +62,21 @@ function MypageEdit() {
 			alert("관심사를 선택해주세요");
 			return;
 		}
+		if (changedNickname.trim() == "") {
+			alert("닉네임을 입력해주세요")
+			return;
+		}
+		if (isConfirmNicknameSuccess && !isValidatedNickname) {
+			alert("올바르지 않은 닉네임입니다")
+			return;
+		}
+		if (isValidatedNickname && !isConfirmNicknameSuccess) {
+			alert("중복 확인이 필요합니다")
+			return;
+		}
 		if (isValidatedNickname && isConfirmNicknameSuccess) {
 			putEditUserMutation.mutate(myPageEditData);
-		} else alert("닉네임을 다시한번 확인해주세요.");
+		} else { alert ("닉네임을 확인해주세요") }
 	};
 
 	return (

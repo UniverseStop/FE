@@ -1,33 +1,59 @@
 import React from "react";
+import Select from "react-select";
 
 function AddMeetingLimit({
-	postSubLimit,
-	setpostSubLimit,
+  postSubLimit,
+  setpostSubLimit,
 }: {
-	postSubLimit: number;
-	setpostSubLimit: (postSubLimit: number) => void;
+  postSubLimit: number;
+  setpostSubLimit: (postSubLimit: number) => void;
 }) {
-	const numberOptions = Array.from({ length: 20 }, (_, index) => index + 1);
+  const options = Array.from({ length: 30 }, (_, index) => ({
+    value: index + 1,
+    label: (index + 1).toString(), // label을 문자열로 설정
+  }));
 
-	return (
-		<div>
-			<p className="text-2xl font-bold m-6 0 6 6">🪧 모임 제한인원</p>
-			<section className="flex flex-col items-center gap-4">
-				<div className="flex border border-mainColor rounded-2xl w-[580px] h-14 ml-5">
-					<select
-						className="rounded-2xl p-4 w-[97%] focus:outline-none"
-						value={postSubLimit}
-						onChange={(e) => setpostSubLimit(Number(e.target.value))}>
-						{numberOptions.map((option) => (
-							<option key={option} value={option}>
-								{option}
-							</option>
-						))}
-					</select>
-				</div>
-			</section>
-		</div>
-	);
+
+  const customStyles = {
+    control: (base: any) => ({
+      ...base,
+      width: "525px",
+      height: "56px",
+      marginLeft: "22px",
+      paddingLeft: "10px",
+      border: "1px solid #BC8E8E",
+      borderRadius: "1rem",
+      '@media (max-width: 450px)': {
+        width: '515px',
+      },
+    }),
+    menu: (base: any) => ({
+      ...base,
+      marginLeft: "24px",
+      width: "525px",
+      '@media (max-width: 450px)': {
+        width: '515px',
+      },
+    }),
+  };
+
+  return (
+    <div>
+      <p className="text-2xl font-bold m-6 0 6 6">🪧 모임 제한인원</p>
+      <Select
+        options={options}
+        onChange={(e) => {
+          if (e) {
+            const selectedValue = e.value as number;
+            setpostSubLimit(selectedValue);
+          }
+        }}
+        defaultValue={{ value: 1, label: "1" }}
+        styles={customStyles}
+        value={{ value: postSubLimit, label: postSubLimit.toString() }}
+      />
+    </div>
+  );
 }
 
 export default AddMeetingLimit;

@@ -82,8 +82,8 @@ function CreatePost() {
     };
 
     return (
-        <div>
-            <section className="w-11/12" >
+        <div className="w-[550px] sm:pr-0 pr-5">
+            <section>
                 <Category title="🗂️ 카테고리" handleCategoryChange={handleCategoryChange} />
                 <AddImage postImage={postImage} setPostImage={setPostImage} />
                 <AddTitle postTitle={postTitle} setPostTitle={setPostTitle} />
@@ -92,7 +92,7 @@ function CreatePost() {
                 <AddDateTime postDateTime={postDateTime} setPostDateTime={setPostDateTime} />
                 <AddPlace postLoaction={postLoaction} setPostLoaction={setPostLoaction} />
             </section>
-            <section className="flex justify-center mb-10 mt-[100px] gap-10">
+            <section className="w-[550px] flex justify-center mb-10 mt-[100px] gap-10">
                 <button onClick={handleCancel} className="border text-mainColor border-mainColor h-14 rounded-2xl w-1/4">
                     취소
                 </button>
