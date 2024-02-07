@@ -25,15 +25,15 @@
 
 </br>
 
-##  2. 화면 구성 및 주요 기능
-
+##  3. 기술적 의사결정
+[FE 기술적 의사결정](https://github.com/UniverseStop/FE/wiki/%08%EA%B8%B0%EC%88%A0%EC%A0%81-%EC%9D%98%EC%82%AC%EA%B2%B0%EC%A0%95)
 </br>
 
-##  3. 아키텍처
+##  4. 아키텍처
 <img src="https://github.com/UniverseStop/FE/assets/130561236/02c1f561-e1ca-4519-97a3-6d43ad182845" alt="아키텍처">
 </br>
 
-##  4. 팀원 소개
+##  5. 팀원 소개
 <table>
     <thead>
         <tr>
@@ -64,12 +64,11 @@
 <!-- ## 시작 가이드 또는 배포 주소 -->
 <br>
 
-## 5. 프로젝트 기술 스택
+## 6. 프로젝트 기술 스택
 ###  언어
 <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white">
 <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white">
 <img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
-
 
 ### 라이브러리
 <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white"/>
