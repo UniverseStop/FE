@@ -1,16 +1,10 @@
 # 유니버스
 
-
 ## 1. 프로젝트 소개
 ### 🚀 우리만의 소우주, UniBus! | 개발기간 : 23.12 ~ 24.01 (4주)
 <div style="display:flex">
  <div style="display:flex">
     <img src="https://github.com/tph7897/tph7897/assets/132332533/f559363a-1c7c-4797-bef8-3dbcdcdb1aef" alt="로고" style="width: 250px; margin:0 0 0 10px"/>
- </div>
- <div style="display: flex; align-items:center; margin-left:30px;">
-     <p style="font-weight: bold;"> Universe <br> 세상의 모든 다양한  <br> 것이 존재하는 공간 </p>
-      <img src="https://github.com/UniverseStop/FE/assets/130561236/d0dd983d-2c2b-42b6-abe1-9f710b1b75a7"  style="width:50px; margin: 0 10px 0 10px;" />
-     <p style="font-weight: bold;">Bus <br> 다양한 사람들이 스쳐 <br> 지나가며 모이는 공간</p>
  </div>
 </div>
 
@@ -68,14 +62,14 @@
 
 ## 6. 프로젝트 기술 스택
 ###  언어
- <div style="margin: 0 auto; text-align: start;" align= "center">
+ <div style="margin: 0 auto; text-align: start;" align= "start">
 <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white">
 <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white">
 <img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
 </div>
 
 ### 라이브러리
-<div style="margin: 0 auto; text-align: start;" align= "center">
+<div style="margin: 0 auto; text-align: start;" align= "start">
 <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white"/>
 <img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white"/>
 <img src="https://img.shields.io/badge/reactquery-FF4154?style=for-the-badge&logo=reactquery&logoColor=white"/>
@@ -87,7 +81,7 @@
 <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white">
 
 ### 협업도구
-<div style="margin: 0 auto; text-align: start;" align= "center">
+<div style="margin: 0 auto; text-align: start;" align= "start">
 <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white">
 <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=Git&logoColor=white">
 <img src="https://img.shields.io/badge/Github-181717?style=for-the-badge&logo=Github&logoColor=white">
