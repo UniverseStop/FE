@@ -22,15 +22,17 @@
     당신의 우주에서 찾아낸 흥미로운 주제를 공유하고, 다양한 이야기를 들어보세요.
 
 
+##  2. 화면 구성 및 주요 기능
+- [FE 화면 구성 및 주요 기능](https://github.com/UniverseStop/FE/wiki/%ED%99%94%EB%A9%B4-%EA%B5%AC%EC%84%B1-%EB%B0%8F-%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5)
 
 </br>
 
 ##  3. 기술적 의사결정
-[FE 기술적 의사결정](https://github.com/UniverseStop/FE/wiki/%08%EA%B8%B0%EC%88%A0%EC%A0%81-%EC%9D%98%EC%82%AC%EA%B2%B0%EC%A0%95)
+- [FE 기술적 의사결정](https://github.com/UniverseStop/FE/wiki/%08%EA%B8%B0%EC%88%A0%EC%A0%81-%EC%9D%98%EC%82%AC%EA%B2%B0%EC%A0%95)
 </br>
 
 ##  4. 아키텍처
-<img src="https://github.com/UniverseStop/FE/assets/130561236/02c1f561-e1ca-4519-97a3-6d43ad182845" alt="아키텍처">
+<img src="https://github.com/UniverseStop/FE/assets/130561236/02c1f561-e1ca-4519-97a3-6d43ad182845" alt="아키텍처" width="800px" height="700px">
 </br>
 
 ##  5. 팀원 소개
@@ -66,24 +68,30 @@
 
 ## 6. 프로젝트 기술 스택
 ###  언어
+ <div style="margin: 0 auto; text-align: start;" align= "center">
 <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white">
 <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white">
 <img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
+</div>
 
 ### 라이브러리
+<div style="margin: 0 auto; text-align: start;" align= "center">
 <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white"/>
 <img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white"/>
 <img src="https://img.shields.io/badge/reactquery-FF4154?style=for-the-badge&logo=reactquery&logoColor=white"/>
 <img src="https://img.shields.io/badge/Tailwind%20CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white">
 <img src="https://img.shields.io/badge/recoil%20-3578E5?style=for-the-badge&logo=recoil&logoColor=white">
+</div>
 
 ###  프레임 워크
 <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white">
 
 ### 협업도구
+<div style="margin: 0 auto; text-align: start;" align= "center">
 <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white">
 <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=Git&logoColor=white">
 <img src="https://img.shields.io/badge/Github-181717?style=for-the-badge&logo=Github&logoColor=white">
 <img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=Slack&logoColor=white">
+</div>
 <br>
 <br>
