@@ -129,7 +129,6 @@ const MainPage = () => {
                     <img className="w-[46%] sm:w-[30%] min-w-[145px]" src="/images/no_post.png" alt="아직 게시글이 없습니다"></img>
                 </div>
             )}
-
             <div className="h-[50px]" />
         </div>
     );

@@ -61,7 +61,6 @@ function UserInput({
        	     if (setIsValidatedNickname) setIsValidatedNickname(true);
        	 }
     	}
-
     	if (setNickname) {
     	    setNickname(inputValue);
     	}
@@ -132,9 +131,9 @@ function UserInput({
 							onChange={(e)=>{e && validateGender(e.value)}}
 							value={{value: "남", label: "남"}}
 							styles={customStyles}
-							/>		
+							/>
 					</div>
-					
+
 				) : null}
 
 				{isShowDuplicateCheckBtn ? (

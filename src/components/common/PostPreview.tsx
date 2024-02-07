@@ -54,7 +54,7 @@ const PostPreview = ({ info, type }: { info: PostPreviewType, type: string }) =>
 				</div>
 				<div className="flex space-x-1 items-center">
 					<img className="w-3" alt="location" src="/images/location.png"/>
-					<span className="text-xs">{getTruncateText(info.location, 15)}</span>
+					<span className="text-xs">{getTruncateText(info.location, 13)}</span>
 				</div>
 			</section>
 		</button>
