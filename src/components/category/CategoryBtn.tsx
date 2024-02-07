@@ -21,9 +21,7 @@ function CategoryBtn({
 		<div className="flex flex-col items-center">
 			<button type="button" className="hover" onClick={categoryBtnClick} id={categoryTagKey}>
 				<div
-					className={`w-20 h-20 rounded-full border border-mainColor border-2 flex items-center justify-center ${
-						isClicked ? "bg-mainColor" : ""
-					}`}>
+					className={`w-20 h-20 rounded-full border border-mainColor border-2 flex items-center justify-center ${ isClicked ? "bg-mainColor" : ""}`}>
 					<p className="text-5xl">{emoticon}</p>
 				</div>
 			</button>

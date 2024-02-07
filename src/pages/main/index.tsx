@@ -124,7 +124,6 @@ const MainPage = () => {
                         }
                     })}
             </div>
-
             <div className="h-[50px]" />
         </div>
     );
