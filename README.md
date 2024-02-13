@@ -50,7 +50,7 @@
     기존의 text를 useState로 관리하여 초기값을 두고 useEffect를 사용하여 데이터 로딩이 완료된 후에 상태를 업데이트하는 방법으로 해결했다.
 
 ----
-### 2 ) [상태 관리 변경 (ContextAPT → Recoil) 🔗](https://github.com/UniverseStop/FE/tree/dev/src/recoil/atoms)
+### 2 ) [상태 관리 변경 (ContextAPI → Recoil) 🔗](https://github.com/UniverseStop/FE/tree/dev/src/recoil/atoms)
 
 #### ⓵ 문제 상황
     ContextAPI 불필요한 리렌더링 발생, 상태 추적 및 디버깅 어려움이 생겼다.
