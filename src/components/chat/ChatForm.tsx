@@ -1,4 +1,4 @@
-import React, {FormEvent, KeyboardEventHandler, useState} from 'react';
+import React, {KeyboardEventHandler, useState} from 'react';
 import TextareaAutosize from "react-textarea-autosize";
 import Image from "next/image";
 import {useChat} from "@/hooks/useChat";
