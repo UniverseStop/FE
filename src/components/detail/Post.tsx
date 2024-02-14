@@ -13,9 +13,18 @@ import { getCategory } from "@/utils/getCategory";
 import Image from "next/image";
 import { postBlockDetailPost } from "@/pages/api/manager";
 
-const Post = ({postId}: {postId: number}) => {
+const Post = ({props}: { props: any}) => {
+
+    console.log('props :>> ', props);
     const queryClient = useQueryClient();
-    const { data: post } = useQuery<PostDetailType>("post", () => getBusStopDetail(postId));
+    const [post, setPost] = useState(props);
+    const { data } = useQuery<any>(["post", post.postId], () => getBusStopDetail(post.postId), {
+        onSuccess: (newData) => {
+            setPost(newData)
+        },
+    });
+    console.log('post :>> ', post);
+    console.log("props", post)
 
     // 현재 로그인된 사용자 정보
     const userInfo = GetCurrentUser();
@@ -41,10 +50,11 @@ const Post = ({postId}: {postId: number}) => {
     })
 
     const handleBlockPost = (postId : string) => {
-        postBlockMutation.mutate(postId)
+        postBlockMutation.mutate(postId);
     }
 
     return (
+
         <div className="h-screen text-black">
             {post &&
             <div>
