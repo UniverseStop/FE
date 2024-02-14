@@ -8,6 +8,7 @@ import DateFilter from "@/components/main/DateFilter";
 import LocationFilter from "@/components/main/LocationFilter";
 import InterestButton from "@/components/main/InterestButton";
 import PostPreview from "@/components/common/PostPreview";
+import Head from "next/head";
 
 interface QueryParams {
     search?: string;
@@ -85,6 +86,9 @@ const MainPage = () => {
 
     return (
         <div>
+            <Head>
+                <meta name="description" content="유니버스 메인 페이지 입니다."></meta>
+            </Head>
             <div className="flex flex-row">
                 {search ? (
                     <div className="flex items-center mr-auto mt-[30px] ml-[30px]">

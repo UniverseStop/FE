@@ -7,6 +7,7 @@ import Layout from "@/components/Layout";
 import { AuthProvider } from "@/context/KakaoContext";
 import { useLoading } from "@/hooks/useLoading";
 import Spinner from "@/components/spinner/Spinner";
+import Head from "next/head";
 
 export default function App({ Component, pageProps }: AppProps) {
     const queryClient = new QueryClient({
@@ -25,7 +26,12 @@ export default function App({ Component, pageProps }: AppProps) {
                 <AuthProvider>
                     {/* React Query Devtools: 필요한 경우 주석 해제 후 사용 */}
                     {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-                    <Layout>{isLoading ? <Spinner /> : <Component {...pageProps} />}</Layout>
+                    <Layout>
+                        <Head>
+                            <title>UNIBUS</title>
+                        </Head>
+                        {isLoading ? <Spinner /> : <Component {...pageProps} />}
+                        </Layout>
                 </AuthProvider>
             </RecoilRoot>
         </QueryClientProvider>
