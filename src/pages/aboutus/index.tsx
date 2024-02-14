@@ -6,6 +6,7 @@ import { currentUser } from "@/recoil/atoms/currentUser";
 import { removeSession } from "@/utils/removeSession";
 import { GetCurrentUser } from "@/utils/getCurrentUser";
 import { getSession } from "@/utils/getSession";
+import Head from "next/head";
 
 export default function AboutUs() {
     const router = useRouter();
@@ -40,7 +41,7 @@ export default function AboutUs() {
                 removeSession("access_Token");
                 removeSession("refresh_Token");
             }
-        }        
+        }
 
         // beforeunload 이벤트에 대한 리스너 추가 (브라우저가 닫힐 때 실행 예정)
         window.addEventListener("beforeunload", resetRecoil);
@@ -52,6 +53,10 @@ export default function AboutUs() {
     }, []);
 
     return (
+        <div>
+            <Head>
+                <meta name="description" content="유니버스 소개 페이지 입니다."></meta>
+            </Head>
         <div className="gradation h-screen relative">
             <div className="bg-cover bg-[url('/images/aboutUs.png')] absolute top-0 left-0 w-full h-full" />
             <div className="relative">
@@ -88,6 +93,7 @@ export default function AboutUs() {
                     </div>
                 </section>
             </div>
+        </div>
         </div>
     );
 }
