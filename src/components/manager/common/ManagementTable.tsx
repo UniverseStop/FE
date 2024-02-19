@@ -22,7 +22,7 @@ const ManagementTable = ({users, totalPages, selectPage, setSelectPage, selectBo
     };
 
     return (
-        <section className="w-[600px] h-[815px] border border-managerPointColor rounded-sm">
+        <div className="w-[600px] h-[815px] border border-managerPointColor rounded-sm">
             {isModal && selectUserInfo ? <ManagementModal isModal={isModal} setIsModal={setIsModal} selectUserInfo={selectUserInfo} setSelectUserInfo={setSelectUserInfo}/> : <></>}
             <table className="text-xs whitespace-no-wrap w-full ">
                 <thead className="bg-managerGrayColor">
@@ -57,7 +57,7 @@ const ManagementTable = ({users, totalPages, selectPage, setSelectPage, selectBo
                     <button key={index} onClick={()=>setSelectPage(index)} className={`${selectPage === index ? "font-bold underline" : "text-gray"}`}>{index + 1}</button>
                 ))}
             </ul>
-        </section>
+        </div>
     )
 }
 

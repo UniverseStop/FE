@@ -1,49 +1,39 @@
 import { useRouter } from "next/router";
 import Post from "@/components/detail/Post";
 import { getBusStopDetail } from "@/pages/api/post";
-import { dehydrate, QueryClient } from "react-query";
+import { dehydrate, QueryClient, useQuery } from "react-query";
+import { PostDetailType } from "@/types/postTypes";
+import Head from "next/head";
+
 
 export default function Detail(props: any) {
-    const data = props.dehydratedState.queries[0].state.data
+    const router = useRouter();
+    const postId = router.query.id;
+    const { data : post } = useQuery<PostDetailType>("post", () => getBusStopDetail(Number(postId)));
+    let metaData = props.dehydratedState.queries[0].state.data;
 
     return (
         <div>
-            {data && <Post props={data}/>}
+            <Head>
+                <title>{`UNIBUS | ${metaData.title}`}</title>
+                <meta name="description" content={metaData.content}></meta>
+            </Head>
+            {post &&
+            <div>
+                <Post post={post}/>
+            </div>}
         </div>
     )
 }
 
-export const getServerSideProps = async (context : any) => {
-    try {
+export const getServerSideProps = async (context: any) => {
     const { id } = context.params;
     const queryClient = new QueryClient();
-    await queryClient.fetchQuery(["post", id], () => getBusStopDetail(id));
+    await queryClient.fetchQuery("post", () => getBusStopDetail(id));
 
     return {
         props: {
             dehydratedState: dehydrate(queryClient),
         },
     };
-} catch(error) {
-    console.log(error)
-}
 };
-
-// export const getServerSideProps: GetServerSideProps = async (context): Promise<GetServerSidePropsResult<{ [key: string]: any; }>> => {
-//     console.log("context", context)
-//     try {
-
-//         const queryClient = new QueryClient();
-//         await queryClient.prefetchQuery("post",()=>getBusStopDetail(id));
-//         return {
-//             props: {
-//                 dehydratedProps: dehydrate(queryClient)
-//             },
-//         };
-//     } catch (error) {
-//         console.log(error);
-//         return {
-//             props: {},
-//         };
-//     }
-// };

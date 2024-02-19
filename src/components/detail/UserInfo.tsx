@@ -10,19 +10,22 @@ const UserInfo = ({ post, isDeleteModal, setIsDeleteModal}: { post: PostDetailTy
     const router = useRouter();
 
     return (
-        <div className="flex flex-row justify-between">
-            <button onClick={()=>router.push(`/mypage/${post.userId}`)} className="flex items-center text-start space-x-4">
+        <>
+        {post && (
+            <div className="flex flex-row justify-between">
+            <div onClick={()=>router.push(`/mypage/${post.userId}`)} className="cursor-pointer flex items-center text-start space-x-4">
                 <img className="w-[60px] h-[60px] rounded-full" alt="profile" src={post.profileImageUrl}/>
                 <div className="flex flex-col">
                     <span className="text-xl font-bold">{post.nickname}</span>
                     <span className="text-sm">{post.age}세 • {getGender(post.gender)}</span>
                 </div>
-            </button>
+            </div>
             <div className="flex flex-col">
-                <span>{post.createdAt.split("T")[0].replaceAll("-", ".")}</span>
+                <span>{post?.createdAt?.split("T")[0].replaceAll("-", ".")}</span>
                 {Number(userInfo.userId) === post.userId && setIsDeleteModal && <button onClick={()=>setIsDeleteModal(!isDeleteModal)} className="flex justify-end pt-1"><img className="w-4 h-4" alt="postTrash" src="/images/postTrash.png"/></button>}
             </div>
-        </div>
+        </div>)}
+        </>
     )
 }
 

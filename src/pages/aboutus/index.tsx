@@ -60,7 +60,7 @@ export default function AboutUs() {
         <div className="gradation h-screen relative">
             <div className="bg-cover bg-[url('/images/aboutUs.png')] absolute top-0 left-0 w-full h-full" />
             <div className="relative">
-                <section className="relative overflow-hidden">
+                <div className="relative overflow-hidden">
                     <img className="absolute w-[55%] left-2/4 top-5" alt="planet" src="/images/planet.png" />
                     <div className="flex flex-col p-[30px] font-bold text-5xl text-white">
                         {["찾았다 🫣", "내가 내릴", "정거장"].map((item, index) => {
@@ -71,11 +71,11 @@ export default function AboutUs() {
                             );
                         })}
                     </div>
-                </section>
-                <section className="max-w-[600px] min-w-[375px]">
+                </div>
+                <div className="max-w-[600px] min-w-[375px]">
                     <ImageSlider />
-                </section>
-                <section>
+                </div>
+                <div>
                     <div className="fixed w-screen bottom-10 right-0">
                         <div className="relative overflow-hidden right-0 top-[330px] w-screen h-[500px] max-w-[600px] mx-auto">
                             <img className="absolute top-0 left-[-145px]" alt="earth" src="/images/earth.png" />
@@ -91,7 +91,7 @@ export default function AboutUs() {
                             </button>
                         </div>
                     </div>
-                </section>
+                </div>
             </div>
         </div>
         </div>

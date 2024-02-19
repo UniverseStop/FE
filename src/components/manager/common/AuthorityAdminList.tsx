@@ -34,7 +34,7 @@ function AuthorityAdminList() {
   }
 
   return (
-    <section className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5">
       <h1 className="text-2xl font-bold text-black">관리자 목록</h1>
           {AdminList && AdminList.sort((a : AdminListType, b : AdminListType) => (b.super ? 1 : -1)).map((item: AdminListType, i: number) => (
             <div key={i} className="flex gap-[630px] items-center w-[950px] h-[75px] bg-white rounded-3xl">
@@ -43,7 +43,7 @@ function AuthorityAdminList() {
                   : (<button onClick={()=>handleDeleteManager(item.nickname)} className="bg-mainColor w-[95px] h-[33px] rounded-3xl text-white font-semibold">권한 삭제</button> )}
             </div>
           ))}
-    </section>
+    </div>
   )
 }
 

@@ -27,7 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
     return (
         <QueryClientProvider client={queryClient}>
             <RecoilRoot>
-                <Hydrate state={pageProps.dehydratedState}>
+                {/* <Hydrate state={pageProps.dehydratedState}> */}
                 <AuthProvider>
                     {/* React Query Devtools: 필요한 경우 주석 해제 후 사용 */}
                     {/* <ReactQueryDevtools initialIsOpen={false} /> */}
@@ -38,7 +38,7 @@ export default function App({ Component, pageProps }: AppProps) {
                         {isLoading ? <Spinner /> : <Component {...pageProps} />}
                         </Layout>
                 </AuthProvider>
-                </Hydrate>
+                {/* </Hydrate> */}
             </RecoilRoot>
         </QueryClientProvider>
     );
