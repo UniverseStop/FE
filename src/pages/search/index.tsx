@@ -10,7 +10,7 @@ const Search = () => {
     // 엔터 검색
     const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key == "Enter"){
-            resetSearchValue; 
+            resetSearchValue;
             router.push(`/main?search=${searchValue}`);
         }
     };
@@ -25,7 +25,7 @@ const Search = () => {
     return (
         <div className="flex flex-col text-center pt-28 h-screen">
             <Back isBlack={true}/>
-            <section>
+            <div>
                 <span className="flex pl-14 font-bold text-2xl">무엇을 찾으시나요?</span>
                 <div className="relative right-4">
                     <input
@@ -39,8 +39,8 @@ const Search = () => {
                         <Image alt="search_icon" width={30} height={30} src="/images/search.png" />
                     </button>
                 </div>
-            </section>
-            <section className="pt-28 flex flex-col items-center text-left">
+            </div>
+            <div className="pt-28 flex flex-col items-center text-left">
                 <span className="w-full flex pl-14 font-bold text-2xl">추천 검색어</span>
                 <div className="flex justify-start items-start w-10/12">
                     <ul className="w-[375px] flex flex-wrap">
@@ -58,7 +58,7 @@ const Search = () => {
                         })}
                     </ul>
                 </div>
-            </section>
+            </div>
         </div>
     );
 };

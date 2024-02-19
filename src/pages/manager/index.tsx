@@ -19,9 +19,9 @@ export default function Manager() {
 
     return (
         <div style={{ width: "99.6vw", marginLeft: "calc(-50vw + 50%)"}}>
-            {isAdmin ? 
+            {isAdmin ?
             <div>
-                <section className="h-[70px] p-4 flex items-center justify-between">
+                <div className="h-[70px] p-4 flex items-center justify-between">
                     <button onClick={()=>(router.push('/main'))} className="absolute">
                         <img className="w-[140px] h-[40px] ml-[20px]" alt="logo" src="/images/unibus_logo.png"/>
                     </button>
@@ -35,10 +35,10 @@ export default function Manager() {
                             );
                         })}
                     </ul>
-                </section>
-                <section className="bg-managerGrayColor h-full">
+                </div>
+                <div className="bg-managerGrayColor h-full">
                     {select === 0 ? <Statistics /> : select === 1 ? <Management /> : <Authority />}
-                </section>
+                </div>
             </div> : <></>}
         </div>
     )

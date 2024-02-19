@@ -9,13 +9,13 @@ const PostImageSlider = ({imageUrlList, selectImg, setSelectImg}: {imageUrlList:
 
     return (
         <div ref={sliderRef} className={`keen-slider ${selectImg ? "max-w-[600px] bg-contain" : ""}`}>
-            {imageUrlList.map((url: string, index: number)=>{
+            {imageUrlList && imageUrlList.map((url: string, index: number)=>{
                 return (
                 <button key={index} onClick={()=>setSelectImg(!selectImg)} >
                     <img className={`keen-slider__slide ${selectImg ? "object-contain w-full h-full" : "w-full h-96 object-cover"}`} alt="image" src={url} />
                 </button>);
             })}
-        </div> 
+        </div>
     )
 }
 
