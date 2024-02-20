@@ -1,5 +1,26 @@
 # 유니버스
 
+## 0. 목차
+[1. 프로젝트 소개](#1--------)
+
+[2. 화면 구성 및 주요 기능](#2--------------)
+
+[3. 기술적 의사결정](#3---------)
+
+[4. 개선사항](#4-----)
+
+[5. 트러블 슈팅](#5-------)
+
+[6. 아키텍처](#6-----)
+
+[7. 프로젝트 기술 스택](#7-----------)
+
+[8. 팀원 소개](#8------)
+
+[9. 팀원 역할](#9------)
+
+</br>
+
 ## 1. 프로젝트 소개
 ### 🚀 우리만의 소우주, UniBus! | 개발기간 : 23.12 ~ 24.01 (4주)
 <div style="display:flex">
@@ -27,8 +48,16 @@
 
 </br>
 
-## 4. 트러블 슈팅
+## 4. 개선사항
+- [개선사항](https://github.com/UniverseStop/FE/wiki/%EA%B0%9C%EC%84%A0-%EC%82%AC%ED%95%AD)
+
+</br>
+
+## 5. 트러블 슈팅
 ### 1 ) [Hydration failed 에러 🔗](https://github.com/UniverseStop/FE/blob/dev/src/pages/aboutus/index.tsx)
+
+</br>
+
 #### ⓵ 문제 상황
     텍스트의 내용이 서버에서 렌더링된 HTML과 일치하지 않는 에러가 발생하였다.
 #### ⓶ 해결 방안
@@ -50,7 +79,11 @@
     기존의 text를 useState로 관리하여 초기값을 두고 useEffect를 사용하여 데이터 로딩이 완료된 후에 상태를 업데이트하는 방법으로 해결했다.
 
 ----
-### 2 ) [상태 관리 변경 (ContextAPT → Recoil) 🔗](https://github.com/UniverseStop/FE/tree/dev/src/recoil/atoms)
+</br>
+
+### 2 ) [렌더링 최적화) 🔗](https://github.com/UniverseStop/FE/tree/dev/src/recoil/atoms)
+
+</br>
 
 #### ⓵ 문제 상황
     server state를 client state로 재조합하는 과정에서 contextAPI 를
@@ -68,12 +101,35 @@
 
 </br>
 
-##  5. 아키텍처
+----
+
+</br>
+
+### 3 ) [상태 관리 변경 (ContextAPI → Recoil) 🔗](https://github.com/UniverseStop/FE/tree/dev/src/recoil/atoms)
+
+</br>
+
+#### ⓵ 문제 상황
+    server state를 client state로 재조합하는 과정에서 contextAPI 를
+    사용하였으나 불필요한 리렌더링이 발생했고, 상태 추적 및 디버깅에 어려움이 생겼다.
+#### ⓶ 해결 방안
+    internal state로 관리하려고 했으나 위의 단점으로 인해 external state 로
+    관리해야 할 필요성을 느꼈고, 시도해 본 상태관리 방법 중 2가지를 사안에 놓고
+    리팩터링 진행하기로 함.
+    1. Redux
+    2. Recoil
+#### ⓷ 의견 조율
+    Redux, Recoil 모두 관련된 컴포넌트 업데이트 가능 및 DevTools 존재하지만, Recoil이 Redux에 비해 보일러플레이트 없이 코드를 간결하게 작성할 수 있다.
+#### ⓸  의견 결정
+    Recoil로 상태 관리하기로 결정하였다.
+
+
+##  6. 아키텍처
 <img src="https://github.com/UniverseStop/FE/assets/130561236/02c1f561-e1ca-4519-97a3-6d43ad182845" alt="아키텍처" width="650px" height="400px">
 
 </br>
 
-## 6. 프로젝트 기술 스택
+## 7. 프로젝트 기술 스택
 ###  언어
  <div style="margin: 0 auto; text-align: start;" align= "start">
 <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white">
@@ -103,7 +159,7 @@
 
 <br>
 
-##  7. 팀원 소개
+##  8. 팀원 소개
 <table>
     <thead>
         <tr>
@@ -134,7 +190,7 @@
 
 <br>
 
-##  8. 팀원 역할
+##  9. 팀원 역할
 <h3>공통: 기획, 디자인, FE 개발</h3>
 </br>
 
@@ -146,7 +202,7 @@
         </tr>
         <tr>
             <th>하은</th>
-            <td>중앙 저장소 관리 (Recoil), AccessToken 관리 (재발급 포함), 카카오 로그인, 소개, 게시물 상세, 관리자 (사용자 전체 목록 전체 및 상세 조회, 차단, 구제), 검색, 에러, 구제 신청
+            <td>중앙 저장소 관리 (Recoil), AccessToken 관리 (재발급 포함), 카카오 로그인, 소개, 게시물 상세, </br> 관리자 (사용자 전체 목록 전체 및 상세 조회, 차단, 구제), 검색, 에러, 구제 신청
             </td>
         </tr>
         <tr>
