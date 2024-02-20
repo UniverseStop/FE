@@ -1,5 +1,26 @@
 # 유니버스
 
+## 0. 목차
+[1. 프로젝트 소개](#1--------)
+
+[2. 화면 구성 및 주요 기능](#2--------------)
+
+[3. 기술적 의사결정](#3---------)
+
+[4. 개선사항](#4-----)
+
+[5. 트러블 슈팅](#5-------)
+
+[6. 아키텍처](#6-----)
+
+[7. 프로젝트 기술 스택](#7-----------)
+
+[8. 팀원 소개](#8------)
+
+[9. 팀원 역할](#9------)
+
+</br>
+
 ## 1. 프로젝트 소개
 ### 🚀 우리만의 소우주, UniBus! | 개발기간 : 23.12 ~ 24.01 (4주)
 <div style="display:flex">
@@ -27,8 +48,16 @@
 
 </br>
 
-## 4. 트러블 슈팅
+## 4. 개선사항
+- [개선사항](https://github.com/UniverseStop/FE/wiki/%EA%B0%9C%EC%84%A0-%EC%82%AC%ED%95%AD)
+
+</br>
+
+## 5. 트러블 슈팅
 ### 1 ) [Hydration failed 에러 🔗](https://github.com/UniverseStop/FE/blob/dev/src/pages/aboutus/index.tsx)
+
+</br>
+
 #### ⓵ 문제 상황
     텍스트의 내용이 서버에서 렌더링된 HTML과 일치하지 않는 에러가 발생하였다.
 #### ⓶ 해결 방안
@@ -50,7 +79,16 @@
     기존의 text를 useState로 관리하여 초기값을 두고 useEffect를 사용하여 데이터 로딩이 완료된 후에 상태를 업데이트하는 방법으로 해결했다.
 
 ----
+
+</br>
+
+----
+
+</br>
+
 ### 2 ) [상태 관리 변경 (ContextAPI → Recoil) 🔗](https://github.com/UniverseStop/FE/tree/dev/src/recoil/atoms)
+
+</br>
 
 #### ⓵ 문제 상황
     server state를 client state로 재조합하는 과정에서 contextAPI 를
@@ -66,14 +104,13 @@
 #### ⓸  의견 결정
     Recoil로 상태 관리하기로 결정하였다.
 
-</br>
 
-##  5. 아키텍처
+##  6. 아키텍처
 <img src="https://github.com/UniverseStop/FE/assets/130561236/02c1f561-e1ca-4519-97a3-6d43ad182845" alt="아키텍처" width="650px" height="400px">
 
 </br>
 
-## 6. 프로젝트 기술 스택
+## 7. 프로젝트 기술 스택
 ###  언어
  <div style="margin: 0 auto; text-align: start;" align= "start">
 <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white">
@@ -103,7 +140,7 @@
 
 <br>
 
-##  7. 팀원 소개
+##  8. 팀원 소개
 <table>
     <thead>
         <tr>
@@ -134,7 +171,7 @@
 
 <br>
 
-##  8. 팀원 역할
+##  9. 팀원 역할
 <h3>공통: 기획, 디자인, FE 개발</h3>
 </br>
 
@@ -146,7 +183,7 @@
         </tr>
         <tr>
             <th>하은</th>
-            <td>중앙 저장소 관리 (Recoil), AccessToken 관리 (재발급 포함), 카카오 로그인, 소개, 게시물 상세, 관리자 (사용자 전체 목록 전체 및 상세 조회, 차단, 구제), 검색, 에러, 구제 신청
+            <td>중앙 저장소 관리 (Recoil), AccessToken 관리 (재발급 포함), 카카오 로그인, 소개, 게시물 상세, </br> 관리자 (사용자 전체 목록 전체 및 상세 조회, 차단, 구제), 검색, 에러, 구제 신청
             </td>
         </tr>
         <tr>
