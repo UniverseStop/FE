@@ -95,17 +95,17 @@ function UserInfoSetting() {
 
 	return (
 		<form onSubmit={handleSubmitUserInfo} className="flex flex-col justify-between h-screen">
-			<section>
+			<div>
 				<Category title="나의 관심사를 선택해주세요" handleCategoryChange={handleCategoryChange} />
 				<UserInput title="닉네임" placeholder="닉네임을 입력해주세요" isShowDuplicateCheckBtn={true} nickname={nickname} setNickname={setNickname} isValidatedNickname={isValidatedNickname} setIsValidatedNickname={setIsValidatedNickname} setIsConfirmNicknameSuccess={setIsConfirmNicknameSuccess}/>
 				<UserInput title="나이" placeholder="만 나이를 입력해주세요" isShowDuplicateCheckBtn={false} age={age} setAge={setAge}/>
 				<UserInput title="성별" placeholder="성별을 입력해주세요" isShowDuplicateCheckBtn={false} gender={koGender} setGender={setGender}/>
-			</section>
-			<section className="flex justify-center mb-10">
+			</div>
+			<div className="flex justify-center mb-10">
 				<button type="submit" className="bg-mainColor text-white h-14 rounded-2xl w-1/4">
 					시작하기
 				</button>
-			</section>
+			</div>
 		</form>
 	);
 }

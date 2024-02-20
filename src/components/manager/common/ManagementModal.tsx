@@ -51,11 +51,11 @@ const ManagementModal = ({isModal, setIsModal, selectUserInfo, setSelectUserInfo
     return (
         <div ref={backdropRef} className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="flex flex-col bg-white w-[950px] h-[540px] z-50 items-center overflow-y-auto overflow-x-hidden">
-                {learnMoreImage && 
-                <section onClick={()=>setLearnMoreImage("")} className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
+                {learnMoreImage &&
+                <div onClick={()=>setLearnMoreImage("")} className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
                     <img onClick={(e) => e.stopPropagation()} alt="image" src={learnMoreImage}/>
-                </section>}
-                <section>
+                </div>}
+                <div>
                     <table className="text-xs whitespace-no-wrap w-[950px]">
                         <thead className="bg-managerGrayColor">
                             <tr>
@@ -77,17 +77,17 @@ const ManagementModal = ({isModal, setIsModal, selectUserInfo, setSelectUserInfo
                             </tr>
                         </tbody>
                     </table>
-                </section>
-                {salvationReason ? 
-                <section className="flex w-full h-1/5">
+                </div>
+                {salvationReason ?
+                <div className="flex w-full h-1/5">
                     <div className="w-full  text-center items-center flex justify-between">
                         <div className="w-1/5 font-bold text-center"><span>구제 사유</span></div>
                         <div className="w-full text-center text-sm"><span>{salvationReason.content}</span></div>
                     </div>
-                </section> 
+                </div>
                 : <></>}
-                {reports ? 
-                <section className="h-3/5">
+                {reports ?
+                <div className="h-3/5">
                     <table className="text-xs whitespace-no-wrap w-[950px] ">
                         <thead className="bg-managerGrayColor w-full">
                             <tr>
@@ -112,8 +112,8 @@ const ManagementModal = ({isModal, setIsModal, selectUserInfo, setSelectUserInfo
                                 );
                             })}
                         </tbody>
-                    </table> 
-                </section>
+                    </table>
+                </div>
                 : <></>}
             </div>
         </div>

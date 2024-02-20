@@ -4,7 +4,7 @@ import React from "react";
 const Spinner = () => {
     return (
         <div className="flex h-screen bg-white z-[999]">
-            <section className="m-auto flex flex-col items-center">
+            <div className="m-auto flex flex-col items-center">
                 <div className="relative top-[30px]">
                     <Image
                         alt="earth"
@@ -21,7 +21,7 @@ const Spinner = () => {
                         className="absolute top-[-30px] left-[45px]"
                     />
                 </div>
-            </section>
+            </div>
         </div>
     );
 };

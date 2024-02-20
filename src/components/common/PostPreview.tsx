@@ -25,7 +25,7 @@ const PostPreview = ({ info, type }: { info: PostPreviewType, type: string }) =>
 	}
 
 	return (
-		<button onClick={handleClickPost} className="w-full h-full max-w-[600px] p-3 text-white rounded-[20px] flex flex-col justify-between relative"
+		<div onClick={handleClickPost} className="w-full h-full max-w-[600px] p-3 text-white rounded-[20px] flex flex-col justify-between relative"
         style={{
             backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.1)), url(${info.thumbnailImageUrl})`,
             backgroundSize: "cover",
@@ -33,7 +33,7 @@ const PostPreview = ({ info, type }: { info: PostPreviewType, type: string }) =>
             backgroundRepeat: "no-repeat",
             backgroundBlendMode: "multiply",
         }}>
-			<section className="flex justify-between w-full">
+			<div className="flex justify-between w-full">
 				<div className="flex items-center space-x-1">
 					<div>
 						<img className="rounded-full w-12 h-12" alt="profile" src={info.profileImageUrl}/>
@@ -46,8 +46,8 @@ const PostPreview = ({ info, type }: { info: PostPreviewType, type: string }) =>
 				<div className="pt-1">
 					<span className="text-xs">{time}</span>
 				</div>
-			</section>
-			<section className="space-y-2">
+			</div>
+			<div className="space-y-2">
 				<div className="flex flex-col items-start">
 					<span className={`${titleSize} font-medium`}>{getTruncateText(info.title, 10)}</span>
 					<span className={`${textSize} w-20 border rounded-[20px]`}>{getCategory(info.category)}</span>
@@ -56,8 +56,8 @@ const PostPreview = ({ info, type }: { info: PostPreviewType, type: string }) =>
 					<img className="w-3" alt="location" src="/images/location.png"/>
 					<span className="text-xs">{getTruncateText(info.location, 13)}</span>
 				</div>
-			</section>
-		</button>
+			</div>
+		</div>
 	);
 };
 

@@ -97,20 +97,20 @@ const UserReport = () => {
 	return (
 		<div className="flex flex-col content-center items-center h-full">
 			<h1 className="text-3xl m-[60px] font-bold">신고사유</h1>
-			<section className="w-[420px] flex flex-wrap mb-4 ml-7 sm:w-[500px]">
+			<div className="w-[420px] flex flex-wrap mb-4 ml-7 sm:w-[500px]">
 				{Object.entries(reasons).map(([key, value], index) => (
 					<div className="sm:w-[250px] h-[50px] w-[210px]" key={index}>
 						<input type="radio" name="reason" id={`content${index}`} onClick={() => handleReasonChange(value)} className="cursor-pointer mr-5"/>
 						<label htmlFor={`content${index}`} className="cursor-pointer text-lg">{key}</label>
 					</div>
 				))}
-			</section>
-			<section>
+			</div>
+			<div>
 				<textarea className="pl-4 pt-4 border reszie-none border-gray rounded-2xl sm:w-[500px] w-[380px] sm:ml-0 ml-1 h-60" value={reportDetail}
 							onChange={handleReportDetailChange}
 					placeholder="구체적인 신고 사유를 입력해주세요." maxLength={1500}/>
-			</section>
-			<section className="sm:w-[500px] w-[380px]">
+			</div>
+			<div className="sm:w-[500px] w-[380px]">
 				<h2 className="pr-[200px] text-lg mt-5 mb-5 font-bold sm:pr-[420px]">신고사진</h2>
 				<input type="file" id="file" multiple accept=".jpg, .jpeg, .png" className="hidden" onChange={handleImageChange}/>
 			{ reportImage.length ? (
@@ -133,13 +133,13 @@ const UserReport = () => {
 					</>
 				)
 			}
-			</section>
-			<section className="flex justify-center mb-[50px] mt-[100px] gap-10">
+			</div>
+			<div className="flex justify-center mb-[50px] mt-[100px] gap-10">
 						<button onClick={handleCancel} className="font-bold border text-white h-14 rounded-2xl bg-[#D9D9D9] sm:w-[200px] w-[150px]">취소</button>
 						<button className="font-bold bg-mainColor text-white h-14 rounded-2xl sm:w-[200px] w-[150px]" onClick={handleReportPost}>
 							신고
 						</button>
-			</section>
+			</div>
 			<div className="h-[65px]"></div>
 		</div>
 	)

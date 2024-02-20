@@ -38,14 +38,14 @@ function AuthoritySearchUser() {
 
 
   return (
-    <div>
-      <section>
+    <>
+      <div>
         <h1 className="text-2xl font-bold mb-2 text-black">사용자 검색</h1>
           <div className="flex gap-[210px] w-[950px] h-[75px] bg-white rounded-3xl">
               <input value={userNickname} onChange={handleNicknameChange} type="text" placeholder="닉네임을 입력해주세요" maxLength={7} className="ml-6 mt-5 w-[600px] h-[40px] focus:outline-none" />
               <button onClick={handleUserSearch} className="bg-mainColor w-[95px] h-[33px] rounded-3xl mt-5 text-white font-semibold">유저 검색</button>
           </div>
-      </section>
+      </div>
            { isResultModalState && (
             <div onClick={()=>setIsResultModalState(false)} className="flex items-center justify-center fixed top-0 left-0 bg-[rgba(0,0,0,0.6)] w-full h-full">
                 <div onClick={(e) => e.stopPropagation()} className="flex flex-col gap-3 items-center bg-managerGrayColor w-[900px] h-[500px] rounded-3xl">
@@ -65,7 +65,7 @@ function AuthoritySearchUser() {
             </div>
          )
          }
-     </div>
+     </>
 
   )
 }

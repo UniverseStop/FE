@@ -79,25 +79,6 @@
     기존의 text를 useState로 관리하여 초기값을 두고 useEffect를 사용하여 데이터 로딩이 완료된 후에 상태를 업데이트하는 방법으로 해결했다.
 
 ----
-</br>
-
-### 2 ) [렌더링 최적화) 🔗](https://github.com/UniverseStop/FE/tree/dev/src/recoil/atoms)
-
-</br>
-
-#### ⓵ 문제 상황
-    server state를 client state로 재조합하는 과정에서 contextAPI 를
-    사용하였으나 불필요한 리렌더링이 발생했고, 상태 추적 및 디버깅에 어려움이 생겼다.
-#### ⓶ 해결 방안
-    internal state로 관리하려고 했으나 위의 단점으로 인해 external state 로
-    관리해야 할 필요성을 느꼈고, 시도해 본 상태관리 방법 중 2가지를 사안에 놓고
-    리팩터링 진행하기로 함.
-    1. Redux
-    2. Recoil
-#### ⓷ 의견 조율
-    Redux, Recoil 모두 관련된 컴포넌트 업데이트 가능 및 DevTools 존재하지만, Recoil이 Redux에 비해 보일러플레이트 없이 코드를 간결하게 작성할 수 있다.
-#### ⓸  의견 결정
-    Recoil로 상태 관리하기로 결정하였다.
 
 </br>
 
@@ -105,7 +86,7 @@
 
 </br>
 
-### 3 ) [상태 관리 변경 (ContextAPI → Recoil) 🔗](https://github.com/UniverseStop/FE/tree/dev/src/recoil/atoms)
+### 2 ) [상태 관리 변경 (ContextAPI → Recoil) 🔗](https://github.com/UniverseStop/FE/tree/dev/src/recoil/atoms)
 
 </br>
 
