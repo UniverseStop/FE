@@ -6,7 +6,7 @@ import { GetCurrentUser } from "@/utils/getCurrentUser";
 import { removeSession } from "@/utils/removeSession";
 import { saveSession } from "@/utils/saveSession";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 
 function MypageEdit() {
@@ -18,10 +18,6 @@ function MypageEdit() {
 	const router = useRouter();
 
 	ConfirmPermissions(); // 로그인 후 이용가능한 페이지
-
-	const handleCategoryChange = (category: string) => {
-		setChangedCategory(category)
-	}
 
 	const userEditSettings = {
 		nickname: changedNickname,
@@ -82,9 +78,9 @@ function MypageEdit() {
 	return (
 		<div className="flex flex-col justify-between h-screen">
 			<div>
-				<Category title="나의 관심사를 선택해주세요" handleCategoryChange={handleCategoryChange}/>
-				<UserInput title="닉네임" placeholder="닉네임을 입력해주세요" isShowDuplicateCheckBtn={true} nickname={changedNickname} setNickname={setChangedNickname}
-				isValidatedNickname={isValidatedNickname} setIsValidatedNickname={setIsValidatedNickname} setIsConfirmNicknameSuccess={setIsConfirmNicknameSuccess}/>
+				<Category title="나의 관심사를 선택해주세요" setChangedCategory={setChangedCategory}/>
+				<UserInput title="닉네임" placeholder="닉네임을 입력해주세요" isShowDuplicateCheckBtn={true} setChangeNickname={setChangedNickname}
+			 setIsValidatedNickname={setIsValidatedNickname} setIsConfirmNicknameSuccess={setIsConfirmNicknameSuccess}/>
 			</div>
 			<div className="flex justify-center mb-20 gap-5">
 				<button onClick={handleCancel} className="border text-mainColor border-mainColor h-14 rounded-2xl w-1/4">취소</button>

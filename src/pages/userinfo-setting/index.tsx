@@ -22,10 +22,6 @@ function UserInfoSetting() {
 
 	ConfirmPermissions(); // 로그인 후 이용가능한 페이지
 
-	const handleCategoryChange = (category: string) => {
-		setInterest(category);
-	};
-
 	const gender = getEngGender(koGender)
 
 	const userSettings = {
@@ -96,8 +92,8 @@ function UserInfoSetting() {
 	return (
 		<form onSubmit={handleSubmitUserInfo} className="flex flex-col justify-between h-screen">
 			<div>
-				<Category title="나의 관심사를 선택해주세요" handleCategoryChange={handleCategoryChange} />
-				<UserInput title="닉네임" placeholder="닉네임을 입력해주세요" isShowDuplicateCheckBtn={true} nickname={nickname} setNickname={setNickname} isValidatedNickname={isValidatedNickname} setIsValidatedNickname={setIsValidatedNickname} setIsConfirmNicknameSuccess={setIsConfirmNicknameSuccess}/>
+				<Category title="나의 관심사를 선택해주세요" setChangedCategory={setInterest} />
+				<UserInput title="닉네임" placeholder="닉네임을 입력해주세요" isShowDuplicateCheckBtn={true} setChangeNickname={setNickname} setIsValidatedNickname={setIsValidatedNickname} setIsConfirmNicknameSuccess={setIsConfirmNicknameSuccess}/>
 				<UserInput title="나이" placeholder="만 나이를 입력해주세요" isShowDuplicateCheckBtn={false} age={age} setAge={setAge}/>
 				<UserInput title="성별" placeholder="성별을 입력해주세요" isShowDuplicateCheckBtn={false} gender={koGender} setGender={setGender}/>
 			</div>

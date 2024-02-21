@@ -34,10 +34,6 @@ function CreatePost() {
         router.back();
     };
 
-    const handleCategoryChange = (category: string) => {
-        setPostCategory(category);
-    };
-
     const postData = {
         category: postCategory,
         title: postTitle,
@@ -84,7 +80,7 @@ function CreatePost() {
     return (
         <div className="w-[550px] sm:pr-0 pr-5">
             <div>
-                <Category title="🗂️ 카테고리" handleCategoryChange={handleCategoryChange} />
+                <Category title="🗂️ 카테고리" setChangedCategory={setPostCategory} />
                 <AddImage postImage={postImage} setPostImage={setPostImage} />
                 <AddTitle postTitle={postTitle} setPostTitle={setPostTitle} />
                 <AddContent postContent={postContent} setPostContent={setPostContent} />
