@@ -81,7 +81,7 @@
 
 ----
 
-### 2 ) [불필요한 리렌더링 방지 🔗]([https://github.com/UniverseStop/FE/tree/dev/src/recoil/atoms](https://github.com/UniverseStop/FE/blob/dev/src/components/user-input/UserInput.tsx))
+### 2 ) [불필요한 리렌더링 방지 🔗](https://github.com/UniverseStop/FE/blob/dev/src/components/user-input/UserInput.tsx)
 
 #### ⓵ 문제 상황
     내 정보를 수정할때, category button 과 nickname input 값이 변동될 때마다
