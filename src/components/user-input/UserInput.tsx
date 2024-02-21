@@ -116,7 +116,7 @@ function UserInput({
 		isSuccess = true;
 	}
 
-	useCallback(()=>{
+	useEffect(()=>{
 		if(setChangeNickname)
 		setChangeNickname(nickname)
 		if(setIsValidatedNickname)
