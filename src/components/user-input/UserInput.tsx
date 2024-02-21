@@ -1,5 +1,7 @@
 import { postConfirmNickname } from "@/pages/api/user";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { useCallback } from "react";
+import { useEffect } from "react";
 import { useMutation } from "react-query";
 import Select from "react-select";
 
@@ -7,29 +9,28 @@ function UserInput({
 	title,
 	placeholder,
 	isShowDuplicateCheckBtn,
-	nickname,
-	setNickname,
+	setChangeNickname,
 	age,
 	setAge,
 	gender,
 	setGender,
-	isValidatedNickname,
 	setIsValidatedNickname,
 	setIsConfirmNicknameSuccess,
 }: {
 	title: string;
 	placeholder: string;
 	isShowDuplicateCheckBtn: boolean;
-	nickname?: string;
-	setNickname?: (nickname: string) => void;
+	setChangeNickname?: (nickname: string) => void;
 	age?: string;
 	setAge?: (age: string) => void;
 	gender?: string;
 	setGender?: (gender: string) => void;
-	isValidatedNickname?: boolean;
 	setIsValidatedNickname?: (isValidatedNickname: boolean) => void;
 	setIsConfirmNicknameSuccess?: (isConfirmNicknameSuccess: boolean) => void;
 }) {
+	const [nickname , setNickname] = useState<string>("")
+	const [ValidatedNickname, setValidatedNickname] = useState<boolean>(false)
+
 	/** title '나이'일 경우 : 10부터 99까지의 2자릿수 */
 	const validateAge = (inputValue: string) => {
 		const ageRegex = /^(1\d|2[0-9])$/;
@@ -45,27 +46,25 @@ function UserInput({
 	const validateNickname = (inputValue: string) => {
   	  if (inputValue === "") {
         setErrorMsg("");
-        if (setIsValidatedNickname) setIsValidatedNickname(false);
+        setValidatedNickname(false);
   	  } else if (inputValue.length < 2 || inputValue.length > 7) {
       	  setErrorMsg("2자 이상 7자 이하로 입력해주세요.");
-	  if (setIsValidatedNickname) setIsValidatedNickname(false);
+		setValidatedNickname(false);
     	} else {
        	 const nicknameRegex = /^[a-zA-Z0-9가-힣]*$/;
        	 const hasOnlyConsonantsOrVowels = /^[ㄱ-ㅎㅏ-ㅣ]+$/;
-
         	if (title === "닉네임" && (!nicknameRegex.test(inputValue) || hasOnlyConsonantsOrVowels.test(inputValue))) {
            	 setErrorMsg("영어 대소문자, 한글, 숫자만 사용가능하며, 중간에 자음이나 모음만 사용할 수 없습니다.");
-        	    if (setIsValidatedNickname) setIsValidatedNickname(false);
+			 setValidatedNickname(false);
       	  } else {
        	     setErrorMsg("");
-       	     if (setIsValidatedNickname) setIsValidatedNickname(true);
+       	     setValidatedNickname(true);
        	 }
     	}
     	if (setNickname) {
     	    setNickname(inputValue);
     	}
 	};
-
 
 	/** title '닉네임'일 경우 : 통신로직 */
 	const [textBlue, setTextBlue] = useState(false);
@@ -91,7 +90,8 @@ function UserInput({
 
 	// 중복체크 버튼 눌렀을때 함수
 	const handleDuplicateCheck = () => {
-		if (nickname) postConfirmNicknameMutation.mutate(nickname);
+		if (nickname && errorMsg == "") postConfirmNicknameMutation.mutate(nickname);
+		else alert("닉네임을 다시한번 확인 후 중복확인을 해주세요")
 	};
 
 	/** title '성별'일 경우 : setGender이 있을 경우 진행 (타입에러방지)*/
@@ -111,15 +111,28 @@ function UserInput({
         }),
     };
 
+	let isSuccess = false;
+	if(errorMsg == "사용가능한 닉네임입니다.") {
+		isSuccess = true;
+	}
+
+	useCallback(()=>{
+		if(setChangeNickname)
+		setChangeNickname(nickname)
+		if(setIsValidatedNickname)
+		setIsValidatedNickname(true)
+	},[isSuccess])
+
 	return (
 		<div>
 			<p className="text-2xl font-bold m-6 0 6 6">{title}</p>
 			<div className="flex gap-5 ml-6">
 				{title === "닉네임" ? (
 					<div className="w-1/2">
-						<input type="text" value={nickname} onChange={(e) => validateNickname(e.target.value)} placeholder={placeholder}
+						<input type="text" value={nickname}
+							 onChange={(e)=>validateNickname(e.target.value)} placeholder={placeholder}
 							className="focus:outline-none pl-4 border border-mainColor rounded-2xl w-full h-14" />
-						<p className={`pt-2 pl-1 text-sm ${textBlue ? 'text-blue' : 'text-red'}`}>{errorMsg}</p>
+						 <p className={`pt-2 pl-1 text-sm ${textBlue ? 'text-blue' : 'text-red'}`}>{errorMsg}</p>
 					</div>
 				) : title === "나이" ? (
 					<input type="text" value={age} onChange={(e) => validateAge(e.target.value)} placeholder={placeholder}

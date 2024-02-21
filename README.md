@@ -56,8 +56,6 @@
 ## 5. 트러블 슈팅
 ### 1 ) [Hydration failed 에러 🔗](https://github.com/UniverseStop/FE/blob/dev/src/pages/aboutus/index.tsx)
 
-</br>
-
 #### ⓵ 문제 상황
     텍스트의 내용이 서버에서 렌더링된 HTML과 일치하지 않는 에러가 발생하였다.
 #### ⓶ 해결 방안
@@ -72,23 +70,34 @@
 #### ⓷ 의견 조율
     1. 문제를 보니 HTML 태그의 잘못된 중첩이 아닌 비동기로 데이터를 로딩하면서 생기는 문제인듯하다.
 
-    2. 비동기로 데이터를 로딩하면서 발생하는 문제이므로 기존의 text를 useState로 관리하여 초기값을 두고 useEffect를 사용하여 데이터 로딩이 완료된 후에 상태를 업데이트하는 해결방안이 적합해 보인다.
+    2. 비동기로 데이터를 로딩하면서 발생하는 문제이므로 기존의 text를 useState로 관리하여
+    초기값을 두고 useEffect를 사용하여 데이터 로딩이 완료된 후에 상태를 업데이트하는 해결방안이 적합해 보인다.
 
-    3. SSR을 비활성화 하는 방법이 있지만 그렇게 되면 사전 랜더링을 포기하는 것이기때문에 초기 성능이 좀더 좋지 않고 SEO관점에서도 좋지 않아 보인다.
+    3. SSR을 비활성화 하는 방법이 있지만 그렇게 되면
+    사전 랜더링을 포기하는 것이기때문에 초기 성능이 좀더 좋지 않고 SEO관점에서도 좋지 않아 보인다.
 #### ⓸  의견 결정
-    기존의 text를 useState로 관리하여 초기값을 두고 useEffect를 사용하여 데이터 로딩이 완료된 후에 상태를 업데이트하는 방법으로 해결했다.
+    기존의 text를 useState로 관리하여 초기값을 두고
+    useEffect를 사용하여 데이터 로딩이 완료된 후에 상태를 업데이트하는 방법으로 해결했다.
 
 ----
 
-</br>
+### 2 ) [불필요한 리렌더링 방지 🔗](https://github.com/UniverseStop/FE/blob/dev/src/components/user-input/UserInput.tsx)
+
+#### ⓵ 문제 상황
+    내 정보를 수정할때, category button 과 nickname input 값이 변동될 때마다
+    페이지 전체가 불필요하게 리렌더링 되고 있었다.
+#### ⓶ 해결 방안
+    컴포넌트를 다시 설계하여 state의 위치를 자식요소에 배치시킨 뒤
+    useCallback 을 사용하여 부모요소에 완성된 state의 값만을 전달하게 했다.
+#### ⓷ 의견 조율
+    useRef로 input 값을 관리하려고 하였으나,
+    화면상에 렌더링이 되고 있음을 확인시켜줘야 하기때문에 useCallback 을 사용했다.
+#### ⓸  의견 결정
+    useCallback 함수 사용하여 불필요한 리렌더링 방지시켜주었다.
 
 ----
 
-</br>
-
-### 2 ) [상태 관리 변경 (ContextAPI → Recoil) 🔗](https://github.com/UniverseStop/FE/tree/dev/src/recoil/atoms)
-
-</br>
+### 3 ) [상태 관리 변경 (ContextAPI → Recoil) 🔗](https://github.com/UniverseStop/FE/tree/dev/src/recoil/atoms)
 
 #### ⓵ 문제 상황
     server state를 client state로 재조합하는 과정에서 contextAPI 를
@@ -100,7 +109,8 @@
     1. Redux
     2. Recoil
 #### ⓷ 의견 조율
-    Redux, Recoil 모두 관련된 컴포넌트 업데이트 가능 및 DevTools 존재하지만, Recoil이 Redux에 비해 보일러플레이트 없이 코드를 간결하게 작성할 수 있다.
+    Redux, Recoil 모두 관련된 컴포넌트 업데이트 가능 및 DevTools 존재하지만,
+    Recoil이 Redux에 비해 보일러플레이트 없이 코드를 간결하게 작성할 수 있다.
 #### ⓸  의견 결정
     Recoil로 상태 관리하기로 결정하였다.
 

@@ -1,19 +1,25 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import CategoryBtn from "./CategoryBtn";
 
 function Category({
 	title,
-	handleCategoryChange,
+	setChangedCategory,
 }: {
 	title: string;
-	handleCategoryChange: (categoryTagKey: string) => void;
+	setChangedCategory: (categoryTagKey: string) => void;
 }) {
 	const [activeCategory, setActiveCategory] = useState("");
 
 	const handleCategoryBtnClick = (categoryTagKey: string) => {
-		handleCategoryChange(categoryTagKey);
 		setActiveCategory(categoryTagKey);
 	};
+
+	let isSuccess = false;
+	if (activeCategory) isSuccess = true;
+	useEffect(()=>{
+		setChangedCategory(activeCategory)
+	},[isSuccess])
 
 	return (
 		<div>
