@@ -3,10 +3,10 @@ import { useRouter } from "next/router";
 import { useMutation } from "react-query";
 import { decode } from "js-base64";
 import { getKakaoLogin } from "@/pages/api/rest";
-import { getSession } from "@/utils/getSession";
 import { useRecoilState } from "recoil";
 import { currentUser } from "@/recoil/atoms/currentUser";
 import { blackUser } from "@/recoil/atoms/blackUser";
+import { getCookie } from "@/utils/tokenUtils";
 
 const KakaoRedirect = () => {
     // 위쪽 코드 제거 필요
@@ -23,7 +23,7 @@ const KakaoRedirect = () => {
 				setBlackUserState(data.data);
 				router.push("/users/login");
 			} else { // 일반 사용자
-				const token = getSession("access_Token");
+				const token = getCookie("access_Token");
 				if (token) {
 					const payload = token.split('.')[1];
 					const decodedPayload = decode(payload);

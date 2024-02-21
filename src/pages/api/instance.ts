@@ -1,7 +1,5 @@
-import { getSession } from "@/utils/getSession";
-import { removeSession } from "@/utils/removeSession";
-import { saveSession } from "@/utils/saveSession";
-import axios from 'axios';
+import axios from "axios";
+import { getCookie, setCookie } from "@/utils/tokenUtils";
 
 export const instance = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -9,10 +7,10 @@ export const instance = axios.create({
 
 instance.interceptors.request.use(
     function (config) {
-        const accessToken = getSession("access_Token");
+        const accessToken = getCookie("access_Token");
 		if (accessToken) config.headers.Authorization = accessToken;
 
-        const refreshToken = getSession("refresh_Token");
+        const refreshToken = getCookie("refresh_Token");
 		if (refreshToken) config.headers.RefreshToken = refreshToken;
 
         return config;
@@ -39,10 +37,8 @@ instance.interceptors.response.use(
 			const config = { ...error.config };
 			const newToken = headers.authorization;
 			if (newToken) {
-				// 기존 토큰 제거 및 새로운 토큰 추가
-				removeSession("access_Token");
-				saveSession("access_Token", newToken);
-
+				// 새로운 토큰 추가
+				setCookie("access_Token", newToken);
                 config.headers.Authorization = newToken;
 
 				// 실패했던 기존 request 재시도

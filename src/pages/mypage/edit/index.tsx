@@ -1,13 +1,12 @@
+import React, { useState } from "react";
+import { useMutation, useQueryClient } from "react-query";
+import { useRouter } from "next/router";
 import Category from "@/components/category/Category";
 import UserInput from "@/components/user-input/UserInput";
 import { putUserInfoEdit } from "@/pages/api/user";
 import { ConfirmPermissions } from "@/utils/confirmPermissions";
 import { GetCurrentUser } from "@/utils/getCurrentUser";
-import { removeSession } from "@/utils/removeSession";
-import { saveSession } from "@/utils/saveSession";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
+import { setCookie } from "@/utils/tokenUtils";
 
 function MypageEdit() {
 	const [changedCategory, setChangedCategory] = useState<string>("")
@@ -43,11 +42,11 @@ function MypageEdit() {
 	const putEditUserMutation = useMutation(putUserInfoEdit, {
 		onSuccess: (data) => {
 			queryClient.invalidateQueries(["mypage", userInfo.userId]);
-			//토큰 삭제 후 토큰 갱신
+			//토큰 갱신
 			const { headers } = data;
 			const newToken = headers.authorization;
-			removeSession("access_Token");
-			saveSession("access_Token", newToken);
+			setCookie("access_Token", newToken);
+
 			router.push(`/mypage/${userInfo.userId}`);
 		},
 		onError: (err) => {
