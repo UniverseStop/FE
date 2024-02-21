@@ -82,11 +82,27 @@
 
 </br>
 
+### 2 ) [불필요한 리렌더링 방지 🔗](https://github.com/UniverseStop/FE/tree/dev/src/recoil/atoms)
+
+</br>
+
+#### ⓵ 문제 상황
+    내 정보를 수정할때, category button 과 nickname input 값이 변동될 때마다
+    페이지 전체가 불필요하게 리렌더링 되고 있었다.
+#### ⓶ 해결 방안
+    컴포넌트 구조를 설계할 때, 부모의 요소에 state를 두고 자식요소에 state를 props로
+    내려준 뒤 값을 변동하고 있어, 자식요소에서 변동되는 state가 부모요소인 페이지까지 전달되어 불필요하게 렌더링되고 있음을 확인하고, 컴포넌트를 다시 설계하여 state의 위치를 자식요소에 배치시킨 뒤, useCallback 을 사용하여 부모요소에 완성된 state의 값만을 전달하게 했다.
+#### ⓷ 의견 조율
+    useRef로 input 값을 관리하려고 하였으나, 화면상에 렌더링이 되고 있음을 확인시켜줘야 하기때문에 useCallback 을 사용했다.
+#### ⓸  의견 결정
+    useCallback 함수 사용하여 불필요한 리렌더링 방지시켜주었다.
+
+
 ----
 
 </br>
 
-### 2 ) [상태 관리 변경 (ContextAPI → Recoil) 🔗](https://github.com/UniverseStop/FE/tree/dev/src/recoil/atoms)
+### 3 ) [상태 관리 변경 (ContextAPI → Recoil) 🔗](https://github.com/UniverseStop/FE/tree/dev/src/recoil/atoms)
 
 </br>
 

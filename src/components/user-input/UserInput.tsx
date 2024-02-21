@@ -1,5 +1,6 @@
 import { postConfirmNickname } from "@/pages/api/user";
 import React, { useRef, useState } from "react";
+import { useCallback } from "react";
 import { useEffect } from "react";
 import { useMutation } from "react-query";
 import Select from "react-select";
@@ -115,7 +116,7 @@ function UserInput({
 		isSuccess = true;
 	}
 
-	useEffect(()=>{
+	useCallback(()=>{
 		if(setChangeNickname)
 		setChangeNickname(nickname)
 		if(setIsValidatedNickname)
