@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useResetRecoilState } from "recoil";
 import ImageSlider from "@/components/aboutus/ImageSlider";
 import { currentUser } from "@/recoil/atoms/currentUser";
-import { removeSession } from "@/utils/removeSession";
 import { GetCurrentUser } from "@/utils/getCurrentUser";
-import { getSession } from "@/utils/getSession";
-import Head from "next/head";
+import { getCookie, removeCookie } from "@/utils/tokenUtils";
 
 export default function AboutUs() {
     const router = useRouter();
@@ -18,38 +17,16 @@ export default function AboutUs() {
     const handleClickButto = () => {
         if (buttonName === "로그인") router.push("/users/login");
         else {
-            // 로그아웃
-            removeSession("access_Token");
-            removeSession("refresh_Token");
+            removeCookie("access_Token");
+            removeCookie("refresh_Token");
             reset();
             setButtonName("로그인");
         }
     };
 
-    useEffect(() => {
-        // 브라우저 닫기 시 리코일 초기화
-        const resetRecoil = () => {
-            reset();
-        };
-
-        const token = getSession("access_Token");
-        if (!token){
-            resetRecoil();
-        } else {
-            if (userInfo.isLoggedIn) setButtonName("로그아웃");
-            else {
-                removeSession("access_Token");
-                removeSession("refresh_Token");
-            }
-        }
-
-        // beforeunload 이벤트에 대한 리스너 추가 (브라우저가 닫힐 때 실행 예정)
-        window.addEventListener("beforeunload", resetRecoil);
-
-        return () => {
-            // 브라우저 닫기 시에만 초기화 되도록 beforeunload 이벤트에 등록된 리스너를 제거하여 함수 실행
-            window.removeEventListener("beforeunload", resetRecoil);
-        };
+    useEffect(()=>{
+        const token = getCookie("access_Token");
+        if(token) setButtonName("로그아웃");
     }, []);
 
     return (

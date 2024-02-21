@@ -1,14 +1,13 @@
 import Category from "@/components/category/Category";
 import UserInput from "@/components/user-input/UserInput";
 import { GetCurrentUser } from "@/utils/getCurrentUser";
-import { removeSession } from "@/utils/removeSession";
-import { saveSession } from "@/utils/saveSession";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { putUserInfoSet } from "../api/user";
 import { ConfirmPermissions } from "@/utils/confirmPermissions";
 import { getEngGender } from "@/utils/getEngGender";
+import { setCookie } from "@/utils/tokenUtils";
 
 function UserInfoSetting() {
 	const [nickname, setNickname] = useState<string>("");
@@ -44,12 +43,10 @@ function UserInfoSetting() {
 			const { status } = response;
 			if( status === 200) {
 			queryClient.invalidateQueries(["mypage", userInfo.userId]);
-			//토큰 삭제 후 토큰 갱신
+			// 토큰 갱신
 			const { headers } = response;
 			const newToken = headers.authorization;
-			removeSession("access_Token");
-			saveSession("access_Token", newToken);
-			console.log('response', response)
+			setCookie("access_Token", newToken);
 			} else {
 				alert("에러가 발생하였습니다")
 			}

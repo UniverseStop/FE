@@ -1,14 +1,14 @@
-import { useEffect, useRef, useState } from 'react';
-import { useRouter } from 'next/router';
-import {CompatClient, Stomp, StompSubscription} from '@stomp/stompjs';
-import SockJS from 'sockjs-client';
+import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/router";
+import {CompatClient, Stomp, StompSubscription} from "@stomp/stompjs";
+import SockJS from "sockjs-client";
 import {MessageType} from "@/types/chatTypes";
-import { getSession } from "@/utils/getSession";
+import { getCookie } from "@/utils/tokenUtils";
 
 export const useChat = () => {
     const router = useRouter();
     const roomIdQuery = router.query.room
-    const token = getSession("access_Token");
+    const token = getCookie("access_Token");
     const clientRef = useRef<any>({});
     const [stompClient, setStompClient] = useState<CompatClient | null>();
     const [isConnected, setIsConnected] = useState(false);
@@ -45,7 +45,7 @@ export const useChat = () => {
         const connectStompClient = () => {
             if (!roomIdQuery || !token || isConnected) return;
 
-            const socket = new SockJS('http://3.37.62.9:8080/ws-stomp');
+            const socket = new SockJS("http://3.37.62.9:8080/ws-stomp");
             client = Stomp.over(socket);
 
             client.connect(
@@ -69,7 +69,7 @@ export const useChat = () => {
                     );
                 },
                 (error:any) => {
-                    console.error('Connection error:', error);
+                    console.error("Connection error:", error);
                     setTimeout(connectStompClient, 3000); // 연결 실패 시 5초 후 재연결 시도
                 }
             );

@@ -2,10 +2,10 @@ import React, { MouseEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { GetCurrentUser } from "@/utils/getCurrentUser";
 import { useResetRecoilState } from "recoil";
 import { currentUser } from "@/recoil/atoms/currentUser";
-import { removeSession } from "@/utils/removeSession";
+import { GetCurrentUser } from "@/utils/getCurrentUser";
+import { removeCookie } from "@/utils/tokenUtils";
 
 const Nav = ({ isHide }: { isHide: boolean }) => {
     const router = useRouter();
@@ -40,13 +40,11 @@ const Nav = ({ isHide }: { isHide: boolean }) => {
     const handleLoginLogout = () => {
         if (buttonName === "로그인") router.push("/users/login");
         else {
-            removeSession("access_Token");
-            removeSession("refresh_Token");
+            removeCookie("access_Token");
+            removeCookie("refresh_Token");
             reset();
             setButtonName("로그인");
-            if (isActiveBoxVisible) {
-                setIsActiveBoxVisible(false);
-            }
+            if (isActiveBoxVisible) setIsActiveBoxVisible(false);
             router.push("/users/login");
         }
     };
