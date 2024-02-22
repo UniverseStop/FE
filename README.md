@@ -22,6 +22,9 @@
 </br>
 
 ## 1. 프로젝트 소개
+![Group 38022](https://github.com/UniverseStop/FE/assets/132332533/76341cd2-36e3-4308-b2ca-9a2012989e5e)
+
+
 ### 🚀 우리만의 소우주, UniBus! | 개발기간 : 23.12 ~ 24.01 (4주)
 <div style="display:flex">
  <div style="display:flex">
