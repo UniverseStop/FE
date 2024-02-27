@@ -60,7 +60,6 @@
 ## 5. 트러블 슈팅
 ### 1 ) [Hydration failed 에러 🔗](https://github.com/UniverseStop/FE/blob/dev/src/pages/aboutus/index.tsx)
 
-</br>
 
 #### ⓵ 문제 상황
     텍스트의 내용이 서버에서 렌더링된 HTML과 일치하지 않는 에러가 발생하였다.
@@ -84,11 +83,8 @@
 
 ----
 
-</br>
-
 ### 2 ) [불필요한 리렌더링 방지 🔗](https://github.com/UniverseStop/FE/tree/dev/src/recoil/atoms)
 
-</br>
 
 #### ⓵ 문제 상황
     내 정보를 수정할때, category button 과 nickname input 값이 변동될 때마다
@@ -104,11 +100,7 @@
 
 ----
 
-</br>
-
 ### 3 ) [상태 관리 변경 (ContextAPI → Recoil) 🔗](https://github.com/UniverseStop/FE/tree/dev/src/recoil/atoms)
-
-</br>
 
 #### ⓵ 문제 상황
     server state를 client state로 재조합하는 과정에서 contextAPI 를

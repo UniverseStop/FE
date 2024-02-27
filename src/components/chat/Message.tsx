@@ -15,7 +15,7 @@ dayjs.extend(relativeTime);
 dayjs.extend(utc);
 
 export default function Message() {
-    const { realTimeMessage, realTimeMessageResponse, roomIdQuery, isConnected } = useChat();
+    const { realTimeMessage, roomIdQuery, isConnected } = useChat();
     const roomId = Array.isArray(roomIdQuery) ? roomIdQuery[0] : roomIdQuery || '';
     const [allMessageList, setAllMessageList] = useState<MessageType[]>([])
     const [today, setToday] = useState(dayjs());
@@ -96,8 +96,6 @@ export default function Message() {
     useEffect(() => {
         scrollToBottom();
     }, []);
-
-    console.log('allMessageList', allMessageList)
 
     return (
         <div ref={scrollRef} className="flex flex-col px-4 overflow-y-scroll flex-1">
