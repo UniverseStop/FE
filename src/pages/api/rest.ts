@@ -1,23 +1,19 @@
-import axios from "axios";
+import { instance } from "@/pages/api/instance";
+import { setCookie } from "@/utils/tokenUtils";
 
-const instance = axios.create({
-	baseURL: process.env.NEXT_PUBLIC_API_URL,
-});
-
-// Auth
 // KakaoLogin
-export const kakaoLogin = async (accessToken: any) => {
+export const getKakaoLogin = async (KAKAO_CODE: string) => {
 	try {
-		const response = await instance.post("/", {
-			headers: {
-				Authorization: `Bearer ${accessToken}`,
-			},
-		});
-		console.log(response.data);
+		const response = await instance.post(`/api/kakao?code=${KAKAO_CODE}`);
+		const accessToken = response.headers.authorization;
+		if (accessToken) setCookie("access_Token", accessToken);
+
+		const refreshToken = response.headers.refreshtoken;
+		if (refreshToken) setCookie("refresh_Token", refreshToken);
+
 		return response.data;
 	} catch (error) {
-		console.error("Error sending user data to backend", error);
+		// 로그인 에러 처리
+		throw error;
 	}
 };
-
-export default instance;

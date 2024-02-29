@@ -1,26 +1,6 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import { signOut, useSession } from "next-auth/react";
-import { authOptions } from "./api/auth/[...nextauth]";
-
-const inter = Inter({ subsets: ["latin"] });
+import AboutUs from "./aboutus";
 
 export default function Home() {
-	const { data, status } = useSession();
+    return (<AboutUs />);
+};
 
-	console.log(data);
-	console.log(status);
-	console.log(authOptions.session);
-
-	return (
-		<div>
-			<div className='foolish'>남규 바보</div>
-
-			{status === "authenticated" ? (
-				<button type='button' onClick={() => signOut()}>
-					로그아웃
-				</button>
-			) : null}
-		</div>
-	);
-}

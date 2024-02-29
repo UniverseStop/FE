@@ -1,0 +1,61 @@
+.datePickerFliter {
+    display: flex;
+    align-items: center;
+    border: 1px solid hsl(0, 7%, 62%);
+    border-radius: 5px;
+    background-color: white;
+    box-sizing: border-box;
+    width: 370px;
+    height: 50px;
+    color: #bc8e8e;
+    text-align: center;
+    padding-right: 14px;
+    font-size: 25px;
+}
+
+.datePickerPost {
+    display: flex;
+    border: 1px solid #bc8e8e;;
+    border-radius: 15px;
+    box-sizing: border-box;
+    height: 55px;
+    width: 525px;
+    color:  #8492a6;
+    font-size: 17px;
+    margin-left: 22px;
+    align-items: center;
+    padding-right: 16px;
+    padding-left: 19px;
+}
+@media (max-width: 450px) {
+   .datePickerPost {
+    width: 515px;
+  }
+}
+
+.calenderWrapper {
+    background-color: white;
+}
+
+.selectedDay {
+    background-color: #bc8e8e;
+    font-size: 20px;
+    width: 45px;
+    height: 36px;
+}
+
+.selectedDay:hover {
+    border-radius: 50%;
+    background-color: #bc8e8e;
+    font-size: 20px;
+}
+.unselectedDay {
+    font-size: 20px;
+    width: 45px;
+    height: 36px;
+}
+
+.unselectedDay :hover {
+    border-radius: 50%;
+    background-color: black;
+}
