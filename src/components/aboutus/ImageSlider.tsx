@@ -24,10 +24,10 @@ const ImageSlider = () => {
     };
 
     return (
-        <Slider {...settings} className="z-50 ">
+        <Slider {...settings} className="z-50">
             {posts && posts.map((p: PostPreviewType)=>{
                 return (
-                    <div className="pt-8 aspect-square max-w-[90%]" key={p.id}>
+                    <div className="pt-8 aspect-square max-w-[95%] h-[400px]" key={p.id}>
                         <PostPreview info={p} type="aboutus"/>
                     </div>
                 );
