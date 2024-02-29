@@ -1,23 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
-import { useAuth } from '@/context/KakaoContext';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import { useRecoilValue, useResetRecoilState } from "recoil";
 import { blackUser } from "@/recoil/atoms/blackUser";
 import Image from "next/image";
 
 const LoginPage = () => {
-    const auth = useAuth();
     const router = useRouter();
-
     const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}&prompt=login`;
-
-    useEffect(() => {
-        if (auth.isLoggedIn) {
-            router.back();
-        }
-    }, [auth, router]);
-
     const onKakaoLogin = () => {
         window.location.href = KAKAO_AUTH_URL;
     };
@@ -27,7 +17,7 @@ const LoginPage = () => {
     const isBlack = blackUserNickname !== "";
     const reset = useResetRecoilState(blackUser); // recoil 저장소 초기화 (차단 유저)
 
-    return !auth.isLoggedIn ? (
+    return  (
         <div className="gradation">
             {isBlack ? 
             <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -54,7 +44,7 @@ const LoginPage = () => {
                 </div>
             </div>
         </div>
-    ) : null;
+    )
 };
 
 export default LoginPage;
