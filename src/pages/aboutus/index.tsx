@@ -34,7 +34,7 @@ export default function AboutUs() {
             <Head>
                 <meta name="description" content="유니버스 소개 페이지 입니다."></meta>
             </Head>
-        <div className="gradation h-screen relative">
+        <div className="gradation h-screen relative pt-10">
             <div className="bg-cover bg-[url('/images/aboutUs.png')] absolute top-0 left-0 w-full h-full" />
             <div className="relative">
                 <div className="relative overflow-hidden">
@@ -49,7 +49,7 @@ export default function AboutUs() {
                         })}
                     </div>
                 </div>
-                <div className="max-w-[600px] min-w-[375px]">
+                <div className="max-w-[600px] min-w-[375px] h-[400px">
                     <ImageSlider />
                 </div>
                 <div>
