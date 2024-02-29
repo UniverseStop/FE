@@ -1,10 +1,9 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { RecoilRoot } from "recoil";
-import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import Layout from "@/components/Layout";
-import { AuthProvider } from "@/context/KakaoContext";
 import { useLoading } from "@/hooks/useLoading";
 import Spinner from "@/components/spinner/Spinner";
 import Head from "next/head";
@@ -28,7 +27,6 @@ export default function App({ Component, pageProps }: AppProps) {
         <QueryClientProvider client={queryClient}>
             <RecoilRoot>
                 {/* <Hydrate state={pageProps.dehydratedState}> */}
-                <AuthProvider>
                     {/* React Query Devtools: 필요한 경우 주석 해제 후 사용 */}
                     {/* <ReactQueryDevtools initialIsOpen={false} /> */}
                     <Layout>
@@ -37,7 +35,6 @@ export default function App({ Component, pageProps }: AppProps) {
                         </Head>
                         {isLoading ? <Spinner /> : <Component {...pageProps} />}
                         </Layout>
-                </AuthProvider>
                 {/* </Hydrate> */}
             </RecoilRoot>
         </QueryClientProvider>
